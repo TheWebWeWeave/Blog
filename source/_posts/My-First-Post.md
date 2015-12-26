@@ -1,6 +1,6 @@
 title: My First Post
 date: 2015-12-23 10:48:54
-tags:
+tags: Testing
 ---
 ### Opening Night
 Nothing special to say here right now just checking out how the blog thing will really work.
