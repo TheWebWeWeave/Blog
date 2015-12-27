@@ -2,6 +2,7 @@ title: The Power of Time Tracking
 date: 2008-06-21
 tags: 
 - Time Tracker
+- Products
 ---
 I love to keep track of time.  It could be related to my love of data and all the information that I can extract from it: how much fuel does my car use, how much time do I spend on stuff each week, how many hours am I away from my family. 
 
