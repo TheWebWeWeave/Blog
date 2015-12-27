@@ -1,6 +1,9 @@
 title: 'C#.net or VB.net'
 date: 2008-06-21
-tags: dotNet
+tags: 
+- dotNet
+- c#
+- vb
 ---
 ## Starting from the Beginning
 I have been a Visual Basic developer for over ten years now.  It was not my first language that got me excited about programming.  No, that would have been Clipper.  I accidentally fell into Clipper much the same way that Visual Basic started as an experiment for me.  

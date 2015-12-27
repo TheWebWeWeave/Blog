@@ -1,6 +1,7 @@
 title: "No no he's not dead, he's, he's restin'!"
 date: 2008-06-21
-tags: Blogs
+tags: 
+- Blogs
 ---
 {% asset_img blog_grim_reaper.gif "The blog grim reaper"%}
 Just in case you did not get the Monty Python reference here is a cartoon courtesy of [Blaugh](http://www.blaugh.com) which gets right to the point.  I have been away from writing anything for my web site for a very, very, long time.  Where have I been?  Where do I begin?  I have been quite busy developing software for a number of clients that I cannot name because of none disclosure clauses in my contracts.  I never did understand how disclosing who the actual client is in a public forum would be such a big deal but I can only descibe what I have been doing over the last four years as having worked in the hospitality, mortgage, back to hospitality and now property cost industry.  While that has been keeping me busy with all the work that these projects generate, Mary and I have continued to develop and support our [AGP Maker](http://www.agpmaker.com) program.

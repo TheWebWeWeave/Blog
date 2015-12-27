@@ -1,6 +1,8 @@
 title: 'What is The Web We Weave, Inc?'
 date: 2008-06-14
-tags: 3WInc
+tags: 
+- 3WInc
+- Corporation
 ---
 A little more than a year ago, Mary and I had a discussion about the many projects that we both have had in the backs of our minds and would like to make a reality.  We thought a corporation would be good in that it could provide us with the legal entity and a single structure in which we could register our copyrights and trademarks.  It might also provide us with some tax relief and if things went well, could very well represent a major part of our future. 
 
