@@ -3,7 +3,7 @@
     [string]$StagingPath
 )
 
-$targetPath = "$StagingPath\DoS"
+$targetPath = "$StagingPath"
 $scriptPath = "$StagingPath\Scripts"
 
 if (-not(Test-Path($targetPath))) {
@@ -14,6 +14,6 @@ if (-not(Test-Path($scriptPath))) {
         mkdir $scriptPath
     }
 
-Copy-Item "$SourcePath\public\*.*" -Destination $targetPath -Recurse
+Copy-Item "$SourcePath\public" -Recurse -Destination $targetPath 
 Copy-Item "$SourcePath\blog.zip" -Destination $StagingPath
 Copy-Item "$SourcePath\scripts\*.*" -Destination $scriptPath
