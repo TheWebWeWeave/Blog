@@ -14,6 +14,6 @@ if (-not(Test-Path($scriptPath))) {
         mkdir $scriptPath
     }
 
-Copy-Item "$SourcePath\public" -Recurse -Destination $targetPath 
-Copy-Item "$SourcePath\blog.zip" -Destination $StagingPath
-Copy-Item "$SourcePath\scripts\*.*" -Destination $scriptPath
+Copy-Item "$SourcePath\public" -Recurse -Destination $targetPath -Force
+Copy-Item "$SourcePath\blog.zip" -Destination $StagingPath -Force
+Copy-Item "$SourcePath\scripts\*.*" -Destination $scriptPath -Force
