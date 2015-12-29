@@ -20,5 +20,5 @@ if (-not(Test-Path($testPath))) {
     }
 
 Copy-Item "$SourcePath\public\*.*" -Destination $targetPath
-Copy-Item "$SourcePath\blog.zip -Destination $StagingPath
+Copy-Item "$SourcePath\blog.zip" -Destination $StagingPath
 Copy-Item "$SourcePath\scripts\*.*" -Destination $scriptPath
