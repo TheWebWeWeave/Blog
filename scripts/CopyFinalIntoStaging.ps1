@@ -6,13 +6,12 @@
 $targetPath = "$StagingPath\DoS"
 $scriptPath = "$StagingPath\Scripts"
 
+if (-not(Test-Path($targetPath))) {
+        mkdir $targetPath
+    }
 
 if (-not(Test-Path($scriptPath))) {
         mkdir $scriptPath
-    }
-
-if (-not(Test-Path($testPath))) {
-        mkdir $testPath
     }
 
 Copy-Item "$SourcePath\public\*.*" -Destination $targetPath -Recurse
