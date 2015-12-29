@@ -6,6 +6,8 @@
 $targetPath = "$StagingPath"
 $scriptPath = "$StagingPath\Scripts"
 
+Remove-Item $StagingPath -Recurse -Force
+
 if (-not(Test-Path($targetPath))) {
         mkdir $targetPath
     }
