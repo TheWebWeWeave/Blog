@@ -35,7 +35,7 @@ foreach($item in (dir $Dir *.* -Recurse))
 
     catch [Exception] 
     {
-        $onNetwork = "0"
-        write-host $_.Exception.Message;
+        #$onNetwork = "0"
+        #write-host $_.Exception.Message;
     }
 }
