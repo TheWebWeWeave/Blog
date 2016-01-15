@@ -1,8 +1,11 @@
 title: A New Start on an Old Blog
 tags:
-- Blogs
-- ALM
+  - Blogs
+  - ALM
+date: 2016-01-14 20:21:45
 ---
+
+{% img right /images/V__FD25.jpg 450 450 "Fall colors in California" %}
 It has been quite a while since I have posted my last blog so today I thought I would bring you up to speed on what I have been doing with this
 site.  The last time I did a post like this was back in June of 2008.  Back then I talked about the transition that I made going from City Desk 
 to Microsoft Content Management System which evenually was merged into SharePoint and from there we changed the blog into DotNetNuke.
@@ -13,6 +16,8 @@ are rendered dynamically and the content pulled from a database.  What I really 
 and built the same way that I build all my software, stored in Version Control.
 
 ## Hexo
+
+{% img right /images/hexo.jpg 100 100 "Hexo Logo" %}
 [Hexo](https://hexo.io/) is a static page generator program that takes [simple markup](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) 
 and turns it into static html pages.  This means I can deploy this anywhere from a build that I can generate from my source control.  It come 
 fully embrassing git and is a github open source project.  I thought that moving my blog to Hexo would help me in too ways, besides giving me 
@@ -24,10 +29,11 @@ As of this post I am using FTP in a PowerShell script which is used to deploy th
 package that can then be deployed directly onto the Azure website that is hosting this blog.
 
 ## The Work Flow
+
 The process begins when I want to start a new blog.  Because my git repositories are available to me from almost any computer that I am working with
 I go to the local workspace of my Blog git repository checkout the dev branch and at the command line enter the following command
 ```
-hexo new Post "A New Start on an Old Blog"
+  hexo new Post "A New Start on an Old Blog"
 ```
 This will place a new md file in the _post folder with the same name as the title but the spaces replaced by hyphens ("-").  After that I like to 
 open the folder at the root of my blog workspace using [Visual Studio Code](https://code.visualstudio.com/).  The thing that I like about using
@@ -43,10 +49,11 @@ need some way to keep all these in sync and that is what I use the dev branch fo
 dev into master and this will begin the build process.
 
 ## Publishing the Post
+
 Once I am happy with my post all I need to do is to merge the dev branch into Master and this starts the build process.  Which is really just another
 Hexo command that is called against my source which then generates all the static pages, javascript, images and so on and puts it into a public folder.
 ```
-hexo generate
+  hexo generate
 ```
 It is the contents of this folder that then becomes my drop artifacts.  Because the Release Manager is also has a CI trigger after the build has been
 sucessful it will begin a Release pipeline to get this drop into my web site.  My goal is to get this wrapped up into an MSDeploy package that can then
@@ -57,6 +64,7 @@ script that will FTP the pages to my Azure web site.  It needs to do this as a u
 the CUI to do it and complete it.
 
 ## Summary
+
 So there you have it, I have my blog all in source control so I have no dependancy of a database and all the code to generate the web site and my
 content pages are in source control which makes it really easy if I ever need to make a more or anything like rebuild from a really bad crash.  As
 an ALM guy I really like this approach and what would be even better was having a new production staging site to go over the site and give it a last
