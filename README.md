@@ -18,3 +18,8 @@ These commands will assume that you are in the Blog directory
 5. When you sync up with the remote git repository on TFS, this will cause the pages to be generated and packaged up
 6. The build will trigger the deployment so make sure that ALM-Test is up and running as it uses that for staging.
 7. Enjoy the new blog at http://www.donaldonsoftware.com
+
+# Feb 4, 2016 - Change in the Deployment
+Up until now we have had to make sure that ALM-Test was up so that we could copy files over to it so that we could then call a coded UI test that would interact with the powershell that it would call to do the FTP to the actual web site.
+Today we experimented with a new FTP task which will ftp the location of the drop into the web site so we can do this without having any virtual machines running at all.  This is great but we will still need to use this kind of concept for
+some of our other projects like AGP which needs to make a package unique to each environment first and that is not part of the drop or in a share any where.
