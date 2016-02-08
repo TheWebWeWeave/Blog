@@ -1,6 +1,9 @@
 title: Migrate from TFVC to Git in TFS with Full History
 date: 2016-02-01 23:00:44
 tags:
+- ALM
+- git
+- git-tf
 ---
 Over the last year or so I have been experimenting and learning about git.  The more I learned about this distributed version control the more I liked it and finally about 6 months ago I moved all my existing code into git repositories.  They are still hosted on TFS which is the best ALM tool on the market by a very, very, very long mile.  Did I mention how much I love TFS and where this product is going?  Anyway, back to my git road map as this road is not as simple as it sounds because many of the concepts are so different and at first I even thought a bit weird.  After getting my head around the concepts and the true power of this tool there was no turning back.  Just to be clear I am not saying that the old centeralized version control known as TFVC is dead, by no means there are somethings that I will continue to use it for and probably always will like my PowerPoint slides, and much of my training material.
 ## Starting with Git
