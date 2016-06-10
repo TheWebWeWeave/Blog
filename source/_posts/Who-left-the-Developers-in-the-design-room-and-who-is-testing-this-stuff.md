@@ -1,6 +1,9 @@
 title: Who left the Developers in the Design Room
 date: 2016-05-23 16:53:51
 tags:
+- Testing
+- Soap Box
+- User Experience (UX)
 ---
 {% img left /images/SoapBox.jpg 100 100 "My Opinion" %}
 This post is all about something that has been starting to bug me and it has been bugging me for quite a while.  I have been quiet about this and have started the conversation with different people at random and now it is finally time I just say my piece.  Yes this is soap box time and so I am just going to unload here.  If you don't like this kind of post, I promise to be more joyful and uplifting next month but this month I am going to lay it out there and it just might sound a bit harsh.
