@@ -1,0 +1,1 @@
+﻿& "C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe" -verb:sync -source:package="C:\Deploy\drop\msdeploy\blog.zip" -dest:auto -useChecksum

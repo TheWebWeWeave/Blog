@@ -6,6 +6,7 @@
 $targetPath = "$StagingPath"
 $scriptPath = "$StagingPath\Scripts"
 $testPath = "$StagingPath\Tests"
+$msDeploy = "$StagingPath\MSDeploy"
 
 Remove-Item $StagingPath -Recurse -Force
 
@@ -21,7 +22,11 @@ if (-not(Test-Path($testPath))) {
         mkdir $testPath
     }
 
+if (-not(Test-Path($msDeploy))) {
+        mkdir $msDeploy
+    }
+
 Copy-Item "$SourcePath\public" -Recurse -Destination $targetPath -Force
-Copy-Item "$SourcePath\blog.zip" -Destination $StagingPath -Force
 Copy-Item "$SourcePath\scripts\*.*" -Destination $scriptPath -Force
 Copy-Item "$SourcePath\DeployViaFTP\bin\Debug\*.*" -Destination $testPath -Force
+Copy-Item "$SourcePath\MSDeploy\*.*" -Destination $msDeploy -Force
