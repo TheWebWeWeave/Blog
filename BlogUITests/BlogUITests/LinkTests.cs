@@ -57,6 +57,15 @@ namespace TheWebWeWeave.BlogUITests
             Assert.IsTrue(HomePage.PostFound(post), String.Format("The post \"{0}\" was not found", post));
         }
 
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void MSDeploy_Tips_Post_Exists_And_Was_Deployed()
+        {
+            string post = "Some MSDeploy Tricks I've Learned";
+            HomePage.Goto();
+            Assert.IsTrue(HomePage.PostFound(post), String.Format("The post \"{0}\" was not found", post));
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
