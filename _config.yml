@@ -63,7 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: landscape
+theme: bootstrap-blog
 
 disqus_shortname: donaldonsoftware
 feed:
@@ -76,3 +76,21 @@ feed:
 deploy:
   type:
   
+theme_config:
+  # Header
+  navbar_brand: <img src="/images/Donald.png" height="90" width="90">
+  menu:
+    Home: index.html
+    Archives: archives/
+    About: About-Me/index.html
+    RSS: atom.xml 
+  widgets:
+    #- about
+    - category
+    - archive
+    - tagcloud
+    - recent_posts
+    - tag
+  about_widget_content: >
+    <p>This is <strong>custom content</strong> for the
+    "about" sidebar widget.</p>

@@ -1,7 +1,7 @@
 title: About Me
 date: 2015-12-26 10:19:28
 ---
-{% img right /images/Donald.png 100 100 'Donald L. Schulz' %} Ah yes, you have arrived at the very strange world of Donald on Software.  I'm Donald Schulz your host.  Almost everything you see here is written by me, and it reflects my (shall-we-say) uniquie sensibilities about software development and what ever I find interesting.
+Ah yes, you have arrived at the very strange world of Donald on Software.  I'm Donald Schulz your host.  Almost everything you see here is written by me, and it reflects my (shall-we-say) uniquie sensibilities about software development and what ever I find interesting.
 
 I was a software developer in Los Angeles with more than 20 years of experience.  I am originally from Canada and relocated in 1998 to work for One, Inc until they folded after the colapse of the dot com boom in January 2002.  I have my own company, [The Web We Weave, Inc.](http://www.thewebweweave.net) which makes [AGP Maker](http://www.agpmaker.com), the Software used to simplify the Awards and Graduation programs in High Schools.  
 
