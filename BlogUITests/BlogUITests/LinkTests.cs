@@ -66,6 +66,15 @@ namespace TheWebWeWeave.BlogUITests
             Assert.IsTrue(HomePage.PostFound(post), String.Format("The post \"{0}\" was not found", post));
         }
 
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void Git_SubModule_Post_Exists_And_Was_Deployed()
+        {
+            string post = "My Experience with Git Sub-modules";
+            HomePage.Goto();
+            Assert.IsTrue(HomePage.PostFound(post), string.Format("The post \"{0}\" was not found", post));
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
