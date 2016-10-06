@@ -75,6 +75,15 @@ namespace TheWebWeWeave.BlogUITests
             Assert.IsTrue(HomePage.PostFound(post), string.Format("The post \"{0}\" was not found", post));
         }
 
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void ThreeRulesForReleases_Exists_And_Was_Deployed()
+        {
+            string post = "My New 3 Rules for Releases";
+            HomePage.Goto();
+            Assert.IsTrue(HomePage.PostFound(post), string.Format("The post \"{0}\" was not found", post));
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
