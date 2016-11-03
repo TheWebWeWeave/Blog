@@ -84,6 +84,15 @@ namespace TheWebWeWeave.BlogUITests
             Assert.IsTrue(HomePage.PostFound(post), string.Format("The post \"{0}\" was not found", post));
         }
 
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void SecurityConfiguration_Exists_And_Was_Deployed()
+        {
+            string post = "Security Configuration for Teams";
+            HomePage.Goto();
+            Assert.IsTrue(HomePage.PostFound(post), string.Format("The post \"{0}\" was not found", post));
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
