@@ -53,5 +53,19 @@ namespace TheWebWeWeave.BlogAutomation
             }
             return false;
         }
+
+        public static void GoToPost(string post)
+        {
+            var postTitles = Driver.Instance.FindElements(By.ClassName("article-title"));
+            foreach (var title in postTitles)
+            {
+                if (title.Text == post)
+                {
+                    title.Click();
+                    break;
+                }
+
+            }
+        }
     }
 }

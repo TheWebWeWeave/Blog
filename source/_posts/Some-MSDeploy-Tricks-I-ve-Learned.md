@@ -5,12 +5,12 @@ tags:
 - DevOps
 ---
 {% img left /images/WebDeploy.jpg 300 300 "Web Deploy" %}
-[In an earlier post I talked about Hexo the tool I use for this Blog](2016/01/A-New-Start-on-an-Old-Blog/index.html).  In that post I talked about how delighted I was with this process except for one thing that did bother me and that was the deployment to the Azure website.  For this process I was using FTP to push the files from the public folder to Azure.  Instead I was hoping for an MSDeploy solution but that is harder than it sounds especially when you are really not using a Visual Studio Project and MSBuild to create the application.
+[In an earlier post I talked about Hexo the tool I use for this Blog](../../../2016/01/A-New-Start-on-an-Old-Blog/index.html).  In that post I talked about how delighted I was with this process except for one thing that did bother me and that was the deployment to the Azure website.  For this process I was using FTP to push the files from the public folder to Azure.  Instead I was hoping for an MSDeploy solution but that is harder than it sounds especially when you are really not using a Visual Studio Project and MSBuild to create the application.
 
 In this post I will take you on my journey to find a working solution that does enable me to deploy my blog as a MSDeploy package to the Azure website.
 
 ## What is in the Public Folder
-First off I guess we should talk about what is in this folder that I call Public.  As I have mentioned in my [Hexo Post](2016/01/A-New-Start-on-an-Old-Blog/index.html), the Hexo Generate command takes all my posts written in simple markup and creates the output that is my website and places it in a folder called public. 
+First off I guess we should talk about what is in this folder that I call Public.  As I have mentioned in my [Hexo Post](../../../2016/01/A-New-Start-on-an-Old-Blog/index.html), the Hexo Generate command takes all my posts written in simple markup and creates the output that is my website and places it in a folder called public. 
 
 It is the output of this folder that I wish to create the MSDeploy package from.  This is quite straight forward as I already knew that you can use MSDeploy to not only deploy a package but also create one.  This will require knowing how to call MSDeploy from the command line.
 

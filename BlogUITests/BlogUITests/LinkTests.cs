@@ -93,6 +93,26 @@ namespace TheWebWeWeave.BlogUITests
             Assert.IsTrue(HomePage.PostFound(post), string.Format("The post \"{0}\" was not found", post));
         }
 
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void FirstInternalLinksMsDeploy_Works_And_IsValid()
+        {
+            string post = "Some MSDeploy Tricks I've Learned";
+            HomePage.Goto();
+            HomePage.GoToPost(post);
+            Assert.IsTrue(MSDeployPost.DoesInternalLinkWork("In an earlier post I talked about Hexo the tool I use for this Blog", "A New Start on an Old Blog"));
+        }
+
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void SecondInternalLinksMsDeploy_Works_And_IsValid()
+        {
+            string post = "Some MSDeploy Tricks I've Learned";
+            HomePage.Goto();
+            HomePage.GoToPost(post);
+            Assert.IsTrue(MSDeployPost.DoesInternalLinkWork("Hexo Post", "A New Start on an Old Blog"));
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
