@@ -113,6 +113,35 @@ namespace TheWebWeWeave.BlogUITests
             Assert.IsTrue(MSDeployPost.DoesInternalLinkWork("Hexo Post", "A New Start on an Old Blog"));
         }
 
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void VersionArgument_Exists_And_Was_Deployed()
+        {
+            string post = "An Argument against the Date Based Version Number";
+            HomePage.Goto();
+            Assert.IsTrue(HomePage.PostFound(post), string.Format("The post \"{0}\" was not found", post));
+        }
+
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void FirstInternalLinksVersion_Works_And_IsValid()
+        {
+            string post = "An Argument against the Date Based Version Number";
+            HomePage.Goto();
+            HomePage.GoToPost(post);
+            Assert.IsTrue(MSDeployPost.DoesInternalLinkWork("My New 3 Rules for Releases", "My New 3 Rules for Releases"));
+        }
+
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void SecondInternalLinksVersion_Works_And_IsValid()
+        {
+            string post = "An Argument against the Date Based Version Number";
+            HomePage.Goto();
+            HomePage.GoToPost(post);
+            Assert.IsTrue(MSDeployPost.DoesInternalLinkWork("How I Use Chocolatey in my Releases", "How I Use Chocolatey in my Releases"));
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
