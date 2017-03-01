@@ -32,7 +32,7 @@ After thinking about this for a while and having similar discussions with client
 When I am happy with the results I promote it to Production.  The promotion does not do anything to any environment or machine but does lock the build, increment the build number and my newest thing create a Release work item.
 
 ## Why Create a Release Work item
-I will talk about this feature in more detail with some code samples in a future post. Briefly, the whole reason for the creation of a Release work item when I deploy to Production is to keep track of how many releases I have done in the last quarter.  I love good metrics and this is one that lets me know I am pushing code out into production and not just tweaking it to death.  Remmeber you can't get good feedback if you don't get it out there.
+I will talk about this feature in more detail with some code samples in a future post. Briefly, the whole reason for the creation of a Release work item when I deploy to Production is to keep track of how many releases I have done in the last quarter.  I love good metrics and this is one that lets me know I am pushing code out into production and not just tweaking it to death.  Remember you can't get good feedback if you don't get it out there.
 
 ## In Conclusion
 So there you have it, all my products internal or customer facing I have much more clarity as to when a build has new code in it.  I could have gone though source control and found out from the code history and found the lastest changeset number and see the first time that this was used in a build but so much work for something that I can see at a glance and not having to look anywhere else for it. 
