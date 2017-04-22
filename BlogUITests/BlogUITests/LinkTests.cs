@@ -142,6 +142,16 @@ namespace TheWebWeWeave.BlogUITests
             Assert.IsTrue(MSDeployPost.DoesInternalLinkWork("How I Use Chocolatey in my Releases", "How I Use Chocolatey in my Releases"));
         }
 
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void Waterfall_Exits_And_Was_Deployed()
+        {
+            string post = "When is Waterfall a Good Choice";
+            HomePage.Goto();
+            HomePage.GoToPost(post);
+            Assert.IsTrue(HomePage.PostFound(post), string.Format("The post \"{0}\" was not found", post));
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
