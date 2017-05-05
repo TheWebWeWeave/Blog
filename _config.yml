@@ -69,7 +69,8 @@ disqus_shortname: donaldonsoftware
 feed:
   type: atom
   path: atom.xml
-  limit: 20  
+  limit: 20
+  content: false  
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html

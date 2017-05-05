@@ -152,6 +152,16 @@ namespace TheWebWeWeave.BlogUITests
             Assert.IsTrue(HomePage.PostFound(post), string.Format("The post \"{0}\" was not found", post));
         }
 
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void Sending_Email_To_Developer_on_Failed_Build_Was_Deployed()
+        {
+            string post = "Sending an Email to the Developer when the Build Failed";
+            HomePage.Goto();
+            HomePage.GoToPost(post);
+            Assert.IsTrue(HomePage.PostFound(post), string.Format("The post \"{0}\" was not found", post));
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
