@@ -162,6 +162,16 @@ namespace TheWebWeWeave.BlogUITests
             Assert.IsTrue(HomePage.PostFound(post), string.Format("The post \"{0}\" was not found", post));
         }
 
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void One_Build_Definition_Was_Deployed()
+        {
+            string post = "One Build Definition to Support Multiple Branches";
+            HomePage.Goto();
+            HomePage.GoToPost(post);
+            Assert.IsTrue(HomePage.PostFound(post), String.Format("The post \"{0}\" was not found", post));
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
