@@ -172,6 +172,16 @@ namespace TheWebWeWeave.BlogUITests
             Assert.IsTrue(HomePage.PostFound(post), String.Format("The post \"{0}\" was not found", post));
         }
 
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void Master_Only_In_Production_Was_Deployed()
+        {
+            string post = "Master Only in Production, an Improvement";
+            HomePage.Goto();
+            HomePage.GoToPost(post);
+            Assert.IsTrue(HomePage.PostFound(post), String.Format("The post \"{0}\" was not found", post));
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
