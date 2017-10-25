@@ -182,6 +182,16 @@ namespace TheWebWeWeave.BlogUITests
             Assert.IsTrue(HomePage.PostFound(post), String.Format("The post \"{0}\" was not found", post));
         }
 
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void When_Is_It_Done_Was_Deployed()
+        {
+            string post = "When Should we Move the Work Items to DONE?";
+            HomePage.Goto();
+            HomePage.GoToPost(post);
+            Assert.IsTrue(HomePage.PostFound(post), String.Format("The post \"{0}\" was not found", post));
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
