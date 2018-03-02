@@ -4,7 +4,7 @@
 )
 
 $targetPath = "$StagingPath"
-$scriptPath = "$StagingPath\Scripts"
+$scriptPath = "$StagingPath\deployment"
 $testPath = "$StagingPath\Tests"
 $msDeploy = "$StagingPath\MSDeploy"
 
@@ -26,6 +26,6 @@ if (-not(Test-Path($msDeploy))) {
         mkdir $msDeploy
     }
 
-Copy-Item "$SourcePath\scripts\*.*" -Destination $scriptPath -Force
+Copy-Item "$SourcePath\deployment\*.*" -Destination $scriptPath -Force
 Copy-Item "$SourcePath\BlogUITests\BlogUITests\bin\Release\*.*" -Destination $testPath -Force
 Copy-Item "$SourcePath\MSDeploy\*.*" -Destination $msDeploy -Force
