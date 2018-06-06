@@ -202,6 +202,16 @@ namespace TheWebWeWeave.BlogUITests
             Assert.IsTrue(HomePage.PostFound(post), String.Format("The post \"{0}\" was not found", post));
         }
 
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void Red_Gate_Tools_vs_SQL_Server_Data_Tools()
+        {
+            string post = "Red Gate tools vs SQL Server Data Tools";
+            HomePage.Goto();
+            HomePage.GoToPost(post);
+            Assert.IsTrue(HomePage.PostFound(post), $"The post \"{post}\" was not found");
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
