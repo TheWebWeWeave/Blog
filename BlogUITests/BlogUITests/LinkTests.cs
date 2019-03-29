@@ -212,6 +212,16 @@ namespace TheWebWeWeave.BlogUITests
             Assert.IsTrue(HomePage.PostFound(post), $"The post \"{post}\" was not found");
         }
 
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void Team_SubTeam_AreaPaths_Was_Deployed()
+        {
+            string post = "Teams, SubTeams and Area Path's";
+            HomePage.Goto();
+            HomePage.GoToPost(post);
+            Assert.IsTrue(HomePage.PostFound(post), $"The post \"{post}\" was not found");
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
