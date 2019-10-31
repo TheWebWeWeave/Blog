@@ -63,7 +63,10 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
+##theme: hiker
 theme: hexo-theme-bootstrap-blog
+## theme: landscape
+## theme: clean-blog
 
 disqus_shortname: donaldonsoftware
 feed:

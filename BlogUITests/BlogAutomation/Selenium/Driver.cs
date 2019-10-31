@@ -19,10 +19,9 @@ namespace TheWebWeWeave.BlogAutomation
         /// </summary>
         public static string BaseAddress
         {
-            get {
-                string webSite = ConfigurationManager.AppSettings["BaseAddress"];
-                string result = (webSite != "__baseAddress__" ? webSite : "http://localhost:4000");               
-                return  result;
+            get 
+            {
+                return ConfigurationManager.AppSettings["BaseAddress"];
             }
             
         }
@@ -30,12 +29,12 @@ namespace TheWebWeWeave.BlogAutomation
         public static void Initialize()
         {
 
-            Instance = new FirefoxDriver(new FirefoxBinary() { Timeout = TimeSpan.FromMinutes(2) }, new FirefoxProfile());
+            //Instance = new FirefoxDriver(new FirefoxBinary() { Timeout = TimeSpan.FromMinutes(2) }, new FirefoxProfile());
 
-            //ChromeOptions options = new ChromeOptions();
-            //options.AddArgument("--disable-popup-blocking");
-            //options.AddArgument("--ignore-certificate-errors");           
-            //Instance = new ChromeDriver(@"..\..\..\packages\Selenium.Chrome.WebDriver.2.45\driver\", options);
+            ChromeOptions options = new ChromeOptions();
+            options.AddArgument("--disable-popup-blocking");
+            options.AddArgument("--ignore-certificate-errors");
+            Instance = new ChromeDriver(ConfigurationManager.AppSettings["driverPath"], options);
 
             TurnOnWait();
         }
@@ -43,6 +42,7 @@ namespace TheWebWeWeave.BlogAutomation
         public static void Close()
         {
             Instance.Close();
+            Instance.Quit();
         }
 
         private static void TurnOnWait()

@@ -222,10 +222,21 @@ namespace TheWebWeWeave.BlogUITests
             Assert.IsTrue(HomePage.PostFound(post), $"The post \"{post}\" was not found");
         }
 
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void Easy_Configuration_Updates_During_Deployment_Was_Deployed()
+        {
+            string post = "Easy Configuration Updates During Deployment";
+            HomePage.Goto();
+            HomePage.GoToPost(post);
+            Assert.IsTrue(HomePage.PostFound(post), $"The post \"{post}\" was not found");
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
             Driver.Close();
+            
         }
     }
 }

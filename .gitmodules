@@ -1,3 +1,6 @@
 [submodule "themes/hexo-theme-bootstrap-blog"]
 	path = themes/hexo-theme-bootstrap-blog
 	url = https://github.com/cgmartin/hexo-theme-bootstrap-blog.git
+[submodule "themes/hiker"]
+	path = themes/hiker
+	url = https://github.com/SchulzDL/hexo-theme-hiker.git

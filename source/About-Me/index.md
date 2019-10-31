@@ -5,10 +5,10 @@ Ah yes, you have arrived at the very strange world of Donald on Software.  I'm D
 
 I was a software developer in Los Angeles with more than 20 years of experience.  I am originally from Canada and relocated in 1998 to work for One, Inc until they folded after the colapse of the dot com boom in January 2002.  I have my own company, [The Web We Weave, Inc.](http://www.thewebweweave.net) which makes [AGP Maker](http://www.agpmaker.com), the Software used to simplify the Awards and Graduation programs in High Schools.  
 
-I currently work as an [ALM](https://en.wikipedia.org/wiki/Application_lifecycle_management) Consultant for [Imaginet](http://www.Imaginet.com) and travel all over the [United States and Canada](http://binged.it/1NRvP6B) providing guidance and recommendations to our clients on improving their process, culture and tooling to develop better software.  You can learn more about me personnaly by reading what I write.
+I currently work as an [ALM](https://en.wikipedia.org/wiki/Application_lifecycle_management) and [DevOps](https://en.wikipedia.org/wiki/DevOps) Consultant for [Imaginet](http://www.Imaginet.com) and travel all over the [United States and Canada](http://binged.it/1NRvP6B) providing guidance and recommendations to our clients on improving their process, culture and tooling to develop better software.  You can learn more about me personnaly by reading what I write.
 
 
-## How Ofen Do New Things Appear Here?
+## How Often Do New Things Appear Here?
 "Whether or not I put things up will depend largely on whether, on a particular day, I have anything to put up," to paraphrase McSweeneys. 
 
 ## So, Am I Supposed to Check Back Every Day?
