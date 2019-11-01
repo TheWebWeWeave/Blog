@@ -29,4 +29,4 @@ if (-not(Test-Path($msDeploy))) {
 Copy-Item "$SourcePath\deployment\*.*" -Destination $scriptPath -Force
 Copy-Item "$SourcePath\BlogUITests\BlogUITests\bin\Release\*.*" -Destination $testPath -Force
 Copy-Item "$SourcePath\MSDeploy\*.*" -Destination $msDeploy -Force
-Copy-Item "$SourcePath\public.zip" -Destination $msDeploy -Force
+Copy-Item "$SourcePath\Publish.zip" -Destination $msDeploy -Force
