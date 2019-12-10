@@ -1,0 +1,144 @@
+pool:
+  name: Hosted Windows 2019 with VS2019
+  demands:
+  - npm
+  - msbuild
+  - visualstudio
+
+#Your build pipeline references an undefined variable named ‘$BuildDefName’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘$BuildDefName’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘$FinalVersion’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘GitVersion.SemVer’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+variables:
+  BuildPlatform: 'any cpu'
+  BuildConfiguration: 'release'
+  ContentPath : '$(Build.SourcesDirectory)\public'
+
+steps:
+- task: gittools.gitversion-preview.gitversion-task.GitVersion@5
+  displayName: GitVersion
+  inputs:
+    runtime: full
+    preferBundledVersion: false
+    configFilePath: GitVersion.yml
+
+- task: petergroenewegen.PeterGroenewegen-Xpirit-Vsts-Build-InlinePowershell.Xpirit-Vsts-Build-InlinePowershell.InlinePowershell@1
+  displayName: 'Rename the Build to include the version number'
+  inputs:
+    Script: |
+     Param(
+        $FinalVersion
+     )
+     
+     [string] $BuildDefName = "$env:BUILD_DEFINITIONNAME"
+     
+     Write-Host "##vso[build.updatebuildnumber]$($BuildDefName)_v$($FinalVersion)"
+    ScriptArguments: '-FinalVersion $(GitVersion.SemVer)'
+
+- task: UniversalPackages@0
+  displayName: 'download hexo node_modules'
+  inputs:
+    downloadDirectory: '$(System.DefaultWorkingDirectory)\node_modules'
+    vstsFeed: 'e6dffc65-5baa-4671-b51a-db24b7afdd56'
+    vstsFeedPackage: '76b9a807-7777-40e9-a8e2-b888d0505dfd'
+    vstsPackageVersion: 1.1.0
+
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    workingDir: '$(Build.SourcesDirectory)'
+    verbose: false
+
+- task: Npm@1
+  displayName: 'Install hexo-generator-feed'
+  inputs:
+    command: custom
+    workingDir: '$(Build.SourcesDirectory)'
+    verbose: false
+    customCommand: 'install hexo-generator-feed --save'
+
+- task: NuGetCommand@2
+  displayName: 'NuGet restore'
+
+- task: VSBuild@1
+  displayName: 'Build solution **\*.sln'
+  inputs:
+    vsVersion: 14.0
+    platform: '$(BuildPlatform)'
+    configuration: '$(BuildConfiguration)'
+
+- task: DeleteFiles@1
+  displayName: 'Delete files from public'
+  inputs:
+    SourceFolder: public
+    Contents: '**'
+
+- task: whitesource.ws-bolt.bolt.wss.WhiteSource Bolt@19
+  displayName: 'WhiteSource Bolt'
+  inputs:
+    cwd: '$(Build.SourcesDirectory)\src\'
+
+- task: colinsalmcorner.colinsalmcorner-buildtasks.replace-tokens-task.ReplaceTokens@1
+  displayName: 'Replace tokens in msdeploy'
+  inputs:
+    sourcePath: msdeploy
+    filePattern: '*.xml'
+  enabled: false
+
+- task: CmdLine@1
+  displayName: 'Run the Hexo Generate command'
+  inputs:
+    filename: 'node_modules\.bin\hexo'
+    arguments: generate
+
+- task: CmdLine@1
+  displayName: 'Run "C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe"'
+  inputs:
+    filename: '"C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe"'
+    arguments: '-verb:sync -source:manifest="$(Build.SourcesDirectory)\msdeploy\manifest.source.xml" -dest:package="$(Build.SourcesDirectory)\msdeploy\blog.zip"'
+  enabled: false
+
+- task: CmdLine@1
+  displayName: 'Run "C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe"'
+  inputs:
+    filename: '"C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe"'
+    arguments: '-verb:sync -source:package="$(Build.SourcesDirectory)\msdeploy\blog.zip" -dest:manifest="$(Build.SourcesDirectory)\msdeploy\manifest.dest.xml"'
+  enabled: false
+
+- task: DeleteFiles@1
+  displayName: 'Delete files from msdeploy'
+  inputs:
+    SourceFolder: msdeploy
+    Contents: blog.zip
+  enabled: false
+
+- task: CmdLine@1
+  displayName: 'Run "C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe"'
+  inputs:
+    filename: '"C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe"'
+    arguments: '-verb:sync -source:iisApp="Default Web Site" -dest:package="$(Build.SourcesDirectory)\msdeploy\blog.zip"'
+  enabled: false
+
+- task: ArchiveFiles@2
+  displayName: 'Archive $(contentPath)'
+  inputs:
+    rootFolderOrFile: '$(contentPath)'
+    includeRootFolder: false
+    archiveFile: '$(Agent.BuildDirectory)\s\Publish.zip'
+    verbose: true
+
+- task: PowerShell@2
+  displayName: 'CopyFinalIntoStaging Script'
+  inputs:
+    targetType: filePath
+    filePath: ./deployment/CopyFinalIntoStaging.ps1
+    arguments: '-SourcePath "$(Agent.BuildDirectory)\s" -StagingPath "$(Agent.BuildDirectory)\b"'
+    failOnStderr: true
+
+- task: CopyPublishBuildArtifacts@1
+  displayName: 'Copy Publish Artifact: drop'
+  inputs:
+    CopyRoot: '$(Agent.BuildDirectory)\b'
+    Contents: '**'
+    ArtifactName: drop
+    ArtifactType: Container
