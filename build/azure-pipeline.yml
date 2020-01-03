@@ -1,5 +1,7 @@
+#pool:
+#  name: Hosted Windows 2019 with VS2019
 pool:
-  name: Hosted Windows 2019 with VS2019
+  name: 3WInc-Pool
   demands:
   - npm
   - msbuild
