@@ -78,14 +78,7 @@ steps:
 - task: whitesource.ws-bolt.bolt.wss.WhiteSource Bolt@19
   displayName: 'WhiteSource Bolt'
   inputs:
-    cwd: '$(Build.SourcesDirectory)\src\'
-
-- task: colinsalmcorner.colinsalmcorner-buildtasks.replace-tokens-task.ReplaceTokens@1
-  displayName: 'Replace tokens in msdeploy'
-  inputs:
-    sourcePath: msdeploy
-    filePattern: '*.xml'
-  enabled: false
+    cwd: '$(Build.SourcesDirectory)\src'
 
 - task: CmdLine@1
   displayName: 'Run the Hexo Generate command'
@@ -93,49 +86,21 @@ steps:
     filename: 'node_modules\.bin\hexo'
     arguments: generate
 
-- task: CmdLine@1
-  displayName: 'Run "C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe"'
-  inputs:
-    filename: '"C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe"'
-    arguments: '-verb:sync -source:manifest="$(Build.SourcesDirectory)\msdeploy\manifest.source.xml" -dest:package="$(Build.SourcesDirectory)\msdeploy\blog.zip"'
-  enabled: false
-
-- task: CmdLine@1
-  displayName: 'Run "C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe"'
-  inputs:
-    filename: '"C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe"'
-    arguments: '-verb:sync -source:package="$(Build.SourcesDirectory)\msdeploy\blog.zip" -dest:manifest="$(Build.SourcesDirectory)\msdeploy\manifest.dest.xml"'
-  enabled: false
-
-- task: DeleteFiles@1
-  displayName: 'Delete files from msdeploy'
-  inputs:
-    SourceFolder: msdeploy
-    Contents: blog.zip
-  enabled: false
-
-- task: CmdLine@1
-  displayName: 'Run "C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe"'
-  inputs:
-    filename: '"C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe"'
-    arguments: '-verb:sync -source:iisApp="Default Web Site" -dest:package="$(Build.SourcesDirectory)\msdeploy\blog.zip"'
-  enabled: false
-
 - task: ArchiveFiles@2
   displayName: 'Archive $(contentPath)'
   inputs:
     rootFolderOrFile: '$(contentPath)'
     includeRootFolder: false
-    archiveFile: '$(Agent.BuildDirectory)\s\Publish.zip'
+    archiveFile: '$(Agent.BuildDirectory)\b\Publish.zip'
     verbose: true
 
-- task: PowerShell@2
-  displayName: 'CopyFinalIntoStaging Script'
+- task: CopyFiles@2
+  displayName: 'Copy the tests to staging'
   inputs:
-    targetType: filePath
-    filePath: ./deployment/CopyFinalIntoStaging.ps1
-    arguments: '-SourcePath "$(Agent.BuildDirectory)\s" -StagingPath "$(Agent.BuildDirectory)\b"'
-    failOnStderr: true
+    SourceFolder: '$(Agent.BuildDirectory)\s\test\BlogUITests\bin\$(BuildConfiguration)'
+    Contents: '**'
+    TargetFolder: '$(Agent.BuildDirectory)\b\Tests'
+    flattenFolders: true
 
 - task: CopyPublishBuildArtifacts@1
   displayName: 'Copy Publish Artifact: drop'
