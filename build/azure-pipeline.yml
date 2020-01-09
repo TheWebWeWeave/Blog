@@ -1,7 +1,5 @@
-#pool:
-#  name: Hosted Windows 2019 with VS2019
 pool:
-  name: 3WInc-Pool
+  name: Hosted Windows 2019 with VS2019
   demands:
   - npm
   - msbuild
@@ -14,9 +12,13 @@ pool:
 variables:
   BuildPlatform: 'any cpu'
   BuildConfiguration: 'release'
-  ContentPath : '$(Build.SourcesDirectory)\public'
+  ContentPath : '$(Build.SourcesDirectory)\src\public'
 
 steps:
+- checkout: self
+  clean: true
+  submodules: true
+  
 - task: gittools.gitversion-preview.gitversion-task.GitVersion@5
   displayName: GitVersion
   inputs:
@@ -83,8 +85,9 @@ steps:
 - task: CmdLine@1
   displayName: 'Run the Hexo Generate command'
   inputs:
-    filename: 'node_modules\.bin\hexo'
-    arguments: generate
+    filename: '..\node_modules\.bin\hexo'
+    arguments: 'generate'
+    workingFolder: '$(Build.SourcesDirectory)\src'
 
 - task: ArchiveFiles@2
   displayName: 'Archive $(contentPath)'
@@ -101,6 +104,24 @@ steps:
     Contents: '**'
     TargetFolder: '$(Agent.BuildDirectory)\b\Tests'
     flattenFolders: true
+
+- task: chwebdude.badge-creator.custom-build-task.badge-creator@1
+  displayName: 'Create Badge'
+  inputs:
+    nameString: Blog
+    versionString: '$(GitVersion.SemVer)'
+    destinationPath: '$(Build.ArtifactStagingDirectory)\blog.svg'  
+    color: blue
+    style: flat
+
+- task: AzureFileCopy@2
+  displayName: 'AzureBlob File Copy'
+  inputs:
+    SourcePath: '$(Build.ArtifactStagingDirectory)\blog.svg'
+    azureSubscription: '2019-01-08_MSDN_Subscription'
+    Destination: AzureBlob
+    storage: msdtlvm967694675
+    ContainerName: badges 
 
 - task: CopyPublishBuildArtifacts@1
   displayName: 'Copy Publish Artifact: drop'

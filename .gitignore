@@ -6,8 +6,8 @@ db.json
 package.json
 package-lock.json
 *.log
-#node_modules/
-themes/
+node_modules/
+#themes/
 public/
 .deploy*/
 

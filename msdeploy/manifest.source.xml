@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<sitemanifest>
-  <!-- This is the public folder on the x3winc-build machine -->
-  <contentPath path="__contentPath__" />
-  <createApp path="" />
-</sitemanifest>
