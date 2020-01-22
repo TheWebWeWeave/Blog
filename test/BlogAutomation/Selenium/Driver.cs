@@ -34,6 +34,7 @@ namespace TheWebWeWeave.BlogAutomation
             ChromeOptions options = new ChromeOptions();
             options.AddArgument("--disable-popup-blocking");
             options.AddArgument("--ignore-certificate-errors");
+            options.AddArgument("--whitelisted-ips=''");
             Instance = new ChromeDriver(ConfigurationManager.AppSettings["driverPath"], options);
 
             TurnOnWait();

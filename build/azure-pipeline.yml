@@ -1,3 +1,13 @@
+trigger:
+  branches:
+    include:
+    - '*'
+  paths:
+    include:
+    - src/source/*
+    - src/themes/*
+    - test/*
+
 pool:
   name: Hosted Windows 2019 with VS2019
   demands:
