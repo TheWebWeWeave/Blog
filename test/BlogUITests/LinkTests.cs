@@ -252,6 +252,16 @@ namespace TheWebWeWeave.BlogUITests
             Assert.IsTrue(HomePage.PostFound(post), $"The post \"{post}\" was not found");
         }
 
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void How_I_Work_With_Work_Item_Templates_Was_Deployed()
+        {
+            string post = "How I Work With Work Item Templates";
+            HomePage.Goto();
+            HomePage.GoToPost(post);
+            Assert.IsTrue(HomePage.PostFound(post), $"The post \"{post}\" was not found");
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
