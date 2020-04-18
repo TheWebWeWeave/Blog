@@ -262,6 +262,16 @@ namespace TheWebWeWeave.BlogUITests
             Assert.IsTrue(HomePage.PostFound(post), $"The post \"{post}\" was not found");
         }
 
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void Publishing_A_PowerBI_Report_to_an_Azure_DevOps_Dashboard_Was_Deployed()
+        {
+            string post = "Publishing a PowerBI Report to an Azure DevOps Dashboard";
+            HomePage.Goto();
+            HomePage.GoToPost(post);
+            Assert.IsTrue(HomePage.PostFound(post), $"The post \"{post}\" was not found");
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
