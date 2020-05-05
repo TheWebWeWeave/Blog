@@ -3,6 +3,7 @@
 .DS_Store
 Thumbs.db
 db.json
+src/db.json
 package.json
 package-lock.json
 *.log

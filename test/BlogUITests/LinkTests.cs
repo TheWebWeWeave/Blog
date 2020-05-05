@@ -272,6 +272,16 @@ namespace TheWebWeWeave.BlogUITests
             Assert.IsTrue(HomePage.PostFound(post), $"The post \"{post}\" was not found");
         }
 
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void The_New_Normal_Was_Deployed()
+        {
+            string post = "The New Normal";
+            HomePage.Goto();
+            HomePage.GoToPost(post);
+            Assert.IsTrue(HomePage.PostFound(post), $"The post \"{post}\" was not found");
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
