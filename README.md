@@ -15,4 +15,5 @@ is that the articles and blogs are exactly where I have always wanted them which
 ### [Blog Workflow](docs/workflow.md)
 ### [Steps](docs/steps.md)
 ### [Version](docs/version.md)
+### [New Workspace](docs/startingnewworkspace.md)
 
