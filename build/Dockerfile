@@ -15,7 +15,9 @@ RUN npm install -g hexo-cli
 
 ## set the workdir
 WORKDIR /app
-COPY app/github_clone_using_token.sh .
+COPY github_clone_using_token.sh .
+# Verify that the file is there.
+RUN ls -l
 RUN app/github_clone_using_token.sh
 
 ## expose the HEXO_SERVER_PORT
