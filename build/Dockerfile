@@ -15,6 +15,7 @@ RUN npm install -g hexo-cli
 
 ## set the workdir
 WORKDIR /app/blog
+COPY ../src/package.json .
 RUN npm install hexo --save
 
 
