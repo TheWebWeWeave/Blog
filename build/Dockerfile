@@ -1,4 +1,4 @@
-FROM node:5.3.0-slim AS builder
+FROM node:lts-stretch AS builder
 MAINTAINER Donald Schulz <donald@schulz.com>
 
 ## set HEXO_SERVER_PORT environment default
