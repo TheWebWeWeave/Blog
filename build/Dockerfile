@@ -18,8 +18,8 @@ WORKDIR /app
 COPY github_clone_using_token.sh .
 # Verify that the file is there.
 RUN ls -l
-RUN chmod +x /app/gethub_clone_using_token.sh
-RUN /app/github_clone_using_token.sh
+#RUN chmod +x /app/gethub_clone_using_token.sh
+#RUN /app/github_clone_using_token.sh
 
 ## expose the HEXO_SERVER_PORT
 EXPOSE ${HEXO_SERVER_PORT}
