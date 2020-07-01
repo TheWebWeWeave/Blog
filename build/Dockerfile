@@ -14,14 +14,12 @@ RUN apt-get install git -y
 RUN npm install -g hexo-cli
 
 ## set the workdir
-WORKDIR /app
-COPY github_clone_using_token.sh .
-# Verify that the file is there.
-RUN ls -l
-#RUN chmod +x /app/gethub_clone_using_token.sh
-#RUN /app/github_clone_using_token.sh
+WORKDIR /app/blog
+RUN npm install hexo --save
+
 
 ## expose the HEXO_SERVER_PORT
 EXPOSE ${HEXO_SERVER_PORT}
 
-
+## npm install the latest packages from package.json and run the hexo server
+CMD npm install; hexo clean; hexo server -d -p ${HEXO_SERVER_PORT}
