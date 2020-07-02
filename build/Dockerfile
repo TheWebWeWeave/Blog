@@ -8,7 +8,7 @@ WORKDIR /app/blog/themes
 COPY ./src/themes/ ./themes
 RUN ls -la /app/blog/themes/*
 WORKDIR /app/blog
-COPY _config.yml .
+COPY ./src/_config.yml .
 
 # generate the website
 RUN hexo generate
