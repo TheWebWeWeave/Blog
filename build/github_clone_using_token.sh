@@ -1,4 +1,0 @@
-export GITHUB_USER=t3winc
-export GITHUB_TOKEN=d371809423ef28e66de25c7b2b1924419d8a956b
-export GITHUB_REPOSITORY=T3WInc/Blog
-git clone https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
