@@ -15,3 +15,7 @@ RUN npm install hexo-generator-feed --save
 
 # generate the website
 RUN hexo generate
+
+# app image
+FROM nginx
+COPY  --from=builder /app/blog/public/ /usr/share/nginx/html/
