@@ -1,7 +1,5 @@
 # Blog Powered by Hexo
 
-[[_TOC_]]
-
 |Branch|Status|Stage|Status|
 |-----|------|------|------|
 |Master|![Build Status](https://donald.visualstudio.com/T3WInc/_apis/build/status/Applications/Blog?branchName=master)|Dev|![Dev Deployment Status](https://donald.vsrm.visualstudio.com/_apis/public/Release/badge/782a3910-7e8d-44b6-96e4-945daa083473/5/10)|
@@ -15,4 +13,4 @@ is that the articles and blogs are exactly where I have always wanted them which
 ### [Blog Workflow](docs/workflow.md)
 ### [Steps](docs/steps.md)
 ### [Version](docs/version.md)
-
+### [Docker](docs/docker.md)
