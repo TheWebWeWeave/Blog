@@ -9,4 +9,4 @@ WORKDIR /app/blog
 COPY _config.yml .
 
 # generate the website
-hexo generate
+RUN hexo generate
