@@ -14,4 +14,5 @@ is that the articles and blogs are exactly where I have always wanted them which
 ### [Steps](docs/steps.md)
 ### [Version](docs/version.md)
 ### [New Workspace](docs/startingnewworkspace.md)
+### [Docker](docks/docker.md)
 
