@@ -1,4 +1,4 @@
-FROM t3winc/hexo-base as builder
+FROM t3winc/hexo-base:v1.0 as builder
 
 # set the workdir
 WORKDIR /app/blog/source
