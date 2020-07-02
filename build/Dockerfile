@@ -4,7 +4,7 @@ FROM t3winc/hexo-base:v1.0 as builder
 WORKDIR /app/blog/source
 COPY ./src/source/*.* .
 WORKDIR /app/blog/themes
-COPY .src/themes/*.* .
+COPY ./src/themes/*.* .
 WORKDIR /app/blog
 COPY _config.yml .
 
