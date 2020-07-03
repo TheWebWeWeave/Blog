@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    environment {
+        REGISTRY = "ssh.t3winc.com:5000"
+    }
+    stages {
+        stage('Verify'){
+            steps {
+                dir('build')
+                sh 'chmod +x ./ci/00-verify.bat'
+                sh './ci/00-verify.bat'
+            }
+        }
+        stage('Build'){
+            steps {
+                dir('build')
+                sh 'chmod +x ./ci/01-build.bat'
+                sh './ci/01-build.bat'
+            }
+        }
+    }
+}
