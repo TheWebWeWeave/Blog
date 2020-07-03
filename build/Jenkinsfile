@@ -7,15 +7,15 @@ pipeline {
         stage('Verify'){
             steps {
                 dir('build')
-                sh 'chmod +x ./ci/00-verify.bat'
-                sh './ci/00-verify.bat'
+                sh 'chmod +x ./ci/00-verify.sh'
+                sh './ci/00-verify.sh'
             }
         }
         stage('Build'){
             steps {
                 dir('build')
-                sh 'chmod +x ./ci/01-build.bat'
-                sh './ci/01-build.bat'
+                sh 'chmod +x ./ci/01-build.sh'
+                sh './ci/01-build.sh'
             }
         }
     }
