@@ -6,14 +6,12 @@ pipeline {
     stages {
         stage('Verify'){
             steps {
-                #dir('build')
                 sh 'chmod +x ./build/ci/00-verify.sh'
                 sh './build/ci/00-verify.sh'
             }
         }
         stage('Build'){
             steps {
-                #dir('build')
                 sh 'chmod +x ./build/ci/01-build.sh'
                 sh './build/ci/01-build.sh'
             }
