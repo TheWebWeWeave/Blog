@@ -10,10 +10,16 @@ pipeline {
                 sh './build/ci/00-verify.sh'
             }
         }
+        stage('Version') {
+            steps {
+                sh 'chmod +x ./build/ci/01-version.sh'
+                sh './build/ci/01-version.sh'
+            }
+        }
         stage('Build'){
             steps {
-                sh 'chmod +x ./build/ci/01-build.sh'
-                sh './build/ci/01-build.sh'
+                sh 'chmod +x ./build/ci/02-build.sh'
+                sh './build/ci/02-build.sh'
             }
         }
     }
