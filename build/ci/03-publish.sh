@@ -1,2 +1,3 @@
 #This should send the image up to docker hub...
+cat /var/jenkins_hone/my_password.txt | docker login --username schulzdl --password-stdin
 docker push t3winc/donaldonsoftware:1.11.0-alpha1
