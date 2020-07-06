@@ -25,7 +25,7 @@ pipeline {
         stage('Publish'){
             steps {
                 sh 'chmod +x ./build/ci/03-publish.sh'
-                sh '/build/ci/02-publish.sh'
+                sh '/build/ci/03-publish.sh'
             }
         }
     }
