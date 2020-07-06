@@ -1,0 +1,15 @@
+version: '3.3'
+
+networks:
+    app-net:
+        external:
+            name: nat
+
+services:
+    donaldonsoftware:
+        image: t3winc/donaldonsoftware:latest
+        container_name: donaldonsoftware
+        expose:
+            - 80
+        networks: 
+            - app-net
