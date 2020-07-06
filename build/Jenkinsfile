@@ -22,5 +22,11 @@ pipeline {
                 sh './build/ci/02-build.sh'
             }
         }
+        state('Publish'){
+            steps {
+                sh 'chmod +x ./build/ci/03-publish.sh'
+                sh '/build/ci/02-publish.sh'
+            }
+        }
     }
 }
