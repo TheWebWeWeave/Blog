@@ -6,16 +6,20 @@ pipeline {
     stages {
         stage('Verify'){
             steps {
-                dir('build')
-                sh 'chmod +x ./ci/00-verify.bat'
-                sh './ci/00-verify.bat'
+                sh 'chmod +x ./build/ci/00-verify.sh'
+                sh './build/ci/00-verify.sh'
+            }
+        }
+        stage('Version') {
+            steps {
+                sh 'chmod +x ./build/ci/01-version.sh'
+                sh './build/ci/01-version.sh'
             }
         }
         stage('Build'){
             steps {
-                dir('build')
-                sh 'chmod +x ./ci/01-build.bat'
-                sh './ci/01-build.bat'
+                sh 'chmod +x ./build/ci/02-build.sh'
+                sh './build/ci/02-build.sh'
             }
         }
     }
