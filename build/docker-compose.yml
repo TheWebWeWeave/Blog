@@ -4,46 +4,8 @@ networks:
     app-net:
         external:
             name: nat
-
-volumes:
-    proxy_certs:
-        external: true
-    proxy_html:
-        external: true
-    proxy_vhost:
-        external: true            
-
+         
 services:
-    nginx-proxy:
-        image: jwilder/nginx-proxy
-        container_name: nginx-proxy
-        ports:
-            - "80:80"
-            - "443:443"
-        volumes:
-            - proxy_certs:/etc/nginx/certs
-            - proxy_vhost:/etc/nginx/vhost.d
-            - proxy_html:/usr/share/nginx/html
-            - /var/run/docker.sock:/tmp/docker.sock
-        networks:
-            - app-net
-
-    nginx-proxy-letsencrypt:
-        image: jrcs/letsencrypt-nginx-proxy-companion
-        container_name: letsencrypt
-        environment:
-            - "DEFAULT_EMAIL=admin@thewebweweave.com"
-            - "NGINX_PROXY_CONTAINER=nginx-proxy"
-        volumes:
-#            # One line that won't translate in a compose file is from
-#            # - from nginx-proxy
-            - proxy_certs:/etc/nginx/certs
-            - proxy_vhost:/etc/nginx/vhost.d
-            - proxy_html:/usr/share/nginx/html
-            - /var/run/docker.sock:/var/run/docker.sock:ro
-        networks: 
-            - app-net
-
     donaldonsoftware:
         image: t3winc/donaldonsoftware:1.11.0-alpha1
         container_name: donaldonsoftware
