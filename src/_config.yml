@@ -82,7 +82,7 @@ deploy:
   
 theme_config:
   # Header
-  navbar_brand: <img src="/images/Donald_2019.jpg" height="90" width="90">
+  navbar_brand: <img src="/images/Donald_2019_transparent.jpg" height="90" width="90">
   menu:
     Home: index.html
     Archives: archives/

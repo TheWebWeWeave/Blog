@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+    environment {
+        REGISTRY = "ssh.t3winc.com:5000"
+    }
+    stages {
+        stage('Verify'){
+            steps {
+                sh 'chmod +x ./build/ci/00-verify.sh'
+                sh './build/ci/00-verify.sh'
+            }
+        }
+        stage('Version') {
+            steps {
+                sh 'chmod +x ./build/ci/01-version.sh'
+                sh './build/ci/01-version.sh'
+            }
+        }
+        stage('Build'){
+            steps {
+                sh 'chmod +x ./build/ci/02-build.sh'
+                sh './build/ci/02-build.sh'
+            }
+        }
+        stage('Publish'){
+            steps {
+                sh 'chmod +x ./build/ci/03-publish.sh'
+                sh './build/ci/03-publish.sh'
+            }
+        }
+        stage('Dev-Deploy'){
+            steps {
+                sh 'chmod +x ./build/ci/04-dev-deploy.sh'
+                sh './build/ci/04-dev-deploy.sh'
+            }
+        }
+    }
+}

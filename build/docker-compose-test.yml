@@ -1,0 +1,8 @@
+version: "3.3"
+
+services: 
+    donaldonsoftware:
+        environment: 
+            - "VIRTUAL_HOST=blog-test.t3winc.com"
+            - "VIRTUAL_PORT=80"
+            - "LETSENCRYPT_HOST=blog-test.t3winc.com"    
