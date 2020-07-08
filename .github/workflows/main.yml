@@ -61,12 +61,12 @@ jobs:
         echo "CommitsSinceVersionSourcePadded: ${{ steps.gitversion.outputs.commitsSinceVersionSourcePadded }}"
         echo "CommitDate: ${{ steps.gitversion.outputs.commitDate }}"
 
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo Hello, world!
+    - name: Jenkins
+      uses: enflo/jenkins-action@master
+      with:
+        url: {{ https://jenkins.t3winc.com }}
+        user: {{ diamol }}
+        token: {{ diamol }}
+        job: {{ /job/blog}}
+        parameters: {{ steps.getversion.outputs }}
 
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
