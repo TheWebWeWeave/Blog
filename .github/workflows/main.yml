@@ -64,9 +64,9 @@ jobs:
     - name: Jenkins
       uses: enflo/jenkins-action@master
       with:
-        url: {{ https://jenkins.t3winc.com }}
-        user: {{ diamol }}
-        token: {{ diamol }}
-        job: {{ /job/blog}}
+        url: {{ "https://jenkins.t3winc.com" }}
+        user: {{ "diamol" }}
+        token: {{ "diamol" }}
+        job: {{ "/job/blog" }}
         parameters: {{ steps.getversion.outputs }}
 
