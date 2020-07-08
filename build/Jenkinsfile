@@ -29,10 +29,10 @@ pipeline {
                 sh './build/ci/03-publish.sh'
             }
         }
-        stage('Dev-Deploy'){
+        stage('Deploy'){
             steps {
-                sh 'chmod +x ./build/ci/04-dev-deploy.sh'
-                sh './build/ci/04-dev-deploy.sh'
+                sh 'chmod +x ./build/ci/04-prod-deploy.sh'
+                sh './build/ci/04-prod-deploy.sh'
             }
         }
     }
