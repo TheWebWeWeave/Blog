@@ -1,8 +1,18 @@
-version: "3.3"
+version: '3.3'
 
-services: 
+networks:
+    app-net:
+        external:
+            name: nat
+         
+services:
     donaldonsoftware:
+        image: t3winc/donaldonsoftware:1.11.0-alpha1
+        container_name: test.donaldonsoftware
+        expose:
+            - 80
         environment: 
             - "VIRTUAL_HOST=blog-test.t3winc.com"
-            - "VIRTUAL_PORT=80"
-            - "LETSENCRYPT_HOST=blog-test.t3winc.com"    
+            - "LETSENCRYPT_HOST=blog-test.t3winc.com"              
+        networks: 
+            - app-net
