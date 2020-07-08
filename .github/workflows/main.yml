@@ -68,5 +68,5 @@ jobs:
         user: 'diamol'
         token: 'diamol'
         job: '/job/blog'
-        parameters: {{ steps.getversion.outputs }}
+        parameters: steps.getversion.outputs
 
