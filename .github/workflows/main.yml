@@ -67,6 +67,6 @@ jobs:
         url: 'https://jenkins.t3winc.com'
         user: 'diamol'
         token: 'diamol'
-        job: '/job/blog'
-        parameters: steps.getversion.outputs
+        job: '/job/blog2'
+        parameters: steps.getversion.outputs.fullSemVer
 
