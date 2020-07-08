@@ -12,6 +12,7 @@ pipeline {
         }
         stage('Version') {
             steps {
+                echo 'my semver version is: $semver'
                 sh 'chmod +x ./build/ci/01-version.sh'
                 sh './build/ci/01-version.sh'
             }
