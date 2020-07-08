@@ -1,8 +1,8 @@
 #This should send the image up to docker hub...
-cat /var/jenkins_home/my_password.txt | docker login --username schulzdl --password-stdin
-docker push t3winc/donaldonsoftware:1.11.0-alpha1
+#cat /var/jenkins_home/my_password.txt | docker login --username schulzdl --password-stdin
+#docker push t3winc/donaldonsoftware:1.11.0-alpha1
 
 #This should send the image up to github packages...
-#cat ~/GH_TOKEN.txt | docker login docker.pkg.github.com -u SchulzDL --password-stdin
-#docker tag IMAGE_ID docker.pkg.github.com/t3winc/repository-name/IMAGE_NAME:VERSION
-#docker push docker.pkg.github.com/t3winc/repository-name/IMAGE_NAME:VERSION
+cat ~/GH_TOKEN.txt | docker login docker.pkg.github.com -u SchulzDL --password-stdin
+docker tag IMAGE_ID docker.pkg.github.com/t3winc/blog/donaldonsoftware:1.11.0
+docker push docker.pkg.github.com/t3winc/blog-name/donaldonsoftware:1.11.0
