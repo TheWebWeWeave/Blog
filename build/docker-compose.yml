@@ -16,7 +16,7 @@ volumes:
         external: true
 
 services:
-    nginx-proxy:
+    proxy:
         image: jwilder/nginx-proxy
         container_name: proxy
         ports:
@@ -31,7 +31,7 @@ services:
             - app-net
         restart: always
 
-    nginx-proxy-letsencrypt:
+    letsencrypt:
         image: jrcs/letsencrypt-nginx-proxy-compainion
         container_name: letsencrypt
         environment:
