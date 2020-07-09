@@ -16,9 +16,9 @@ volumes:
         external: true
 
 services:
-    proxy:
+    nginx-proxy:
         image: jwilder/nginx-proxy
-        container_name: proxy
+        container_name: nginx-proxy
         ports:
             - "80:80"
             - "443:443"
@@ -31,9 +31,9 @@ services:
             - app-net
         restart: always
 
-    letsencrypt:
+    nginx-letsencrypt:
         image: jrcs/letsencrypt-nginx-proxy-compainion
-        container_name: letsencrypt
+        container_name: nginx-letsencrypt
         environment:
             - "DEFAULT_EMAIL=admin@thewebweweave.com"
             - "NGINX_PROXY_CONTAINER=proxy"
@@ -46,7 +46,7 @@ services:
             - app-net
         restart: always
         depends_on: 
-            - proxy
+            - nginx-proxy
 
     blog:
         image: docker.pkg.github.com/t3winc/blog/donaldonsoftware:1.11.0
@@ -60,5 +60,5 @@ services:
             - app-net
         restart: always
         depends_on: 
-            - proxy
-            - letsencrypt
+            - nginx-proxy
+            - nginx-letsencrypt
