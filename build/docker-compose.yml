@@ -17,7 +17,7 @@ volumes:
 
 services:
     nginx-proxy:
-        image: registry.hub.docker.com/jwilder/nginx-proxy
+        image: jwilder/nginx-proxy
         container_name: nginx-proxy
         ports:
             - "80:80"
@@ -32,7 +32,7 @@ services:
         restart: always
 
     nginx-letsencrypt:
-        image: registry.hub.docker.com/jrcs/letsencrypt-nginx-proxy-compainion
+        image: /jrcs/letsencrypt-nginx-proxy-companion
         container_name: nginx-letsencrypt
         environment:
             - "DEFAULT_EMAIL=admin@thewebweweave.com"
