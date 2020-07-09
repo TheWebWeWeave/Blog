@@ -39,7 +39,7 @@ services:
             - "NGINX_PROXY_CONTAINER=proxy"
         volumes:
             - proxy_certs:/etc/nginx/proxy_certs
-            - proxy_vhost:/etc/nginx/vhost.docker
+            - proxy_vhost:/etc/nginx/vhost.d
             - proxy_html:/usr/share/nginx/proxy_html
             - /var/run/docker.sock:/var/run/docker.sock:ro
         networks:
