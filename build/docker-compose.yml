@@ -1,0 +1,60 @@
+version: '3.3'
+
+networks:
+    app-net:
+        external:
+            name: nat
+
+volumes:
+    proxy_certs:
+        external: true
+    proxy_html:
+        external: true
+    proxy_vhost:
+        external: true
+    jenkins_data:
+        external: true
+
+services:
+    nginx-proxy:
+        image: jwilder/nginx-proxy
+        container_name: proxy
+        ports:
+            - "80:80"
+            -"443:443"
+        volumes:
+            - proxy_certs:/etc/nginx/proxy_certs
+            - proxy_vhost:/etc/nginx/vhost.d
+            - proxy_html:/usr/share/nginx/proxy_html
+            - /var/run/docker.sock:/tmp/docker.sock
+        networks:
+            - app-net
+
+    nginx-proxy-letsencrypt:
+        image: jrcs/letsencrypt-nginx-proxy-compainion
+        container_name: letsencrypt
+        environment:
+            - "DEFAULT_EMAIL=admin@thewebweweave.com"
+            - "NGINX_PROXY_CONTAINER=proxy"
+        volumes:
+            - proxy_certs:/etc/nginx/proxy_certs
+            - proxy_vhost:/etc/nginx/vhost.docker
+            - proxy_html:/usr/share/nginx/proxy_html
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+        networks:
+            - app-net
+        depends_on: proxy
+
+    blog:
+        image: docker.pkg.github.com/t3winc/blog/donaldonsoftware:1.11.0
+        container_name: blog
+        expose:
+            - 80
+        environment: 
+            - "VIRTUAL_HOST=www.donaldonsoftware.com"
+            - "LETSENCRYPT_HOST=www.donaldonsoftware.com"              
+        networks: 
+            - app-net
+        depends_on: 
+            - proxy
+            - letsencrypt
