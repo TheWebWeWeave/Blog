@@ -29,6 +29,7 @@ services:
             - /var/run/docker.sock:/tmp/docker.sock
         networks:
             - app-net
+        restart: always
 
     nginx-proxy-letsencrypt:
         image: jrcs/letsencrypt-nginx-proxy-compainion
@@ -43,6 +44,7 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock:ro
         networks:
             - app-net
+        restart: always
         depends_on: proxy
 
     blog:
@@ -55,6 +57,7 @@ services:
             - "LETSENCRYPT_HOST=www.donaldonsoftware.com"              
         networks: 
             - app-net
+        restart: always
         depends_on: 
             - proxy
             - letsencrypt
