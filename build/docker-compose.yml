@@ -32,7 +32,7 @@ services:
         restart: always
 
     nginx-letsencrypt:
-        image: /jrcs/letsencrypt-nginx-proxy-companion
+        image: jrcs/letsencrypt-nginx-proxy-companion
         container_name: nginx-letsencrypt
         environment:
             - "DEFAULT_EMAIL=admin@thewebweweave.com"
