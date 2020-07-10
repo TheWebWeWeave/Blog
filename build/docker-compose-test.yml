@@ -7,7 +7,7 @@ networks:
          
 services:
     donaldonsoftware:
-        image: t3winc/donaldonsoftware:1.11.0-alpha1
+        image: t3winc/donaldonsoftware:${RELEASE}
         container_name: test.donaldonsoftware
         expose:
             - 80
