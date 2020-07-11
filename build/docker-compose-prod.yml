@@ -9,6 +9,7 @@ services:
     donaldonsoftware:
         image: docker.pkg.github.com/t3winc/blog/donaldonsoftware:${RELEASE}
         container_name: donaldonsoftware
+        restart: always
         expose:
             - 80
         environment: 
