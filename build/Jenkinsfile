@@ -32,7 +32,7 @@ pipeline {
             steps {
                 sh 'chmod +x ./build/ci/03-publish.sh'
                 // sh './build/ci/03-publish.sh ${RELEASE}'
-                sh './build/ci/03-publish.sh ${params.semver}'
+                sh "./build/ci/03-publish.sh ${params.semver}"
             }
         }
         stage('Deploy'){
