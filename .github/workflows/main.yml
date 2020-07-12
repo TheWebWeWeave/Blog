@@ -65,7 +65,7 @@ jobs:
       uses: stigmelling/jenkins-action@v1.1
       with:
         jenkinsUrl: 'https://jenkins.t3winc.com'
-        user: 'diamol'
+        user: 'token'
         token: 'e867451c16a11a55fbf7de0b66e590b73742bb64'
         job: 'blog'
         params: '{"semver": "${steps.getversion.outputs.fullSemVer}"}'
