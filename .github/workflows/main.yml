@@ -62,11 +62,11 @@ jobs:
         echo "CommitDate: ${{ steps.gitversion.outputs.commitDate }}"
 
     - name: Jenkins
-      uses: enflo/jenkins-action@master
+      uses: stigmellingjenkins-action@v1
       with:
-        url: 'https://jenkins.t3winc.com'
+        jenkinsUrl: 'https://jenkins.t3winc.com'
         user: 'diamol'
-        token: 'diamol'
-        job: '/job/blog'
-        parameters: "semver=${steps.getversion.outputs.fullSemVer}"
+        token: 'e867451c16a11a55fbf7de0b66e590b73742bb64'
+        job: 'blog'
+        params: '{"semver": "${steps.getversion.outputs.fullSemVer}"}'
 
