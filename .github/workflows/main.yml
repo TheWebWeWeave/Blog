@@ -61,11 +61,11 @@ jobs:
         echo "CommitsSinceVersionSourcePadded: ${{ steps.gitversion.outputs.commitsSinceVersionSourcePadded }}"
         echo "CommitDate: ${{ steps.gitversion.outputs.commitDate }}"
 
-    - name: TriggerJenkinsBuild
-      uses: stigmelling/jenkins-action@v1.1
+    - name: jenkins
+      uses: enflo/jenkins-action@master
       with:
-        jenkinsUrl: 'https://jenkins.t3winc.com'
-        username: 'diamol'
+        url: 'https://jenkins.t3winc.com'
+        user: 'diamol'
         token: 'diamol'
         job: '/job/blog'
         params: '{"semver": "1.10.41"}'
