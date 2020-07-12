@@ -68,5 +68,5 @@ jobs:
         user: 'diamol'
         token: 'diamol'
         job: '/job/blog'
-        parameters: steps.getversion.outputs.fullSemVer
+        parameters: "gitversion_semver=${steps.getversion.outputs.fullSemVer}"
 
