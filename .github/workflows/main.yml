@@ -67,6 +67,6 @@ jobs:
         jenkinsUrl: 'https://jenkins.t3winc.com'
         username: 'diamol'
         token: 'e867451c16a11a55fbf7de0b66e590b73742bb64'
-        job: 'blog'
+        job: '/job/blog'
         params: '{"semver": "1.10.41"}'
         #params: '{"semver": "${steps.getversion.outputs.fullSemVer}"}'
