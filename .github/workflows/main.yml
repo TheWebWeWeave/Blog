@@ -64,8 +64,11 @@ jobs:
         SEMVER: ${{ steps.gitversion.outputs.fullSemVer }}
 
     - name: TestResult
-    - run: |
-        echo "${SEMVER}"
+      uses: nick-invision/retry@v1
+      with:
+        timeout_minutes: 1
+        max_attempts: 2 
+        command: echo "${SEMVER}"
 
     - name: jenkins
       uses: enflo/jenkins-action@master
