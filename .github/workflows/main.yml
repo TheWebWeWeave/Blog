@@ -60,6 +60,12 @@ jobs:
         echo "CommitsSinceVersionSource: ${{ steps.gitversion.outputs.commitsSinceVersionSource }}"
         echo "CommitsSinceVersionSourcePadded: ${{ steps.gitversion.outputs.commitsSinceVersionSourcePadded }}"
         echo "CommitDate: ${{ steps.gitversion.outputs.commitDate }}"
+      env:
+        SEMVER: ${{ steps.gitversion.outputs.fullSemVer }}
+
+    - name: TestResult
+    - run: |
+        echo "${SEMVER}"
 
     - name: jenkins
       uses: enflo/jenkins-action@master
@@ -68,5 +74,5 @@ jobs:
         user: 'admin'
         token: '1102074f81f9d32ae7de16d5ef8cebf479'
         job: '/job/blog'
-        parameters: "semver=1.10.41"
+        parameters: "semver=${SEMVER}"
         #params: '{"semver": "${steps.getversion.outputs.fullSemVer}"}'
