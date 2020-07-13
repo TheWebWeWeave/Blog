@@ -77,5 +77,5 @@ jobs:
         user: 'admin'
         token: '1102074f81f9d32ae7de16d5ef8cebf479'
         job: '/job/blog'
-        parameters: "semver=${SEMVER}"
+        parameters: "semver=${{ steps.gitversion.outputs.fullSemVer }}"
         #params: '{"semver": "${steps.getversion.outputs.fullSemVer}"}'
