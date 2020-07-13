@@ -60,15 +60,6 @@ jobs:
         echo "CommitsSinceVersionSource: ${{ steps.gitversion.outputs.commitsSinceVersionSource }}"
         echo "CommitsSinceVersionSourcePadded: ${{ steps.gitversion.outputs.commitsSinceVersionSourcePadded }}"
         echo "CommitDate: ${{ steps.gitversion.outputs.commitDate }}"
-      env:
-        SEMVER: ${{ steps.gitversion.outputs.fullSemVer }}
-
-    - name: TestResult
-      uses: nick-invision/retry@v1
-      with:
-        timeout_minutes: 1
-        max_attempts: 2 
-        command: echo "${SEMVER}"
 
     - name: jenkins
       uses: enflo/jenkins-action@master
