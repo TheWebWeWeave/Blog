@@ -68,5 +68,5 @@ jobs:
         user: 'diamol'
         token: 'diamol'
         job: '/job/blog'
-        parameters: '{"semver": "1.10.41"}'
+        parameters: "semver=1.10.41"
         #params: '{"semver": "${steps.getversion.outputs.fullSemVer}"}'
