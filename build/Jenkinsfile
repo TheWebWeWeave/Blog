@@ -21,6 +21,7 @@ pipeline {
             steps {
                 sh 'chmod +x ./build/ci/00-verify.sh'
                 sh './build/ci/00-verify.sh'
+                echo "GIT_BRANCH: ${env.GIT_BRANCH}"
             }
         }
         stage('Version') {
