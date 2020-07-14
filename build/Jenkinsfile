@@ -57,7 +57,7 @@ pipeline {
         }
         stage('Publish'){
             when {
-                branch "master"
+                branch "*/master"
             }
             steps {
                 sh 'chmod +x ./build/ci/03-publish.sh'
@@ -84,7 +84,7 @@ pipeline {
         }
         stage('Release'){
             when {
-                branch "master"
+                branch "*/master"
             }
             steps {
                 sh 'chmod +x ./build/ci/04-prod-deploy.sh'
