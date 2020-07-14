@@ -40,7 +40,7 @@ pipeline {
         stage('Publish-Testing'){
             steps {
                 sh 'chmod +x ./build/ci/03-dev-publish.sh'
-                sh "./build/ci/03-dev-publish.sh ${params.semver}"
+                sh "./build/ci/03-publish-testing.sh ${params.semver}"
             }
         }
         stage('Publish'){
@@ -52,10 +52,10 @@ pipeline {
                 sh "./build/ci/03-publish.sh ${params.semver}"
             }
         }
-        stage('Deploy-Testing'){
+        stage('Deploy'){
             steps {
-                sh 'chmod +x ./build/ci/04-dev-deploy.sh'
-                sh "./build/ci/04-dev-deploy.sh ${params.semver}"
+                sh 'chmod +x ./build/ci/04-deploy.sh'
+                sh "./build/ci/04-deploy.sh ${params.semver}"
             }
         }
         stage('Release'){
@@ -63,8 +63,8 @@ pipeline {
                 expression { GIT_BRANCH ==~ /(*master)/ }
             }
             steps {
-                sh 'chmod +x ./build/ci/04-prod-deploy.sh'
-                sh "./build/ci/04-prod-deploy.sh ${params.semver}"
+                sh 'chmod +x ./build/ci/04-release.sh'
+                sh "./build/ci/04-release.sh ${params.semver}"
             }
         }
     }
