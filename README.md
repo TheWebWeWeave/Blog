@@ -4,6 +4,7 @@
 |-----|------|------|------|
 |Master|![Build Status](https://donald.visualstudio.com/T3WInc/_apis/build/status/Applications/Blog?branchName=master)|Dev|![Dev Deployment Status](https://donald.vsrm.visualstudio.com/_apis/public/Release/badge/782a3910-7e8d-44b6-96e4-945daa083473/5/10)|
 |Lastest|![Version](https://msdtlvm967694675.blob.core.windows.net/badges/blog.svg)|Prod|![Prod Deployment Status](https://donald.vsrm.visualstudio.com/_apis/public/Release/badge/782a3910-7e8d-44b6-96e4-945daa083473/5/11)|
+|GitHub Actions| ![CI](https://github.com/T3WInc/Blog/workflows/CI/badge.svg)|
 
 
 Currently this is the same content that we have always had out there but it uses simple markdown which gets chured through Hexo and generates static web pages which are perfect and wonderful and the best part 
