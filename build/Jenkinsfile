@@ -1,3 +1,10 @@
+def getCurrentBranch() {
+    return sh (
+        script: 'git rev-parse --abbrev-ref HEAD',
+        returnStdout: true
+    ).trim()
+}
+
 pipeline {
     agent any
     parameters {
@@ -7,6 +14,7 @@ pipeline {
     environment {
         REGISTRY='ssh.t3winc.com:5000'
         RELEASE='1.11.0'
+        BRANCHNAME=getCurrentBranch()
     }
     stages {
         stage('Verify'){
