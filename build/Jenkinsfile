@@ -33,7 +33,8 @@ pipeline {
                 branch "feature/*"
             }
             steps {
-
+                sh 'chmod +x ./build/ci/03-dev-publish.sh'
+                sh "./build/ci/03-dev-publish.sh ${params.semver}"
             }
         }
         stage('Publish-Hotfix'){
@@ -41,7 +42,8 @@ pipeline {
                 branch "hotfix/*"
             }
             steps {
-
+                sh 'chmod +x ./build/ci/03-dev-publish.sh'
+                sh "./build/ci/03-dev-publish.sh ${params.semver}"
             }
         }
         stage('Publish'){
@@ -58,7 +60,8 @@ pipeline {
                 branch "feature/*"
             }
             steps {
-
+                sh 'chmod +x ./build/ci/04-dev-deploy.sh'
+                sh "./build/ci/04-dev-deploy.sh ${params.semver}"
             }
         }
         stage('Deploy-Hotfix'){
@@ -66,7 +69,8 @@ pipeline {
                 branch "hotfix/*"
             }
             steps {
-                
+                sh 'chmod +x ./build/ci/04-dev-deploy.sh'
+                sh "./build/ci/04-dev-deploy.sh ${params.semver}"                
             }
         }
         stage('Release'){

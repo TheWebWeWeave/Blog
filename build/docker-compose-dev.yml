@@ -12,7 +12,7 @@ services:
         expose:
             - 80
         environment: 
-            - "VIRTUAL_HOST=blog-dev.t3winc.com"
-            - "LETSENCRYPT_HOST=blog-dev.t3winc.com"              
+            - "VIRTUAL_HOST=dev-blog.t3winc.com"
+            - "LETSENCRYPT_HOST=dev-blog.t3winc.com"              
         networks: 
             - app-net
