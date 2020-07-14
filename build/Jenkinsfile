@@ -37,19 +37,7 @@ pipeline {
                 sh './build/ci/02-build.sh'
             }
         }
-        stage('Publish-Feature'){
-            when {
-                environment name: 'GIT_BRANCH', value: "feature/*"
-            }
-            steps {
-                sh 'chmod +x ./build/ci/03-dev-publish.sh'
-                sh "./build/ci/03-dev-publish.sh ${params.semver}"
-            }
-        }
-        stage('Publish-Hotfix'){
-            when {
-                environment name: 'GIT_BRANCH', value: "hotfix/*"
-            }
+        stage('Publish-Testing'){
             steps {
                 sh 'chmod +x ./build/ci/03-dev-publish.sh'
                 sh "./build/ci/03-dev-publish.sh ${params.semver}"
@@ -57,34 +45,22 @@ pipeline {
         }
         stage('Publish'){
             when {
-                environment name: 'GIT_BRANCH', value: "*/master"
+                expression { GIT_BRANCH ==~ /(*master)/ }
             }
             steps {
                 sh 'chmod +x ./build/ci/03-publish.sh'
                 sh "./build/ci/03-publish.sh ${params.semver}"
             }
         }
-        stage('Deploy-Feature'){
-            when {
-                environment name: 'GIT_BRANCH', value: "feature/*"
-            }
+        stage('Deploy-Testing'){
             steps {
                 sh 'chmod +x ./build/ci/04-dev-deploy.sh'
                 sh "./build/ci/04-dev-deploy.sh ${params.semver}"
             }
         }
-        stage('Deploy-Hotfix'){
-            when {
-                environment name: 'GIT_BRANCH', value: "hotfix/*"
-            }
-            steps {
-                sh 'chmod +x ./build/ci/04-dev-deploy.sh'
-                sh "./build/ci/04-dev-deploy.sh ${params.semver}"                
-            }
-        }
         stage('Release'){
             when {
-                branch "*/master"
+                expression { GIT_BRANCH ==~ /(*master)/ }
             }
             steps {
                 sh 'chmod +x ./build/ci/04-prod-deploy.sh'
