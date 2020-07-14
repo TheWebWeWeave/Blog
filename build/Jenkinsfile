@@ -45,7 +45,7 @@ pipeline {
         }
         stage('Publish'){
             when {
-                environment name: 'GIT_BRANCH', value: 'origin/master'  }
+                environment name: 'GIT_BRANCH', value: 'origin/master'
             }
             steps {
                 sh 'chmod +x ./build/ci/03-publish.sh'
@@ -60,7 +60,7 @@ pipeline {
         }
         stage('Release'){
             when {
-                environment name: 'GIT_BRANCH', value: 'origin/master' }
+                environment name: 'GIT_BRANCH', value: 'origin/master'
             }
             steps {
                 sh 'chmod +x ./build/ci/04-release.sh'
