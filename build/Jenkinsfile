@@ -39,7 +39,7 @@ pipeline {
         }
         stage('Publish-Testing'){
             steps {
-                sh 'chmod +x ./build/ci/03-dev-publish.sh'
+                sh 'chmod +x ./build/ci/03-publish-testing.sh'
                 sh "./build/ci/03-publish-testing.sh ${params.semver}"
             }
         }
