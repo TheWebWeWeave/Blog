@@ -28,17 +28,53 @@ pipeline {
                 sh './build/ci/02-build.sh'
             }
         }
+        stage('Publish-Feature'){
+            when {
+                branch "feature/*"
+            }
+            steps {
+
+            }
+        }
+        stage('Publish-Hotfix'){
+            when {
+                branch "hotfix/*"
+            }
+            steps {
+
+            }
+        }
         stage('Publish'){
+            when {
+                branch "master"
+            }
             steps {
                 sh 'chmod +x ./build/ci/03-publish.sh'
-                // sh './build/ci/03-publish.sh ${RELEASE}'
                 sh "./build/ci/03-publish.sh ${params.semver}"
             }
         }
-        stage('Deploy'){
+        stage('Deploy-Feature'){
+            when {
+                branch "feature/*"
+            }
+            steps {
+
+            }
+        }
+        stage('Deploy-Hotfix'){
+            when {
+                branch "hotfix/*"
+            }
+            steps {
+                
+            }
+        }
+        stage('Release'){
+            when {
+                branch "master"
+            }
             steps {
                 sh 'chmod +x ./build/ci/04-prod-deploy.sh'
-                // sh './build/ci/04-prod-deploy.sh ${RELEASE}'
                 sh "./build/ci/04-prod-deploy.sh ${params.semver}"
             }
         }
