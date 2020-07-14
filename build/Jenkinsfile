@@ -39,7 +39,7 @@ pipeline {
         }
         stage('Publish-Feature'){
             when {
-                branch "feature/*"
+                environment name: 'GIT_BRANCH', value: "feature/*"
             }
             steps {
                 sh 'chmod +x ./build/ci/03-dev-publish.sh'
@@ -48,7 +48,7 @@ pipeline {
         }
         stage('Publish-Hotfix'){
             when {
-                branch "hotfix/*"
+                environment name: 'GIT_BRANCH', value: "hotfix/*"
             }
             steps {
                 sh 'chmod +x ./build/ci/03-dev-publish.sh'
@@ -57,7 +57,7 @@ pipeline {
         }
         stage('Publish'){
             when {
-                branch "*/master"
+                environment name: 'GIT_BRANCH', value: "*/master"
             }
             steps {
                 sh 'chmod +x ./build/ci/03-publish.sh'
@@ -66,7 +66,7 @@ pipeline {
         }
         stage('Deploy-Feature'){
             when {
-                branch "feature/*"
+                environment name: 'GIT_BRANCH', value: "feature/*"
             }
             steps {
                 sh 'chmod +x ./build/ci/04-dev-deploy.sh'
@@ -75,7 +75,7 @@ pipeline {
         }
         stage('Deploy-Hotfix'){
             when {
-                branch "hotfix/*"
+                environment name: 'GIT_BRANCH', value: "hotfix/*"
             }
             steps {
                 sh 'chmod +x ./build/ci/04-dev-deploy.sh'
