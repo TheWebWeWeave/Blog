@@ -282,11 +282,20 @@ namespace TheWebWeWeave.BlogUITests
             Assert.IsTrue(HomePage.PostFound(post), $"The post \"{post}\" was not found");
         }
 
+        [TestMethod]
+        [TestCategory("UITest")]
+        public void Coming_Full_Circle()
+        {
+            string post = "Coming Full Circle";
+            HomePage.Goto();
+            HomePage.GoToPost(post);
+            Assert.IsTrue(HomePage.PostFound(post), $"The post \"{post}\" was not found");
+        }
+
         [TestCleanup]
         public void Cleanup()
         {
-            Driver.Close();
-            
+            Driver.Close();            
         }
     }
 }
