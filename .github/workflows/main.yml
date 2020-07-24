@@ -69,6 +69,6 @@ jobs:
       with:
         url: 'https://jenkins.t3winc.com'
         user: 'admin'
-        token: '1102074f81f9d32ae7de16d5ef8cebf479'
+        token: '11c2ebf81af34924fe38e1d3a54f75cb11'
         job: '/job/Blog'
         parameters: "semver=${{ steps.gitversion.outputs.fullSemVer }}"
