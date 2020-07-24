@@ -61,6 +61,7 @@ jobs:
         echo "CommitsSinceVersionSourcePadded: ${{ steps.gitversion.outputs.commitsSinceVersionSourcePadded }}"
         echo "CommitDate: ${{ steps.gitversion.outputs.commitDate }}"
     - name: Initial Assignment
+      run: echo "${{ steps.gitversion.outputs.fullSemVer }}"
       env:
         semver: ${{ steps.gitversion.outputs.fullSemVer }}        
     - name: Use action
@@ -68,6 +69,7 @@ jobs:
       uses: ryolambert/current-branch@v1.0
     - name: Override semver if master branch
       if: ${{ steps.get-branch.outputs.branch==master }}
+      run: echo "${{ steps.get-branch.outputs.branch }}"
       env:
         semver: ${{ steps.gitversion.outputs.MajorMinorPatch }}github    
     - name: jenkins
