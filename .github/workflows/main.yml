@@ -63,15 +63,7 @@ jobs:
     - name: Initial Assignment
       run: echo "${{ steps.gitversion.outputs.fullSemVer }}"
       env:
-        semver: ${{ steps.gitversion.outputs.fullSemVer }}        
-    - name: Use action
-      id: get-branch
-      uses: ryolambert/current-branch@v1.0
-    - name: Override semver if master branch
-      if: "${{ steps.get-branch.outputs.branch=='master' }}"
-      run: echo "${{ steps.get-branch.outputs.branch }}"
-      env:
-        semver: ${{ steps.gitversion.outputs.MajorMinorPatch }}github    
+        semver: ${{ steps.gitversion.outputs.fullSemVer }}          
     - name: jenkins
       uses: enflo/jenkins-action@master
       with:
