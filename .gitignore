@@ -6,6 +6,7 @@ db.json
 src/db.json
 package.json
 package-lock.json
+src/package-lock.json
 *.log
 node_modules/
 #themes/
