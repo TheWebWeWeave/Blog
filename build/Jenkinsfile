@@ -1,20 +1,14 @@
-def getCurrentBranch() {
-    return sh (
-        script: 'git rev-parse --abbrev-ref HEAD',
-        returnStdout: true
-    ).trim()
-}
-
 pipeline {
     agent any
     parameters {
         string( name: 'semver', defaultValue: '1.0.0',
          description: 'the resulting semver version number after running gitversion on the source at GitHub')
+        string( name: 'branchname', defaultValue: 'master'),
+         description: 'the actual branch name that triggered the build as precurred from gitVersion') 
     }
     environment {
-        REGISTRY='ssh.t3winc.com:5000'
-        RELEASE='1.11.0'
-        BRANCHNAME=getCurrentBranch()
+        REGISTRY='registry.t3winc.com'
+        RELEASE='1.12.0'
     }
     stages {
         stage('Verify'){
