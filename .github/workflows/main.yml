@@ -63,12 +63,14 @@ jobs:
     - name: Initial Assignment
       run: echo "${{ steps.gitversion.outputs.fullSemVer }}"
       env:
-        semver: ${{ steps.gitversion.outputs.fullSemVer }}          
+        semver: ${{ steps.gitversion.outputs.fullSemVer }}
+        branchname: ${{ steps.gitversion.outputs.branchname }}          
     - name: jenkins
       uses: enflo/jenkins-action@master
       with:
         url: 'https://jenkins.t3winc.com'
         user: 'admin'
-        token: '11c2ebf81af34924fe38e1d3a54f75cb11'
-        job: '/job/Blog'
-        parameters: "semver=${{ steps.gitversion.outputs.fullSemVer }}"
+        token: '11cb01a4bf22f9b3318da402cc0ac20fa7'
+        job: '/job/blog'
+        parameters: "semver=${{ steps.gitversion.outputs.fullSemVer }}",
+                    "branchname=${{ steps.gitversion.outputs.branchname }}"
