@@ -72,5 +72,4 @@ jobs:
         user: 'admin'
         token: '11cb01a4bf22f9b3318da402cc0ac20fa7'
         job: '/job/blog'
-        parameters: "semver=${{ steps.gitversion.outputs.fullSemVer }}",
-                    "branchname=${{ steps.gitversion.outputs.branchname }}"
+        parameters: "semver=${{ steps.gitversion.outputs.fullSemVer }}&branchname=${{ steps.gitversion.outputs.branchname }}"
