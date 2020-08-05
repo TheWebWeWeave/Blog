@@ -8,11 +8,11 @@ networks:
 services:
     donaldonsoftware:
         image: t3winc/donaldonsoftware:${RELEASE}
-        container_name: dev.donaldonsoftware
+        container_name: dev_donaldonsoftware
         expose:
             - 80
         environment: 
-            - "VIRTUAL_HOST=dev-blog.t3winc.com"
-            - "LETSENCRYPT_HOST=dev-blog.t3winc.com"              
+            - "VIRTUAL_HOST=dev.donaldonsoftware.com"
+            - "LETSENCRYPT_HOST=dev.donaldonsoftware.com"              
         networks: 
             - app-net
