@@ -55,8 +55,11 @@ pipeline {
             }
         }
         stage('Release'){
+            agent{
+                label 'AWS-Jenkins-Slave'
+            }
             when {
-                environment name: 'BRANCH_NAME', value: 'origin/master'
+                environment name: 'BRANCH_NAME', value: 'master'
             }
             steps {
                 sh 'chmod +x ./build/ci/04-release.sh'
