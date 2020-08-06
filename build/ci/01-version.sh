@@ -2,4 +2,5 @@
 echo "We are here: ${pwd}"
 echo "The correct version number: ${semver}"
 echo "The actual branch is: ${branchname}"
-#git checkout ${branchname}
+
+
