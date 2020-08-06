@@ -41,7 +41,7 @@ pipeline {
         }
         stage('Publish'){
             when {
-                environment name: 'BRANCH_NAME', value: 'origin/master'
+                environment name: 'BRANCH_NAME', value: 'master'
             }
             steps {
                 sh 'chmod +x ./build/ci/03-publish.sh'
