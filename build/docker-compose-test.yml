@@ -7,7 +7,7 @@ networks:
          
 services:
     donaldonsoftware:
-        image: t3winc/donaldonsoftware:${RELEASE}
+        image: t3winc/donaldonsoftware:${semver}
         container_name: qa.donaldonsoftware
         expose:
             - 80
