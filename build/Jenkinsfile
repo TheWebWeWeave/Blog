@@ -1,3 +1,5 @@
+def blogBuildBadge = addEmbeddableBadgeConfiguration(id: "blog", subject: "${params.semver}")
+
 pipeline {
     agent any
     parameters {
@@ -72,6 +74,14 @@ pipeline {
                 sh 'chmod +x ./build/ci/04-release.sh'
                 sh "./build/ci/04-release.sh ${params.semver}"
             }
+        }
+    }
+    post {
+        success {
+            blogBuildBadge.setStatus('passing')
+        }
+        failure {
+            blogBuildBadge.setStatus('failing')
         }
     }
 }
