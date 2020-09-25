@@ -12,6 +12,12 @@ pipeline {
         BRANCH_NAME="${params.branchname}"
     }
     stages {
+        stage("Initialization"){
+            steps {
+                buildName "${params.semver}"
+                buildDescription "${params.branchname}"
+            }
+        }
         stage('Verify'){
             steps {
                 sh 'chmod +x ./build/ci/00-verify.sh'
