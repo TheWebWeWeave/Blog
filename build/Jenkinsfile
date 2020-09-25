@@ -78,10 +78,14 @@ pipeline {
     }
     post {
         success {
-            blogBuildBadge.setStatus('passing')
+            script {
+                blogBuildBadge.setStatus('passing')
+            }
         }
         failure {
-            blogBuildBadge.setStatus('failing')
+            script {
+                blogBuildBadge.setStatus('failing')
+            }
         }
     }
 }
