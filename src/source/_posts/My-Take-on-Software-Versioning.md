@@ -25,7 +25,8 @@ GitVersion is a command line tool and an open source project that can be found o
 To start I use two types of topic branches.  What I refer to as a topic branch is any branch that is pulled from the master branch to do some work.  When the work has been completed and tested there is a pull request to get it back into master which is where the final build would be created from and then move down the pipeline to possibly getting into Production.  I use two prefixes for my topic branches:
 * feature
 * hotfix
-followed by a forward slash "/" and then a work item number or a short description of what I am doing in this branch.  Finally there is a yaml file that sits in the root of my repository called GitVersion.yml and here is the content of what you might find in there.
+
+Then they are followed by a forward slash "/" and then a work item number or a short description of what I am doing in this branch.  Finally there is a yaml file that sits in the root of my repository called GitVersion.yml and here is the content of what you might find in there.
 ```
 mode: Mainline
 next-version: 1.2.0
