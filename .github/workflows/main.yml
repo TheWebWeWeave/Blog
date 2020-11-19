@@ -18,17 +18,16 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Fetch all history for all tags and branches
-      run: |
-        git config remote.origin.url https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-        git fetch --prune --unshallow
-    - name: Install GitVersion
-      uses: gittools/actions/gitversion/setup@v0.9.4
       with:
-        versionSpec: '5.2.x'  
+        fetch-depth: 0  
+
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.6
+      with:
+        versionSpec: '5.x'  
     - name: Use GitVersion
       id: gitversion # step id used as reference for output values
-      uses: gittools/actions/gitversion/execute@v0.9.4
+      uses: gittools/actions/gitversion/execute@v0.9.6
     - run: |
         echo "Major: ${{ steps.gitversion.outputs.major }}"
         echo "Minor: ${{ steps.gitversion.outputs.minor }}"
