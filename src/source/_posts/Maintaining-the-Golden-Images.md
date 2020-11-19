@@ -18,3 +18,7 @@ Okay, this sounds okay and not that big of a deal as many of these open source p
 Jenkins Needs Docker Installed
 ------------------------------
 First off on my Jenkins image I needed a few things to be part of the image so we need to add some layers to the already available Jenkins Image.  The best way to hand this is to create a new repository for this project.  Not like it is going to contain any C# code but it will contain my Dockerfile and Docker-Compose files to put these pieces together.  New software to be installed should be part of the Dockerfile, this way I even have a full history of what was in this image and say that there is a newer version of Jenkins I want to update to I just update the base image in the Dockerfile and I get all the pieces that I have installed are part of that image as well.  I am getting a little ahead of myself so lets look at that Dockerfile.
+
+Dockerfile
+----------
+The Dockerfile is the key to building a new image and adding additional layers to existing images.
