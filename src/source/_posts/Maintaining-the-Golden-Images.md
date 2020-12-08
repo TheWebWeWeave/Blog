@@ -148,4 +148,42 @@ pipeline {
   }
 }
 ```
-Jenkins declaritive pipelines are pretty easy to follow and I have covered this in an [earlier post](/2020/07/Pipeline-As-Code/).
+Jenkins declarative pipelines are pretty easy to follow and I have covered this in an [earlier post](/2020/07/Pipeline-As-Code/).  So let's have a quick look to see what is going on here.  As I mentioned I covered the basics of the Jenkins declarative pipeline in an earlier post but I do want to go over about four (4) of the steps which are a bit different that a typical build and deploy pipeline.
+
+Build
+-----
+As you can see from the above pipeline that in the Build stage I am calling a shell script called: **01-build.sh**  This is really a shell script that executes Docker and passes it the Dockerfile that is sitting in the src folder.
+```
+docker image build --no-cache --rm -f ./src/Dockerfile -t <account>/jenkins-master .
+```
+This is pretty simple and all that is in the 01-build.sh file, which basically tells docker that we are building an image and not to use any of the cache items to build this image.  The reason I have chosen this option is that I found that when I was building this multiple time and some of the steps were not quite right to what I wanted them to be, Docker did not see them as being invalid builds so instead of starting from the base it would start from the cache that it already had resulting in having pieces in the image that I did not want.
+
+Publish-Topic
+-------------
+The next piece that we are going to talk about is what happens in the Publish-Topic.  Publish-Topic refers to any branch that is not master.  In my typical development workflow, before I start working on any thing I create a branch from master and this branch would be referred to as a topic branch.  In an [earlier post](/2020/09/My-Take-on-Software-Versioning) I talk a little bit about this as a way that I also manage my version numbers.  Speaking of version numbers, this is a shell script were we pass in the semver version number that was passed in to start this pipeline.
+```
+cat /var/jenkins_home/my_password.txt | docker login --username <account> --password-stdin
+docker tag $(docker images | awk '{print $3}' | awk 'NR==2') <account>/jenkins-master:$1
+docker push <account>/jenkins-master:$1
+```
+1. In this step we are taking this docker image that we just finished building and pushing this up to a docker repository.  In my case I am publishing my docker image to hub.docker.com which is the default so only needs the name of the account and a password for that docker account.  If you wanted to publish you docker images to your github repository you would need to add something like **docker.pkg.github.com** before you pass in the username and password.
+2. In the second line we are going to give this new image a tag with the version number that was passed in to start this Jenkins pipeline.  We tag this image with the docker tag command.  This piece in the middle finds the actual image by starting with the docker images which returns information about all the images it finds in this instance.  The first awk command returns only the 3rd column which is just a list of image ids and not all the other stuff.  The second awk pulls out the latest one and that becomes the image that we tag with our ```<account name>/<image name>:<passed in semver>```.
+3. The final line in this shell script is pretty clear it pushes the new tagged image up to your docker repository that you logged into in the first step.
+
+*Note: This command is run no matter what branch you are working with.  Which is different than the Publish-Master shell script.*
+
+Publish-Master
+--------------
+As you can see in the Jenkins pipeline above we have a condition on this stage.  This stage will only run when the branch is master.  In case you are not familiar with my workflow, work is done on the topic branch which is away from the master branch.  This way I can build and test and do all matter of build and destruction until I get something that I am satisfied with.  Then I do a pull request which in github is going to do a temporary build to test out these changes before it even allows the merges to be approved to go back into the master branch.  Then because the master branch just got updated will kick off what could be the final build for this version and send it through the pipeline.  Here is the content of that shell script.
+```
+cat /var/jenkins_home/my_password.txt | docker login --username <account> --password-stdin
+docker tag <account>/jenkins-master:$1 <account>/jenkins-master:latest
+docker push <account>/jenkins-master:latest
+```
+As you can see this shell script is very similar to the Publish-Topic shell script.  The only difference is that we are re-tagging this tagged image to latest.  This way, your operations docker-compose.yml file would use the latest tag to update the Jenkins image that is complete and not in the middle of development.
+
+Operations
+----------
+This last and final stage of the pipeline is the most important part of this process.  As you probably figured out, there is no way that I can call the docker-compose.yml file for my operations infrastructure which is what my Jenkins server is a part of.  I need this to be called from outside this current operation.
+
+What I have done here is created a separate Jenkins pipeline in the Operations repository which is where the docker-compose.yml file lives for all the infrastructure that I am running.  Remember the list of servers that I showed you at the beginning of this post.  
