@@ -186,4 +186,89 @@ Operations
 ----------
 This last and final stage of the pipeline is the most important part of this process.  As you probably figured out, there is no way that I can call the docker-compose.yml file for my operations infrastructure which is what my Jenkins server is a part of.  I need this to be called from outside this current operation.
 
-What I have done here is created a separate Jenkins pipeline in the Operations repository which is where the docker-compose.yml file lives for all the infrastructure that I am running.  Remember the list of servers that I showed you at the beginning of this post.  
+What I have done here is created a separate Jenkins pipeline in the Operations repository which is where the docker-compose.yml file lives for all the infrastructure that I am running.  Remember the list of servers that I showed you at the beginning of this post. I will show you the Jenkinsfile for this Operations job shortly, but all that this job does is update a file in Operations and commits that update in the GitHub repository which triggers its own build but this time won't be calling Jenkins.  This Continuous Integration  trigger is fired off by GitHub using an action script, because we need to keep Jenkins out of this step as the whole point here is to replace that image which would be near impossible if we are working from inside the container that needs to be replaced.  First up let's look at that Jenkinsfile for the Operations job.
+```
+pipeline {
+    agent any
+    parameters {
+        string( name: 'product', defaultValue: 'Jenkins:v2.235.4',
+            description: 'the resulting product and version number being updated')
+    }
+    stages {
+        stage("Initialization"){
+            steps {
+                sh 'docker version'
+                sh 'docker-compose version'
+            }            
+        }
+        stage("New Release"){
+            steps {
+                withCredentials([sshUserPrivateKey(credentialsId: 'jenkins_root_github', keyFileVariable: 'keyfile', usernameVariable: 'username', passphraseVariable: 'passphrase')]) {
+                    sh "git checkout master"
+                    sh "git config --global user.name 'Jenkins Builder'"
+                    sh "git config --global user.email 'jenkins@example.com'"
+                    sh "echo `date` ----- ${product} >> Release.md"
+                    sh "echo \n >> Release.md"
+                    sh "git add Release.md"
+                    sh "git commit -m 'Update the Release file with ${product}'"
+                    sh "git rev-parse --abbrev-ref HEAD"
+                }
+                withCredentials([usernamePassword(credentialsId: 'CredentialName', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/t3winc/operations.git HEAD:master')
+                }                
+            }
+        }
+    }
+}
+```
+In this pipeline there is no shell script file, all the shell script commands are written in-line.  The stage of course where things are really happening is in the "New Release" stage.  Here I have a couple of withCredentials blocks and in the first block I am using ssh to check out the master branch, set the configuration for the user name and email.  Then we send the date and product name that was passed into this job and append it to the end of a Release.md file.  Finally we add and commit the change to the local git in the Jenkins build machine.  The second WithCredentials block uses a username password to push this commit to the repository on GitHub.  This push then fires off the ci trigger to start its own build process, but it does not call Jenkins to fulfill this request, this next step is fired off inside of GitHub and carried out by its own GitHub action script.  Now lets take a look at what is in there.
+
+In case you have never heard of GitHub action scripts before here is a [link for a free course on this feature](https://lab.github.com/githubtraining/github-actions:-hello-world), [GitHub Actions feature page](https://github.com/features/actions) and [GitHub Actions Documentation](https://docs.github.com/en/free-pro-team@latest/actions). When you create a new action script by default GitHub will place this script in the .github/workflows directory and the default name for this file unless you change it is **main.yml**
+```
+# This is a basic workflow to help you get started with Actions
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+on: [push, pull_request]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - name: Fetch all history for all tags and branches
+        run: |
+          git config remote.origin.url https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git fetch --prune --unshallow
+          
+      - name: copy file via ssh key
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.KEY }}
+          source: "src/docker-compose.yml"
+          target: "~/"
+
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key:  ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            whoami
+            ls -al
+            docker-compose -f src/docker-compose.yml up -d --remove-orphans
+```
+The first part of this script we give it a name and set the condition for the trigger.  Here we want this to run on every push and pull_request.  Next we setup a single job called build and incase you were wondering where github was running these jobs, they are docker containers and here I have told it to run in the latest version of ubuntu.
+Largely these commands that you see in this file are plugins that are downloaded from the [GitHub marketplace](https://github.com/marketplace?type=actions) 
+In my first action I am checking out the source control so that I can get at the docker-compose.yml file.  In the second action I am going to copy that docker-compose.yml file over to my docker host which is another Linux virtual machine running in the cloud.  All the secrets are stored in the GitHub secrets area for this repository which you get to from the Settings menu item of the repository and click on Secrets.  The host is going to be the ip address or fully qualified domain name to the server that you are running your operations infrastructure on.  The final action is to run the docker-compose command to get all the containers up and make any updates along the way.
