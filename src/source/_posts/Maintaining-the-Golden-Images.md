@@ -4,6 +4,7 @@ date: 2020-10-31 13:17:51
 tags:
 - DevOps
 ---
+{% img right /images/goldenImage.jpg 300 300 "Golden Image" %}
 Today I wanted to take you down an unusual path as I disclose some of the docker structure that I have configured recently in my environment.  It has been my goal for a while now to run everything that I can in a docker container.  What I mean by everything is that it is more than just my web sites and applications that I have been working as side projects for years but also includes some of the open source support tools that I use.  This blog post is going to mostly cover these tools and here is a list of just a few of them to give you an idea of what I am talking about.
 1. Jenkins Server
 1. Portainer
@@ -17,10 +18,12 @@ Okay, this sounds okay and not that big of a deal as many of these open source p
 
 Jenkins Needs Docker Installed
 ------------------------------
+{% img left /images/Jenkins.png 200 200 "Jenkins" %}
 First off on my Jenkins image I needed a few things to be part of the image so we need to add some layers to the already available Jenkins Image.  The best way to handle this is to create a new repository for this project.  Not like it is going to contain any C# code but it will contain my Dockerfile and Docker-Compose files to put these pieces together.  New software to be installed should be part of the Dockerfile, this way I even have a full history of what was in this image and say that there is a newer version of Jenkins I want to update to I just update the base image in the Dockerfile and I get all the pieces that I have installed are part of that image as well.  I am getting a little ahead of myself so lets look at that Dockerfile.
 
 Dockerfile
 ----------
+{% img right /images/docker.png 200 200 "Docker" %}
 The Dockerfile is the key to building a new image and adding additional layers to existing images.  Just before I share and go over the details of what I have in this Dockerfile I want to go over the structure of this project as it sits in my GitHub repository.  This is going to be the base image for my Jenkins Server so I have called my repository Jenkins-Base and in this repository I have three folders:
 1. .github/workflows
 1. build
@@ -77,6 +80,7 @@ That more or less wraps things up for the source of this image lets now look at 
 
 Jenkinfile
 ----------
+{% img left /images/Jenkins.png 100 100 "Jenkins" %}
 The Jenkinfile is the only file directly inside the build folder.  Inside the build folder I do have another folder that I have named **ci** which contains a number of shell scripts that are called from the Jenkinsfile which is the pipeline for the operation.  We will get to the contents of the ci folder in a minute, right now here is the contents of my Jenkinfile.
 ```
 pipeline {
@@ -152,7 +156,7 @@ Jenkins declarative pipelines are pretty easy to follow and I have covered this 
 
 Build
 -----
-As you can see from the above pipeline that in the Build stage I am calling a shell script called: **01-build.sh**  This is really a shell script that executes Docker and passes it the Dockerfile that is sitting in the src folder.
+As you can see from the above pipeline that in the Build stage I am calling a shell script called: **01-build.sh**  This is really a shell script that executes Docker and passes it the Dockerfile that is sitting in the src folder.  In this command line right after the -t flag (which is for taggin the image) I have account separated by less than and greater than symbols.  I use the account name that I have established on docker.  This should be some sort of indicator that keeps you unique.
 ```
 docker image build --no-cache --rm -f ./src/Dockerfile -t <account>/jenkins-master .
 ```
@@ -167,7 +171,7 @@ docker tag $(docker images | awk '{print $3}' | awk 'NR==2') <account>/jenkins-m
 docker push <account>/jenkins-master:$1
 ```
 1. In this step we are taking this docker image that we just finished building and pushing this up to a docker repository.  In my case I am publishing my docker image to hub.docker.com which is the default so only needs the name of the account and a password for that docker account.  If you wanted to publish you docker images to your github repository you would need to add something like **docker.pkg.github.com** before you pass in the username and password.
-2. In the second line we are going to give this new image a tag with the version number that was passed in to start this Jenkins pipeline.  We tag this image with the docker tag command.  This piece in the middle finds the actual image by starting with the docker images which returns information about all the images it finds in this instance.  The first awk command returns only the 3rd column which is just a list of image ids and not all the other stuff.  The second awk pulls out the latest one and that becomes the image that we tag with our ```<account name>/<image name>:<passed in semver>```.
+2. In the second line we are going to give this new image a tag with the version number that was passed in to start this Jenkins pipeline.  We tag this image with the docker tag command.  This piece in the middle finds the actual image by starting with the docker images which returns information about all the images it finds in this instance.  The first awk command returns only the 3rd column which is just a list of image ids and not all the other stuff.  The second awk pulls out the latest one and that becomes the image that we tag with our **account-name/image-name:passed-in-semver**.
 3. The final line in this shell script is pretty clear it pushes the new tagged image up to your docker repository that you logged into in the first step.
 
 *Note: This command is run no matter what branch you are working with.  Which is different than the Publish-Master shell script.*
@@ -184,6 +188,7 @@ As you can see this shell script is very similar to the Publish-Topic shell scri
 
 Operations
 ----------
+{% img right /images/Operations.jpg 300 300 "Operations" %}
 This last and final stage of the pipeline is the most important part of this process.  As you probably figured out, there is no way that I can call the docker-compose.yml file for my operations infrastructure which is what my Jenkins server is a part of.  I need this to be called from outside this current operation.
 
 What I have done here is created a separate Jenkins pipeline in the Operations repository which is where the docker-compose.yml file lives for all the infrastructure that I am running.  Remember the list of servers that I showed you at the beginning of this post. I will show you the Jenkinsfile for this Operations job shortly, but all that this job does is update a file in Operations and commits that update in the GitHub repository which triggers its own build but this time won't be calling Jenkins.  This Continuous Integration  trigger is fired off by GitHub using an action script, because we need to keep Jenkins out of this step as the whole point here is to replace that image which would be near impossible if we are working from inside the container that needs to be replaced.  First up let's look at that Jenkinsfile for the Operations job.
