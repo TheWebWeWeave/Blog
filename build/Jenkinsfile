@@ -16,8 +16,6 @@ pipeline {
             steps {
                 buildName "${params.semver}"
                 buildDescription "${params.branchname}"
-                sh 'chmod +x ./build/ci/00-docker-clean.sh'
-                sh './build/ci/00-docker-clean.sh'
             }
         }
         stage('Verify'){
