@@ -9,10 +9,11 @@ services:
     donaldonsoftware:
         image: t3winc/donaldonsoftware:${semver}
         container_name: dev_donaldonsoftware
+        restart: always
         expose:
             - 80
         environment: 
             - "VIRTUAL_HOST=dev.donaldonsoftware.com"
-            - "LETSENCRYPT_HOST=dev.donaldonsoftware.com"              
+            - "LETSENCRYPT_HOST=dev.donaldonsoftware.com"        
         networks: 
             - app-net
