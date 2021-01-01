@@ -14,7 +14,7 @@ He does do his best work at night any way when every body sleeps and he does hav
 
 {% asset_img Deflated_christmas_decorations.jpg "What now this Santa is slouching on a stump" %}
 
-I bring this up because the inflatable decorations for the lawn are a lot easier to setup.  My snowmen that we setup every year takes me a long time to setup and then in a few weeks time I have to take them all down and pack them so that I can reconstruct the scene next year.  However, after seeing what the inflatables look like during the day has made me rethink this. 
+I bring this up because the inflatable decorations for the lawn are a lot easier to setup.  My snowmen that I setup every year takes me a long time to setup and then in a few weeks time I have to take them all down and pack them so that I can reconstruct the scene next year.  However, after seeing what the inflatables look like during the day has made me rethink this. 
 
 {% asset_img OurSnowmen.jpg "A lot more work but look great during the day" %}
 
