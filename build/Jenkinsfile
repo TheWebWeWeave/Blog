@@ -39,6 +39,13 @@ pipeline {
                 sh './build/ci/02-build.sh'
             }
         }
+        stage('Test-Image'){
+            steps {
+                sh 'chmod +x ./build/ci/02-testImage.sh'
+                sh './build/ci/02-testImage.sh'
+            }
+        }
+/*        
         stage('Publish-Topic'){
             steps {
                 sh 'chmod +x ./build/ci/03-publish-testing.sh'
@@ -73,5 +80,6 @@ pipeline {
                 sh "./build/ci/04-release.sh ${params.semver}"
             }
         }
+*/
     }
 }
