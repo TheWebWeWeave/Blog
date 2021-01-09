@@ -42,11 +42,8 @@ pipeline {
         stage('Test-Image'){
             steps {
                 script {
-                    try {
-                            {
-                                sh """#!${config.containerShell?:'/bin/sh'}
-                                container-structure-test test --image donaldonsoftware --config ./test/DockerTest/unit-test.yaml --test-report ./TestReport ' --verbosity debug' : ''}"""
-                            }                        
+                    try {                           
+                        sh container-structure-test test --image donaldonsoftware --config './test/DockerTest/unit-test.yaml' --test-report './TestReport' ' --verbosity debug'                                                    
                     } catch (err) {
                         echo "[${STEP_NAME}] Test execution failed"
                         script.currentBuild.result = 'UNSTABLE'
