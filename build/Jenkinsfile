@@ -43,16 +43,12 @@ pipeline {
             steps {
                 script {
                     try {                           
-                        sh container-structure-test test --image donaldonsoftware --config './test/DockerTest/unit-test.yaml' --test-report './TestReport' ' --verbosity debug'                                                    
+                        sh container-structure-test test --image 'donaldonsoftware' --config './test/DockerTest/unit-test.yaml' --verbosity 'debug'                                                    
                     } catch (err) {
                         echo "[${STEP_NAME}] Test execution failed"
                         script.currentBuild.result = 'UNSTABLE'
                         if (config.failOnError) error "[${STEP_NAME}] ERROR: The execution of hte container structure tests failed, see the log for details."
-                    } finally {
-                        echo "${readFile('./TestReport')}"
-                        archiveArtifacts artifacts: './TestReport', allowEmptyArchive: true
-                    }
-
+                    } 
                 }
             }
         }
