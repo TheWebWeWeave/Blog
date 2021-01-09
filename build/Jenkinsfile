@@ -47,7 +47,7 @@ pipeline {
                     } catch (err) {
                         echo "Test-Image Test execution failed"
                         script.currentBuild.result = 'UNSTABLE'
-                        if (config.failOnError) error "Test-Image ERROR: The execution of the container structure tests failed, see the log for details."
+                        error "Test-Image ERROR: The execution of the container structure tests failed, see the log for details."
                     } 
                 }
             }
