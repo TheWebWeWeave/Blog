@@ -46,7 +46,7 @@ pipeline {
                         sh container-structure-test test --image 'donaldonsoftware' --config './test/DockerTest/unit-test.yaml' --verbosity 'debug'                                                    
                     } catch (err) {
                         echo "Test-Image Test execution failed"
-                        script.currentBuild.result = 'UNSTABLE'
+
                         error "Test-Image ERROR: The execution of the container structure tests failed, see the log for details."
                     } 
                 }
