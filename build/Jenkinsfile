@@ -43,7 +43,11 @@ pipeline {
             steps {
                 script {
                     try {                           
-                        sh container-structure-test test --image 'donaldonsoftware' --config './test/DockerTest/unit-test.yaml' --verbosity 'debug'                                                    
+                        def status = sh(returnStatus: true, script: "container-structure-test test --image 'donaldonsoftware' --config './test/DockerTest/unit-test.yaml' --verbosity 'debug' --json | jq .Fail")
+                        if (status != 0) {
+                            currentBuild.result = 'FAILED'
+                            error 'Image Test has failed'
+                        }
                     } catch (err) {
                         echo "Test-Image Test execution failed"
 
