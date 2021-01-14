@@ -10,13 +10,13 @@ fileExistenceTests:
 
   - name: 'Source Files should not exist'
     path: '/app/blog/'
-    shouldExist: false
+    shouldExist: true
 
   - name: 'Hexo Link should not exist'
     path: '/usr/local/bin/hexo'
-    shouldExist: false
+    shouldExist: true
 
   - name: 'Hexo should not exist'
     path: '/usr/local/lib/node_modules/hexo-cli/bin/Hexo'
-    shouldExist: false
+    shouldExist: true
 
