@@ -45,7 +45,7 @@ pipeline {
                     try {                           
                         def status = 0
                         status = sh(returnStatus: true, script: "container-structure-test test --image 'donaldonsoftware' --config './test/DockerTest/unit-test.yaml' --verbosity 'debug' --json | jq .Fail")
-                        echo status
+                        echo "$status"
                         if (status != 0) {
                             currentBuild.result = 'FAILED'
                             error 'Image Test has failed'
