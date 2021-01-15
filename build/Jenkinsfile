@@ -49,16 +49,11 @@ pipeline {
                         if (status != 0) {
                             //currentBuild.result = 'FAILED'
                             error 'Image Test has failed'
-                            echo "The test has failed."
-                            echo ("$status != 0")
                         }
 
                     } catch (err) {
-                        echo "Test-Image Test execution failed"
-
                         error "Test-Image ERROR: The execution of the container structure tests failed, see the log for details."
-                    } finally {
-                        echo "What should we do here no that we got through that...."
+                        echo err
                     } 
                 }
             }
