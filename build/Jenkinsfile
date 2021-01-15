@@ -50,6 +50,7 @@ pipeline {
                             //currentBuild.result = 'FAILED'
                             //error 'Image Test has failed'
                             echo "inside the error detector code."
+                            echo "($status != 0)"
                         }
                     } catch (err) {
                         echo "Test-Image Test execution failed"
