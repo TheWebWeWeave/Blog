@@ -57,8 +57,7 @@ pipeline {
                 }
             }
         }
-
-/*        
+        
         stage('Publish-Topic'){
             steps {
                 sh 'chmod +x ./build/ci/03-publish-testing.sh'
@@ -93,6 +92,5 @@ pipeline {
                 sh "./build/ci/04-release.sh ${params.semver}"
             }
         }
-*/
     }
 }
