@@ -18,5 +18,5 @@ fileExistenceTests:
 
   - name: 'Hexo should not exist'
     path: '/usr/local/lib/node_modules/hexo-cli/bin/Hexo'
-    shouldExist: false
+    shouldExist: true
 
