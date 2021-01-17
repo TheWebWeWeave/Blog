@@ -6,9 +6,9 @@ networks:
             name: nat
          
 services:
-    donaldonsoftware:
+    qa_donaldonsoftware:
         image: t3winc/donaldonsoftware:${semver}
-        container_name: qa.donaldonsoftware
+        container_name: qa_donaldonsoftware
         restart: always
         expose:
             - 80

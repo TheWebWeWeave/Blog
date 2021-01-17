@@ -6,7 +6,7 @@ networks:
             name: nat
          
 services:
-    donaldonsoftware:
+    dev_donaldonsoftware:
         image: t3winc/donaldonsoftware:${semver}
         container_name: dev_donaldonsoftware
         restart: always
