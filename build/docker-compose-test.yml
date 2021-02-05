@@ -7,7 +7,7 @@ networks:
          
 services:
     qa_donaldonsoftware:
-        image: t3winc/donaldonsoftware:${semver}
+        image: schulzdl/donaldonsoftware:${semver}
         container_name: qa_donaldonsoftware
         restart: always
         expose:
