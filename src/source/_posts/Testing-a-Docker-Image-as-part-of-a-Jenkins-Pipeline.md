@@ -50,7 +50,19 @@ fileExistenceTests:
     path: '/usr/local/lib/node_modules/hexo-cli/bin/Hexo'
     shouldExist: false
 ```
-As you can see from this test file that I am just using the **fileExistenceTests** for all my tests as this was good enough to get me started on testing my images and represented the most issues that I would run into when things did not go well.
+As you can see from this test file that I am just using the **fileExistenceTests** for all my tests as this was good enough to get me started on testing my images and represented the most issues that I would run into when things did not go well.  For more information on the various test types that I am not covering here checkout [source and documentation on github](https://github.com/GoogleContainerTools/container-structure-test).
+
+Now that we have all the pieces that we need lets get back to our Jenkins pipeline and setup a step to run this test and either move on to the next stage or fail the build if there is a problem with the image.  I am going to make another assumption that you are familiar with Jenkins declarative pipelines.  If this is all new to you, check out my previous post [Pipeline As Code](/2020/07/Pipeline-As-Code/)
+
+# Test Image Stage
+If you run the code against a fresh image the results of the docker build command the syntax is pretty simple to get a report on the image.
+```
+container-structure-test test --image '<replace with image name>' --config './test/DockerTest/unit-test.yaml'
+```
+{% img left /images/docker-test-results.png 400 400 "Docker Test Results" %}
+As you can see from just running the program locally from my WSL Ubuntu distro on my Windows 10 machine I get a really nice report which would tell me which tests passed and which failed.  In this case I was successful and all of my tests have passed.
+
+The real challenge in getting this to run within the context of a Jenkins pipeline is somehow letting Jenkins know that the tests failed when they do.  If we just ran this in a shell script it would just carry on because there is no exceptions so all must be good.  We need to introduce a couple of additional elements to this story.  Instead of getting a nice report like this we need to return the results as json and then pipe that into something that can parse json and return the number of failures.  Anything that is larger than 0 is a failure.
 
 # What about Azure DevOps
 I am glad you asked as there is a task that does just that.  In your Azure pipeline if you search for "Container Structure Test" you should see this task as it is built into the regular tasks that are part of the build.  You don't have to go looking for it in the Marketplace it should already be available to you.
