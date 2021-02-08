@@ -54,7 +54,7 @@ As you can see from this test file that I am just using the **fileExistenceTests
 
 Now that we have all the pieces that we need lets get back to our Jenkins pipeline and setup a step to run this test and either move on to the next stage or fail the build if there is a problem with the image.  I am going to make another assumption that you are familiar with Jenkins declarative pipelines.  If this is all new to you, check out my previous post [Pipeline As Code](/2020/07/Pipeline-As-Code/)
 
-# Test Image Stage
+# Testing container-structure-test
 If you run the code against a fresh image the results of the docker build command the syntax is pretty simple to get a report on the image.
 ```
 container-structure-test test --image '<replace with image name>' --config './test/DockerTest/unit-test.yaml'
@@ -63,6 +63,43 @@ container-structure-test test --image '<replace with image name>' --config './te
 As you can see from just running the program locally from my WSL Ubuntu distro on my Windows 10 machine I get a really nice report which would tell me which tests passed and which failed.  In this case I was successful and all of my tests have passed.
 
 The real challenge in getting this to run within the context of a Jenkins pipeline is somehow letting Jenkins know that the tests failed when they do.  If we just ran this in a shell script it would just carry on because there is no exceptions so all must be good.  We need to introduce a couple of additional elements to this story.  Instead of getting a nice report like this we need to return the results as json and then pipe that into something that can parse json and return the number of failures.  Anything that is larger than 0 is a failure.
+
+# Introducing Jq
+Jq is a json parser and if you are using a distro that uses apt-get to install software like Ubuntu for your Jenkins builder then you can probably install this open source software with the following command:
+```
+sudo apt-get update -y
+sudo apt-get install -y jq
+```
+If you follow this link [https://stedolan.github.io/jq/download/](https://stedolan.github.io/jq/download/) where there are a number of platforms of how you can install jq to the Jenkins build machine. Now, if that won't work for you than you can download the binaries and install manually from their github repository found at [https://github.com/stedolan/jq/releases](https://github.com/stedolan/jq/releases) 
+
+# Test-Image Stage
+Now we are ready to put this all together we have all the pieces that we need.  For this step in our Jenkins declarative Pipeline we are going to write this as a groovy script.  This part took me the longest to figure out as I could not get the kind of reporting that I needed from a shell script and finally came up with the following work flow.  Here is the step in its entirety.
+```
+stage('Test-Image'){
+    steps {
+        script {
+            try {                           
+                def status = 0
+                status = sh(returnStdout: true, script: "container-structure-test test --image '<name of your image>' --config './test/DockerTest/unit-test.yaml' --json | jq .Fail") as Integer
+                if (status != 0) {                            
+                    error 'Image Test has failed'
+                }
+
+            } catch (err) {
+                error "Test-Image ERROR: The execution of the container structure tests failed, see the log for details."
+                echo err
+            } 
+        }
+    }
+}
+```
+At line 4 we have the meat of the script wrapped in a try catch so that we can also capture any exceptions that might occur.  Line 5 we define a variable named status and give it a value of 0.  We start our test assuming that everything is good, as you remember from earlier that we are returning the number of errors so if we get 0 there were none.
+
+Line 6 is very busy as I am using an inline shell command to execute the actual command.  First off I am setting it to return a standard out and then the second half is the script that we are calling.  This command is just like the one we were calling when we were running this command manually expect that we have added once more option **--json** which will return the results as a json file.  Then we pipe the results of the json file to the jq program and let it know we want to parse the value for Fail.  If there are no errors then the Fail value will be zero.  By default the value is returned as a string so we do a conversion on the fly so that it will be an integer.
+
+Line 7 we check the value of status which is were the integer value from jq was assigned to.  If this is not zero (0) we set an error and this is enough from Jenkins to fail this build and the pipeline will stop here as a failure.
+
+There are a lot of moving pieces and does get a little bit complicated to put this all together, but it is so worth it not having bad docker images in my docker repositories.  This is also a good example of how much harder and more complicated it is to get this working with this kind of setup.  It is a whole lot easier to set this up on Azure DevOps because this all works right out of the box, don't even need any additional extensions.
 
 # What about Azure DevOps
 I am glad you asked as there is a task that does just that.  In your Azure pipeline if you search for "Container Structure Test" you should see this task as it is built into the regular tasks that are part of the build.  You don't have to go looking for it in the Marketplace it should already be available to you.
