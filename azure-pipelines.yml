@@ -27,21 +27,18 @@ stages:
         repository: 't3winc/blog'
         command: 'build'
         Dockerfile: 'Dockerfile'
-        tags: '$(tag)'
+        tags: '$(Build.BuildId)'
 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: 'curl -LO https://storage.googleapis.com/container-structure-test/v1.10.0/container-structure-test-linux-amd64 && mv container-structure-test-linux-amd64 container-structure-test && chmod +x container-structure-test && sudo mv container-structure-test /usr/local/bin/'
+    - task: Bash@3
+    inputs:
+        targetType: 'inline'
+        script: 'curl -LO https://storage.googleapis.com/container-structure-test/v1.10.0/container-structure-test-linux-amd64 && mv container-structure-test-linux-amd64 container-structure-test && chmod +x container-structure-test && sudo mv container-structure-test /usr/local/bin/'
+- task: ContainerStructureTest@0
+inputs:
+    dockerRegistryServiceConnection: 'Docker_Hub'
+    repository: '''t3winc/blog'''
+    configFile: '''**/test/DockerTest/unit-test.yaml'''
+    testRunTitle: '''Container Structure Test'''
+    failTaskOnFailedTests: true
 
-    - task: CmdLine@2
-      inputs:
-        script: 'npm install typed-rest-client --save'
       
-    - task: ContainerStructureTest@0
-      inputs:
-        dockerRegistryServiceConnection: 'Docker_Hub'
-        repository: 't3winc/blog'
-        configFile: '**/test/DockerTest/unit-test.yaml'
-        testRunTitle: 'Container Structure Test'
-        failTaskOnFailedTests: true
