@@ -28,18 +28,17 @@ stages:
         command: 'build'
         Dockerfile: 'Dockerfile'
         tags: '$(Build.BuildId)'
-
     - task: Bash@3
-    inputs:
+      inputs:
         targetType: 'inline'
         script: 'curl -LO https://storage.googleapis.com/container-structure-test/v1.10.0/container-structure-test-linux-amd64 && mv container-structure-test-linux-amd64 container-structure-test && chmod +x container-structure-test && sudo mv container-structure-test /usr/local/bin/'
-
     - task: ContainerStructureTest@0
-    inputs:
-      dockerRegistryServiceConnection: 'Docker_Hub'
-      repository: '''t3winc/blog'''
-      configFile: '''**/test/DockerTest/unit-test.yaml'''
-      testRunTitle: '''Container Structure Test'''
-      failTaskOnFailedTests: true
+      displayName: Test the Image
+      inputs:
+        dockerRegistryServiceConnection: 'Docker_Hub'
+        repository: '''t3winc/blog'''
+        configFile: '''**/test/DockerTest/unit-test.yaml'''
+        testRunTitle: '''Container Structure Test'''
+        failTaskOnFailedTests: true
 
       
