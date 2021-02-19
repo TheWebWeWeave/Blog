@@ -37,6 +37,12 @@ stages:
       inputs:
         targetType: 'inline'
         script: 'curl -LO https://storage.googleapis.com/container-structure-test/v1.10.0/container-structure-test-linux-amd64 && mv container-structure-test-linux-amd64 container-structure-test && chmod +x container-structure-test && sudo mv container-structure-test /usr/local/bin/'
+
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: 'container-structure-test test --image ''t3winc/blog'' --config ''./test/DockerTest/unit-test.yaml'''
+
     - task: ContainerStructureTest@0
       displayName: Test the Image
       inputs:
