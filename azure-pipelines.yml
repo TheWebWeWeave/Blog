@@ -49,6 +49,9 @@ stages:
         targetType: 'inline'
         script: 'container-structure-test test --image "t3winc/blog:latest" --config "./test/DockerTest/unit-test.yaml"'
 
+    - script: npm install typed-rest-client --save
+      displayName: Azure DevOps Patch Install missing packages for ContainerStructureTest
+      
     - task: ContainerStructureTest@0
       displayName: Test the Image
       inputs:
