@@ -51,8 +51,8 @@ pipeline {
                         }
 
                     } catch (err) {
+                        echo "$err"
                         error "Test-Image ERROR: The execution of the container structure tests failed, see the log for details."
-                        echo err
                     } 
                 }
             }
