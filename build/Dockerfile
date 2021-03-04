@@ -1,4 +1,5 @@
 FROM t3winc/hexo-base:v1.0.1 as builder
+LABEL stage=builder
 
 # set the workdir
 WORKDIR /app/blog

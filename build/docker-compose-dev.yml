@@ -6,8 +6,8 @@ networks:
             name: nat
          
 services:
-    donaldonsoftware:
-        image: t3winc/donaldonsoftware:${semver}
+    dev_donaldonsoftware:
+        image: schulzdl/donaldonsoftware:${semver}
         container_name: dev_donaldonsoftware
         restart: always
         expose:

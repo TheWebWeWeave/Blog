@@ -1,4 +1,4 @@
 #This should send the image up to github packages...
-cat /var/jenkins_home/GH_TOKEN.txt | docker login docker.pkg.github.com -u SchulzDL --password-stdin
-docker tag $(docker images | awk '{print $3}' | awk 'NR==2') docker.pkg.github.com/thewebweweave/blog/donaldonsoftware:$1
-docker push docker.pkg.github.com/thewebweweave/blog/donaldonsoftware:$1
+cat /var/jenkins_home/my_password.txt | docker login --username schulzdl --password-stdin
+docker tag donaldonsoftware schulzdl/donaldonsoftware:latest
+docker push schulzdl/donaldonsoftware:latest
