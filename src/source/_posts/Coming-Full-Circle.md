@@ -3,7 +3,7 @@ title: Coming Full Circle
 date: 2020-06-29 21:38:42
 tags:
  - Lifestyle
- - Corpoation
+ - Corporation
  - Career
  - DevOps
 ---
