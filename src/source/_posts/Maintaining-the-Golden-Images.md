@@ -3,6 +3,8 @@ title: Maintaining the Golden Images
 date: 2020-10-31 13:17:51
 tags:
 - DevOps
+- Docker
+- Jenkins
 ---
 {% img right /images/goldenImage.jpg 300 300 "Golden Image" %}
 Today I wanted to take you down an unusual path as I disclose some of the docker structure that I have configured recently in my environment.  It has been my goal for a while now to run everything that I can in a docker container.  What I mean by everything is that it is more than just my web sites and applications that I have been working as side projects for years but also includes some of the open source support tools that I use.  This blog post is going to mostly cover these tools and here is a list of just a few of them to give you an idea of what I am talking about.
