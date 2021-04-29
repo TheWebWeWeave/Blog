@@ -91,8 +91,15 @@ Just before we go over to the Jenkinsfile to put all the pieces together lets st
 ## Back to your Asana Account
 When you go to the calendar that you want to post these entries on, take a look at the url.  Just before the word calendar there is a number between the "/"  That number is the Project Id.  Copy this number so we can apply it in our Jenkins pipeline.
 
-Next we need to create an API key.  
+Next we need to create an API key.  This is not all that intuitive to get to but here are the steps you need to follow.
+1. Over on the right hand side of the Asana page click on your profile photo, it is on the **topbar**
+2. Select My **Profile Settings...**
+3. Open the **Apps** tab
+4. Click **Manage Developer Apps**
+5. Click + **New Access Token**
 
+Now the way that I used this new token that was created was to copy this into a text file that I called asana_api.txt and I placed it in the jenkins_home directory.  I am using a docker image and the operating system is linux so although you can see in the script above that it is mapped to 
+/var/jenkins_home/asana_api.txt  In reality I have a volume on my docker host mapped to this location.  I drop the file into that location and Jenkins will see that file in its instance of /var/jenkins_home.
 ## The Jenkinsfile
 We are getting near the end of our journey here as it is time to plug this into our Jenkins pipeline so we can see those entries appear on our Asana Release Calendar.  I am basically using the same pipeline as I used in my previous post [Pipeline As Code](/2020/07/Pipeline-As-Code/).  Check out that post if you haven't already and the piece that I am going to show you here is the very small modification that I implemented to get this working.
 ```

@@ -91,6 +91,11 @@ pipeline {
                 sh 'chmod +x ./build/ci/04-release.sh'
                 sh "./build/ci/04-release.sh ${params.semver}"
             }
+            post {
+                success {
+                    sh "python3 /var/jenkins_home/workspace/Affirm_Store/build/scripts/src/calendar-api.py Blog-DoS ${params.semver} 1199934081217038"
+                }
+            }
         }
     }
 }
