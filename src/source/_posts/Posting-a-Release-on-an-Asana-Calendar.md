@@ -7,7 +7,7 @@ tags:
 - Dashboards
 - Python
 ---
-One thing that I would like to do is to have a Calendar that shows all the versions that I have released to Production.  I don't have a whole lot of programs that I maintain but there is enough of a variety that I do switch around to the various bug fixes and new features and it would be really cool to see them all on a Single Calendar.  This way I can be sure that features and fixes are getting out there and my stakeholders can also be aware of this information.
+One thing that I like to do is to have a Calendar that shows all the versions that I have released to Production.  I don't have a whole lot of programs that I maintain but there is enough of a variety that I do switch around to the various bug fixes and new features and it would be really cool to see them all on a Single Calendar.  This way I can be sure that features and fixes are getting out there and my stakeholders can also be aware of this information.
 
 I have chosen to use [Asana Calendar](https://asana.com) because they have a good [API](https://en.wikipedia.org/wiki/API) that I can use to make this happen right within the final step of my CI/CD pipeline.  When I release a version of my product into Production and it was successful as a final step I call a Python script and an entry is posted on the Calendar.  I don't have to think about it again it is just part of the normal CI/CD pipeline but the Calendar is always up to date for who ever wants to know this information.
 
@@ -21,11 +21,11 @@ Asana is a whole project management suite but for this post I am only interested
 6. In this next screen they are collecting some demographics to better understand what kind of industries are using their product. I selected IT, but choose what best describes your line of business and click on the Continue button.
 7. Next they want to know what you main objective in Asana, choose what you like, you can even select I'm not sure yet, and then click on Continue.
 8. Now we get to the place of setting up your first Project and they want you to give it a name.  This is where I choose to put the name "Release" as this Project will hold my Release Calendar.  Click on the Continue button.
-9. Asana tries to be helpful by providing a few sample tasks that you might do.  Jest leave these for now and click on the Continue button again.
+9. Asana tries to be helpful by providing a few sample tasks that you might do.  Just leave these for now and click on the Continue button again.
 10. Next it is asking about how you would like to group these tasks, just accept the default and click on the Continue button.
 11. Now we get to make a decision on the layout to use.  Select the Calendar and then click on the Continue button.
 12. In this last and final stage it is asking who all is working on this project with you.  You can add additional emails if you wish and when you are ready click on the "Take me to my project" button.
-13. You will get a message about you 30-day trial and once that ends it will continue with a free Basic plan.  Click on the "Let's get started" button
+13. You will get a message about your 30-day trial and once that ends it will continue with a free Basic plan.  Click on the "Let's get started" button
 14. In trying to be helpful we have 3 tasks that we don't need on our calendar.  Right click each of them and choose delete so you end up with a clean calendar.
 
 We will get back to our calendar in a few minutes as we will need a project number and an personal access code but first lets look at the Python script that I wrote to populate this calendar with our releases into Production.
@@ -74,7 +74,7 @@ if __name__=="__main__":
 ```
 I haven't talked too much about Python so far in my posts but it is an incredible language and an absolute must if you are working on any Linux systems which I find I am doing more and more of that every day.  Python is a language that is installed on almost every Linux distro out there you can almost always just count on it being there.  It is also available for Apple (which is another Linux distro) and Windows.  To install Python go to [https://www.python.org/downloads/](https://www.python.org/downloads/)  Download and install the appropriate version for your operating system.
 
-Python has its own package management system that it uses for installing libraries and dependencies called pip.  You may have to use pip3 as both Python 2 and Python 3 can exist on the same system and in recent distros of Python they require the major version number.  In my Linux environments I setup alias so that Python and Pip would always point to my version 3.  After you have install Python you need to install the Asana library with this command.
+Python has its own package management system that it uses for installing libraries and dependencies called pip.  You may have to use pip3 as both Python 2 and Python 3 can exist on the same system and in recent distros of Python they require the major version number.  In my Linux environments I setup alias so that Python and Pip would always point to my version 3.  After you have installed Python you need to install the Asana library with this command.
 ```
 pip3 install asana
 ```
@@ -101,7 +101,7 @@ Next we need to create an API key.  This is not all that intuitive to get to but
 Now the way that I used this new token that was created was to copy this into a text file that I called asana_api.txt and I placed it in the jenkins_home directory.  I am using a docker image and the operating system is linux so although you can see in the script above that it is mapped to 
 /var/jenkins_home/asana_api.txt  In reality I have a volume on my docker host mapped to this location.  I drop the file into that location and Jenkins will see that file in its instance of /var/jenkins_home.
 ## The Jenkinsfile
-We are getting near the end of our journey here as it is time to plug this into our Jenkins pipeline so we can see those entries appear on our Asana Release Calendar.  I am basically using the same pipeline as I used in my previous post [Pipeline As Code](/2020/07/Pipeline-As-Code/).  Check out that post if you haven't already and the piece that I am going to show you here is the very small modification that I implemented to get this working.
+We are getting near the end of our journey here as it is time to plug this into our Jenkins pipeline so we can see those entries appear on our Asana Release Calendar.  I am basically using the same pipeline as I used in my previous post [Pipeline As Code](/2020/07/Pipeline-As-Code/).  Check out that post if you haven't already and the piece that I am going to show you here is the very small modification that I implemented to get this work.
 ```
         stage('Release'){
             agent {
@@ -121,3 +121,6 @@ We are getting near the end of our journey here as it is time to plug this into 
             }
         }
 ```
+That is it, when we run the pipeline and the current branch that we are building is master then we deploy this to our production environment.  If that was successful then we run our python script that makes the entry onto our Release Calendar.
+
+Good luck with your Release Calendar and if you have any questions or need further clarification, hit me up on the Discussion/Comment section below.
