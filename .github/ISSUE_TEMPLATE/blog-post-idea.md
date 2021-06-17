@@ -4,6 +4,7 @@ about: This issue is a placeholder and guide for new Blog Posts
 title: ''
 labels: blog post
 assignees: ''
+project: Blog Project
 
 ---
 **Describe the synopsis of this article:**
