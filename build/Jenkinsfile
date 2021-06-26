@@ -66,12 +66,12 @@ pipeline {
             post {
                 success {
                     script {
-                        blogBuildBadge.setStatus("v${params.semver} passing")
+                        blogBuildBadge.setStatus("v${params.semver} deployed")
                     }
                 }
                 failure {
                     script {
-                        blogBuildBadge.setStatus("v${params.semver} failing")
+                        blogBuildBadge.setStatus("v${params.semver} failed")
                         blogBuildBadge.setColor('red')
                     }
                 }
@@ -101,12 +101,12 @@ pipeline {
             post {
                 success {
                     script {
-                        blogDevBadge.setStatus("v${params.semver} passing")
+                        blogDevBadge.setStatus("v${params.semver} deployed")
                     }
                 }
                 failure {
                     script {
-                        blogDevBadge.setStatus("v${params.semver} failing")
+                        blogDevBadge.setStatus("v${params.semver} failed")
                         blogDevBadge.setColor('red')
                     }
                 }
