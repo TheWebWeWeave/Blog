@@ -18,7 +18,9 @@ pipeline {
             steps {
                 buildName "${params.semver}"
                 buildDescription "${params.branchname}"
-                blogBuildBadge.setStatus('running')
+                script {
+                    blogBuildBadge.setStatus('running')
+                }
             }
         }
         stage('Verify'){
@@ -61,11 +63,15 @@ pipeline {
             }
             post {
                 success {
-                    blogBuildBadge.setStatus("v${params.semver} passing")
+                    script {
+                        blogBuildBadge.setStatus("v${params.semver} passing")
+                    }
                 }
                 failure {
-                    blogBuildBadge.setStatus("v${params.semver} failing")
-                    blogBuildBadge.setColor('red')
+                    script {
+                        blogBuildBadge.setStatus("v${params.semver} failing")
+                        blogBuildBadge.setColor('red')
+                    }
                 }
             }
         }
