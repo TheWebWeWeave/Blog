@@ -75,6 +75,9 @@ pipeline {
                         blogBuildBadge.setColor('red')
                     }
                 }
+                always {
+                    sh "curl -o blogBuild.svg https://jenkins.t3winc.com/job/blog/badge/icon?config=blogBuild"
+                }
             }
         }
         
@@ -110,6 +113,9 @@ pipeline {
                         blogDevBadge.setColor('red')
                     }
                 }
+                always {
+                    sh "curl -o blogDev.svg https://jenkins.t3winc.com/job/blog/badge/icon?config=blogDev"
+                }
             }
         }
         stage('Release'){
@@ -136,6 +142,9 @@ pipeline {
                         blogProdBadge.setStatus("v${params.semver} failing")
                         blogProdBadge.setColor('red')
                     }
+                }
+                always {
+                    sh "curl -o blogProd.svg https://jenkins.t3winc.com/job/blog/badge/icon?config=blogProd"
                 }
             }
         }
