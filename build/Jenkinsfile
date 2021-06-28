@@ -75,10 +75,10 @@ pipeline {
                         blogBuildBadge.setColor('red')
                     }
                 }
-                always {
+                //always {
                     //sh "curl -o blogBuild.svg https://jenkins.t3winc.com/job/blog/badge/icon?config=blogBuild"
                     //sh "wget -O blogBuild.png ${JOB_URL}buildTimeGraph/png"
-                }
+                //}
             }
         }
         
@@ -114,9 +114,9 @@ pipeline {
                         blogDevBadge.setColor('red')
                     }
                 }
-                always {
+                //always {
                     //sh "curl -o blogDev.svg https://jenkins.t3winc.com/job/blog/badge/icon?config=blogDev"
-                }
+                //}
             }
         }
         stage('Release'){
@@ -144,9 +144,9 @@ pipeline {
                         blogProdBadge.setColor('red')
                     }
                 }
-                always {
+                //always {
                     //sh "curl -o blogProd.svg https://jenkins.t3winc.com/job/blog/badge/icon?config=blogProd"
-                }
+               // }
             }
         }
     }
