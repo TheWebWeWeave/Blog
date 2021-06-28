@@ -2,7 +2,7 @@
 
 |Build|Status|Stage|Status|
 |-----|------|------|------|
-|Git Hub Actions| [![CI](https://github.com/TheWebWeWeave/Blog/workflows/CI/badge.svg)](https://github.com/TheWebWeWeave/Blog/workflows/CI)| Dev |[![Build Status](https://badge.t3winc.com/blogDev.svg)](https://dev.donaldonsoftware.com)|
+|Git Hub Actions| [![CI](https://github.com/TheWebWeWeave/Blog/workflows/CI/badge.svg)](https://github.com/TheWebWeWeave/Blog/actions)| Dev |[![Build Status](https://badge.t3winc.com/blogDev.svg)](https://dev.donaldonsoftware.com)|
 |Jenkins Build | [![Build Status](https://badge.t3winc.com/blogBuild.svg)](https://jenkins.t3winc.com/job/blog/) | Prod |[![Build Status](https://badge.t3winc.com/blogProd.svg)](https://www.donaldonsoftware.com) |
 
 
