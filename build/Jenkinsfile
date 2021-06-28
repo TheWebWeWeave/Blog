@@ -66,18 +66,18 @@ pipeline {
             post {
                 success {
                     script {
-                        blogBuildBadge.setStatus("v${params.semver} deployed")
+                        blogBuildBadge.setStatus("v${params.semver} passing")
                     }
                 }
                 failure {
                     script {
-                        blogBuildBadge.setStatus("v${params.semver} failed")
+                        blogBuildBadge.setStatus("v${params.semver} failing")
                         blogBuildBadge.setColor('red')
                     }
                 }
                 always {
-                    sh "curl -o blogBuild.svg https://jenkins.t3winc.com/job/blog/badge/icon?config=blogBuild"
-                    sh "wget -O blogBuild.png ${JOB_URL}buildTimeGraph/png"
+                    //sh "curl -o blogBuild.svg https://jenkins.t3winc.com/job/blog/badge/icon?config=blogBuild"
+                    //sh "wget -O blogBuild.png ${JOB_URL}buildTimeGraph/png"
                 }
             }
         }
@@ -115,7 +115,7 @@ pipeline {
                     }
                 }
                 always {
-                    sh "curl -o blogDev.svg https://jenkins.t3winc.com/job/blog/badge/icon?config=blogDev"
+                    //sh "curl -o blogDev.svg https://jenkins.t3winc.com/job/blog/badge/icon?config=blogDev"
                 }
             }
         }
@@ -145,7 +145,7 @@ pipeline {
                     }
                 }
                 always {
-                    sh "curl -o blogProd.svg https://jenkins.t3winc.com/job/blog/badge/icon?config=blogProd"
+                    //sh "curl -o blogProd.svg https://jenkins.t3winc.com/job/blog/badge/icon?config=blogProd"
                 }
             }
         }
