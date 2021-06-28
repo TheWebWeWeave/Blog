@@ -77,7 +77,7 @@ pipeline {
                 }
                 always {
                     sh "curl -o blogBuild.svg https://jenkins.t3winc.com/job/blog/badge/icon?config=blogBuild"
-                    sh "wget -O blogBuild.png ${JOB_URL}/buildTimeGraph/png"
+                    sh "wget -O blogBuild.png ${JOB_URL}buildTimeGraph/png"
                 }
             }
         }
