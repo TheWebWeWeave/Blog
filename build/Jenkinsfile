@@ -1,6 +1,7 @@
 def blogBuildBadge = addEmbeddableBadgeConfiguration(id: "blogBuild", subject: "Blog (DoS)")
 def blogDevBadge = addEmbeddableBadgeConfiguration(id: "blogDev", subject: "Blog (DoS)")
 def blogProdBadge = addEmbeddableBadgeConfiguration(id: "blogProd", subject: "Blog (DoS)")
+def BADGE = "1.0.0"
 
 pipeline {
     agent any
@@ -13,7 +14,7 @@ pipeline {
     environment {
         REGISTRY='registry.t3winc.com'
         RELEASE='1.12.0'
-        BRANCH_NAME="${params.branchname}"
+        BRANCH_NAME="${params.branchname}"        
     }
     stages {
         stage("Initialization"){
@@ -22,6 +23,7 @@ pipeline {
                 buildDescription "${params.branchname}"
                 script {
                     blogBuildBadge.setStatus('running')
+                    ${BADGE} = ${params.semver}.replaceAll('-','_') 
                 }
             }
         }
@@ -67,14 +69,14 @@ pipeline {
                 success {
                     script {
                         blogBuildBadge.setStatus("v${params.semver} passing")
-                        sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog (DoS)-v${params.semver}-Green.svg"
+                        sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog (DoS)-v${BADGE}-Green.svg"
                     }
                 }
                 failure {
                     script {
                         blogBuildBadge.setStatus("v${params.semver} failing")
                         blogBuildBadge.setColor('red')
-                        sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog (DoS)-v${params.semver}-Red.svg"
+                        sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog (DoS)-v${BADGE}-Red.svg"
                     }
                 }
                 //always {
