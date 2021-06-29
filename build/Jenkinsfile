@@ -67,12 +67,14 @@ pipeline {
                 success {
                     script {
                         blogBuildBadge.setStatus("v${params.semver} passing")
+                        sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog (DoS)-v${params.semver}-Green.svg"
                     }
                 }
                 failure {
                     script {
                         blogBuildBadge.setStatus("v${params.semver} failing")
                         blogBuildBadge.setColor('red')
+                        sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog (DoS)-v${params.semver}-Red.svg"
                     }
                 }
                 //always {
