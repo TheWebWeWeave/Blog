@@ -1,7 +1,6 @@
 def blogBuildBadge = addEmbeddableBadgeConfiguration(id: "blogBuild", subject: "Blog (DoS)")
 def blogDevBadge = addEmbeddableBadgeConfiguration(id: "blogDev", subject: "Blog (DoS)")
 def blogProdBadge = addEmbeddableBadgeConfiguration(id: "blogProd", subject: "Blog (DoS)")
-def BADGE = "1.0.0"
 
 pipeline {
     agent any
