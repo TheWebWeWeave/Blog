@@ -22,7 +22,7 @@ pipeline {
                 buildDescription "${params.branchname}"
                 script {
                     blogBuildBadge.setStatus('running')
-                    BADGE=${params.semver}.replaceAll('-','_') 
+                    BADGE="${params.semver}.replaceAll('-','_')"
                 }
             }
         }
