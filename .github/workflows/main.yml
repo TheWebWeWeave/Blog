@@ -27,10 +27,18 @@ jobs:
         echo ${{ steps.ip.outputs.ipv4 }}
         echo ${{ steps.ip.outputs.ipv6 }}
                   
+    - name: Replace any dashes
+      id: replacer
+      uses: frabert/replace-string-action@v2.0
+      with:
+        pattern: '-'
+        string: "${{ steps.gitversion.outputs.fullSemVer }}"
+        replace-with: '_'
+
     - name: Assign variables
       run: |
-        echo "${{ steps.gitversion.outputs.SemVer }}"
+        echo "${{ steps.replacer.outputs.replaced }}"
         echo "${{ steps.gitversion.outputs.BranchName }}"
         
     - name: "Calling the Jenkins Job"
-      run: curl "https://jenkins.t3winc.com/buildByToken/buildWithParameters?job=blog&token=c0d81c87-f7d5-4ef1-a682-b23cc7a315c9&semver=${{ steps.gitversion.outputs.SemVer }}&branchname=${{ steps.gitversion.outputs.BranchName }}"
+      run: curl "https://jenkins.t3winc.com/buildByToken/buildWithParameters?job=blog&token=c0d81c87-f7d5-4ef1-a682-b23cc7a315c9&semver=${{ steps.replacer.outputs.replaced }}&branchname=${{ steps.gitversion.outputs.BranchName }}"
