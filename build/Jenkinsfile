@@ -69,8 +69,8 @@ pipeline {
                 }
                 always {
                     script {
-                        sh "ssh -o StrictHostKeyChecking=no admin@prod.t3winc.com ls /docker/badge -l"
-                        sh "ssh -o StrictHostKeyChecking=no admin@prod.t3winc.com mv -f ./blogBuild.svg /docker/badge/blogBuild.svg"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com mv -f ./blogBuild.svg /docker/badge/blogBuild.svg"
                     }
                 }
             }
