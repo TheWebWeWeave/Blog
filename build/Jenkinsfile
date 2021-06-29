@@ -67,6 +67,12 @@ pipeline {
                         sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Red.svg"
                     }
                 }
+                always {
+                    script {
+                        ssh ubuntu@prod.t3winc.com ls /docker/badge -l
+                        ssh mv -f ./blogBuild.svg /docker/badge/blogBuild.svg
+                    }
+                }
             }
         }
         
