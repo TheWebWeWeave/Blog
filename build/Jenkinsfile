@@ -1,7 +1,3 @@
-def blogBuildBadge = addEmbeddableBadgeConfiguration(id: "blogBuild", subject: "Blog (DoS)")
-def blogDevBadge = addEmbeddableBadgeConfiguration(id: "blogDev", subject: "Blog (DoS)")
-def blogProdBadge = addEmbeddableBadgeConfiguration(id: "blogProd", subject: "Blog (DoS)")
-
 pipeline {
     agent any
     parameters {
@@ -20,9 +16,6 @@ pipeline {
             steps {
                 buildName "${params.semver}"
                 buildDescription "${params.branchname}"
-                script {
-                    blogBuildBadge.setStatus('running')
-                }
             }
         }
         stage('Verify'){
@@ -66,21 +59,14 @@ pipeline {
             post {
                 success {
                     script {
-                        blogBuildBadge.setStatus("v${params.semver} passing")
                         sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Green.svg"
                     }
                 }
                 failure {
                     script {
-                        blogBuildBadge.setStatus("v${params.semver} failing")
-                        blogBuildBadge.setColor('red')
                         sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Red.svg"
                     }
                 }
-                //always {
-                    //sh "curl -o blogBuild.svg https://jenkins.t3winc.com/job/blog/badge/icon?config=blogBuild"
-                    //sh "wget -O blogBuild.png ${JOB_URL}buildTimeGraph/png"
-                //}
             }
         }
         
@@ -107,18 +93,14 @@ pipeline {
             post {
                 success {
                     script {
-                        blogDevBadge.setStatus("v${params.semver} deployed")
+                        sh "curl -o blogDev.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Green.svg"
                     }
                 }
                 failure {
                     script {
-                        blogDevBadge.setStatus("v${params.semver} failed")
-                        blogDevBadge.setColor('red')
+                        sh "curl -o blogDev.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Red.svg"
                     }
                 }
-                //always {
-                    //sh "curl -o blogDev.svg https://jenkins.t3winc.com/job/blog/badge/icon?config=blogDev"
-                //}
             }
         }
         stage('Release'){
@@ -137,18 +119,14 @@ pipeline {
                 success {
                     sh "python3 /var/jenkins_home/workspace/Affirm_Store/build/scripts/src/calendar-api.py Blog-DoS ${params.semver} 1199934081217038"
                     script {
-                        blogProdBadge.setStatus("v${params.semver} passing")
+                        sh "curl -o blogProd.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Green.svg"
                     }
                 }
                 failure {
                     script {
-                        blogProdBadge.setStatus("v${params.semver} failing")
-                        blogProdBadge.setColor('red')
+                        sh "curl -o blogProd.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Red.svg"
                     }
                 }
-                //always {
-                    //sh "curl -o blogProd.svg https://jenkins.t3winc.com/job/blog/badge/icon?config=blogProd"
-               // }
             }
         }
     }
