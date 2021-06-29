@@ -71,7 +71,7 @@ pipeline {
                     sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
                         sh "ls -l"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com cp ./blogBuild.svg /docker/badge/blogBuild.svg -f"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com cp ./blogBuild.svg /docker/badge/blogBuild.svg "
                     }
                 }
             }
