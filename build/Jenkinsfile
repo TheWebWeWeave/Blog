@@ -61,18 +61,21 @@ pipeline {
                     script {
                         sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Green.svg"
                     }
-                }
-                failure {
-                    script {
-                        sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Red.svg"
-                    }
-                }
-                always {
                     sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
                         sh "ls -l"
                         sh "scp ./blogBuild.svg ubuntu@prod.t3winc.com:/docker/badge/blogBuild.svg "
                     }
+                }
+                failure {
+                    script {
+                        sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Red.svg"
+                    }
+                    sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                        sh "ls -l"
+                        sh "scp ./blogBuild.svg ubuntu@prod.t3winc.com:/docker/badge/blogBuild.svg "
+                    }                    
                 }
             }
         }
@@ -138,7 +141,7 @@ pipeline {
         }
     }
     post {
-        always {
+        always {                      
             cleanWs(cleanWhenNotBuilt: false,
                     deleteDirs: true,
                     disableDeferredWipeout: true,
