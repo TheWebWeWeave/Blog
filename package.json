@@ -1,4 +1,4 @@
-{
+d.Mar{
   "name": "hexo-site",
   "version": "0.0.0",
   "private": true,
@@ -12,6 +12,7 @@
     "hexo-generator-feed": "^2.2.0",
     "hexo-generator-index": "^0.2.0",
     "hexo-generator-tag": "^0.2.0",
+    "hexo-prism-plus": "^2.1.2",
     "hexo-renderer-ejs": "^0.3.0",
     "hexo-renderer-marked": "^0.3.0",
     "hexo-renderer-stylus": "^0.3.1",

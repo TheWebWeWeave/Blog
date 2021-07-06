@@ -9,7 +9,7 @@ pipeline {
     environment {
         REGISTRY='registry.t3winc.com'
         RELEASE='1.12.0'
-        BRANCH_NAME="${params.branchname}"
+        BRANCH_NAME="${params.branchname}"        
     }
     stages {
         stage("Initialization"){
@@ -56,6 +56,28 @@ pipeline {
                     } 
                 }
             }
+            post {
+                success {
+                    script {
+                        sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Green.svg"
+                    }
+                    sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                        sh "scp ./blogBuild.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogBuild.svg"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogBuild.svg"
+                    }
+                }
+                failure {
+                    script {
+                        sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Red.svg"
+                    }
+                    sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                        sh "scp ./blogBuild.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogBuild.svg"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogBuild.svg"
+                    }                    
+                }
+            }
         }
         
         stage('Publish-Topic'){
@@ -78,6 +100,28 @@ pipeline {
                 sh 'chmod +x ./build/ci/04-deploy.sh'
                 sh "./build/ci/04-deploy.sh ${params.semver}"
             }
+            post {
+                success {
+                    script {
+                        sh "curl -o blogDev.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Green.svg"
+                    }
+                    sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                        sh "scp ./blogBuild.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogDev.svg"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogDev.svg"
+                    }                     
+                }
+                failure {
+                    script {
+                        sh "curl -o blogDev.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Red.svg"
+                    }
+                    sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                        sh "scp ./blogBuild.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogDev.svg"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogDev.svg"
+                    }                     
+                }
+            }
         }
         stage('Release'){
             agent{
@@ -94,8 +138,36 @@ pipeline {
             post {
                 success {
                     sh "python3 /var/jenkins_home/workspace/Affirm_Store/build/scripts/src/calendar-api.py Blog-DoS ${params.semver} 1199934081217038"
+                    script {
+                        sh "curl -o blogProd.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Green.svg"
+                    }
+                    sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                        sh "scp ./blogBuild.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogProd.svg"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogProd.svg"
+                    }                     
+                }
+                failure {
+                    script {
+                        sh "curl -o blogProd.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Red.svg"
+                    }
+                    sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                        sh "scp ./blogBuild.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogProd.svg"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogProd.svg"
+                    }                     
                 }
             }
+        }
+    }
+    post {
+        always {                      
+            cleanWs(cleanWhenNotBuilt: false,
+                    deleteDirs: true,
+                    disableDeferredWipeout: true,
+                    notFailBuild: true,
+                    patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
+                               [pattern: '.propsfile', type: 'EXCLUDE']])
         }
     }
 }

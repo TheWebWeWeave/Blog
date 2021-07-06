@@ -4,7 +4,6 @@ about: This issue is a placeholder and guide for new Blog Posts
 title: ''
 labels: blog post
 assignees: ''
-projects: Blog Project
 
 ---
 **Describe the synopsis of this article:**
@@ -29,3 +28,4 @@ projects: Blog Project
 3. Create a new branch: **git checkout -b** [new-branch]
 4. First time push for new branch: **git push --set-upstream origin** [new-branch]
 5. Pull Request: **gh pr create --title** "The title of the new PR"
+
