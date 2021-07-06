@@ -28,3 +28,4 @@ assignees: ''
 3. Create a new branch: **git checkout -b** [new-branch]
 4. First time push for new branch: **git push --set-upstream origin** [new-branch]
 5. Pull Request: **gh pr create --title** "The title of the new PR"
+
