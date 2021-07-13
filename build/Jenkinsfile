@@ -12,6 +12,7 @@ pipeline {
         BRANCH_NAME="${params.branchname}"        
     }
     stages {
+        
         stage("Initialization"){
             steps {
                 buildName "${params.semver}"
@@ -21,6 +22,7 @@ pipeline {
                 sh "curl -X PURGE https://camo.githubusercontent.com/ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667"
             }
         }
+        
         stage('Verify'){
             steps {
                 sh 'chmod +x ./build/ci/00-verify.sh'
@@ -29,6 +31,7 @@ pipeline {
                 echo "BRANCH_NAME: ${env.BRANCH_NAME}"
             }
         }
+
         stage('Version') {
             steps {
                 echo "my semver version is: ${params.semver}"
@@ -36,12 +39,14 @@ pipeline {
                 sh './build/ci/01-version.sh'
             }
         }
+        
         stage('Build'){
             steps {
                 sh 'chmod +x ./build/ci/02-build.sh'
                 sh './build/ci/02-build.sh'
             }
         }
+
         stage('Test-Image'){
             steps {
                 script {
@@ -93,6 +98,7 @@ pipeline {
                 sh "./build/ci/03-publish-testing.sh ${params.semver}"
             }
         }
+
         stage('Publish-Master'){
             when {
                 environment name: 'BRANCH_NAME', value: 'master'
@@ -102,11 +108,18 @@ pipeline {
                 sh "./build/ci/03-publish.sh ${params.semver}"
             }
         }
+
         stage('Deploy'){
             steps {
                 sh 'chmod +x ./build/ci/04-deploy.sh'
                 sh "./build/ci/04-deploy.sh ${params.semver}"
             }
+        }
+
+         stage('Test-Deplopy'){
+            steps {
+                tpJobRun projectId: 'GYqn1YCHbUKFcsUnHsr-Tg', jobId: 'dMtILq6XMUCf-z0_qsOOkw', agentId: 'H3zXuEhE-kuxBS4mX_W9tg', waitJobFinishSeconds: 600
+            }                       
             post {
                 success {
                     script {
@@ -134,6 +147,7 @@ pipeline {
                 }
             }
         }
+
         stage('Release'){
             agent{
                 label 'AWS-Jenkins-Slave'
@@ -175,6 +189,7 @@ pipeline {
             }
         }
     }
+    
     post {
         always {
             sh "curl -X PURGE https://camo.githubusercontent.com/132bc0b92c4749ac87e46bd5b905e7f9bf8be431c5cc8b350277d0fb007b05e4/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674275696c642e737667"
