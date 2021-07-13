@@ -116,7 +116,7 @@ pipeline {
             }
         }
 
-         stage('Test-Deplopy'){
+        stage('Test-Deplopy'){
             steps {
                 tpJobRun projectId: 'GYqn1YCHbUKFcsUnHsr-Tg', jobId: 'dMtILq6XMUCf-z0_qsOOkw', agentId: 'H3zXuEhE-kuxBS4mX_W9tg', waitJobFinishSeconds: 600
             }                       
@@ -189,7 +189,7 @@ pipeline {
             }
         }
     }
-    
+
     post {
         always {
             sh "curl -X PURGE https://camo.githubusercontent.com/132bc0b92c4749ac87e46bd5b905e7f9bf8be431c5cc8b350277d0fb007b05e4/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674275696c642e737667"
