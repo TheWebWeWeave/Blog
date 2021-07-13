@@ -7,8 +7,7 @@ pipeline {
          description: 'the actual branch name that triggered the build as precurred from gitVersion') 
     }
     environment {
-        REGISTRY='registry.t3winc.com'
-        RELEASE='1.12.0'
+        RELEASE="${params.semver}"
         BRANCH_NAME="${params.branchname}"        
     }
     stages {
