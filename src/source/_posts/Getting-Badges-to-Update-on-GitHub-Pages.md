@@ -13,4 +13,4 @@ My needs are quite simple as this is my own personal project and do all the deve
 ### Badges
 I realize that all I really need were some build and deployment badges that would tell me what was successfully deployed at each environment.  If I had that and it was updated automatically this would solve my problem and I could stop looking for a simple CD solution.  I could get everything I needed from the Jenkins pipeline and not feel like I have some process that really just feels like over kill.
 
-In today's post I will show you how a constructed the badges and then how I consume them on the README.md page.
+In today's post I will show you how a constructed the badges and then how I consume them on the README.md page.  There is a plugin that you can use in Jenkins but I did not find it all that useful as the result was a url back onto my Jenkins Server which is on a box that GitHub cannot call directly.
