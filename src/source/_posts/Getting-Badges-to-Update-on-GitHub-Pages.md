@@ -13,4 +13,20 @@ My needs are quite simple as this is my own personal project and do all the deve
 ### Badges
 I realize that all I really need were some build and deployment badges that would tell me what was successfully deployed at each environment.  If I had that and it was updated automatically this would solve my problem and I could stop looking for a simple CD solution.  I could get everything I needed from the Jenkins pipeline and not feel like I have some process that really just feels like over kill.
 
-In today's post I will show you how a constructed the badges and then how I consume them on the README.md page.  There is a plugin that you can use in Jenkins but I did not find it all that useful as the result was a url back onto my Jenkins Server which is on a box that GitHub cannot call directly.
+In today's post I will show you how I constructed the badges and then how I consume them on the README.md page.  There is a plugin that you can use in Jenkins but I did not find it all that useful as the result was a url back onto my Jenkins Server which is on a box that GitHub cannot call directly.  What I needed was an actual file that I can put onto a share that my github pages could access them from.  My stage/test/dev environment is closed to all IP address except for mine.  This is part of a security thing, I don't want anyone being able to reach the half backed updates and they go through their testing cycles.  My production environment is different as it is exposed to the world through a secure SSL connection.  This connection is open to all IP addresses so I wanted a simple docker container that could live in my production environment.  From here my github ReadMe files could easily get the images from this server and would have access to these files 24/7.  My first trick is to produce the badge and get it over to the underlying shared volume of the docker.
+
+#### Step 1. Create A Physical Badge
+First identify where you want to make a mark in your pipeline.  Think of this as a milestone.  There may be many milestones in the pipeline that you may want to track.  Over time you may want to revise this as you may change your process for better efficiencies and clarity.  DevOps like any other process is itself part of a continuous improvement cycle.  We should always be on the look out for ways that can improve things.  In my initial stab at this I keep things pretty simple but I do want to track the following flow:
+```
+Build --> Dev --> Prod
+```
+So at this time I just want to show three (3) badges one for each of these steps that I indicated.  So after my build step but still within it I want to add a post with a success and failure sections.  So at the end of the steps (just to recap the hierarchy of the pipeline is stages --> stage --> steps -->) and the post would be in parallel to the steps but still inside of the stage.  Then for the success step you would run the following curl command:
+```
+sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Green.svg"
+```
+This URL that I am using is a simplified version from some of the others that I found.  However, in that simplicity there is a very specific syntax that you must follow.  There are three parts to the instructions I am sending in:
+1. The left side of the text (in my case this is Blog_DoS)
+2. The right side of the text (here I set my version number which I have stored in the parameter params.semver)
+3. Finally this is the color of the badge.  (Green is good, Red is bad, you can add other colors for other ideas.)
+
+These three elements are separated by a **"-"** so you want to make sure you are not using the dash in your names.
