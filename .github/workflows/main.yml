@@ -16,7 +16,7 @@ jobs:
       id: gitversion
       uses: nmcc/actions-gitversion@v1
       with:
-        path-to-gitversion: packages/GitVersion.CommandLine/tools/GitVersion.exe
+        path-to-gitversion: gitversion
 
     - name: Public IP
       id: ip 

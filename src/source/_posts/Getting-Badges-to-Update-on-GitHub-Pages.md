@@ -30,3 +30,37 @@ This URL that I am using is a simplified version from some of the others that I 
 3. Finally this is the color of the badge.  (Green is good, Red is bad, you can add other colors for other ideas.)
 
 These three elements are separated by a **"-"** so you want to make sure you are not using the dash in your names.
+#### Step 2. Copy the Badge to a public shared location
+Even though my badge is being built as part of the Jenkins build process I needed to move this badge to a location where my github pages could access it.  In my environment I have a Jenkins Build Machine that is in a Docker container running on a machine that can only be accessed from my IP address.  This means that Jenkins can pull the repository from GitHub but GitHub cannot see anything on my Jenkins Build Machine.  The solution I chose was to have a Docker container that is running in my Production environment that is accessible from the world but only on port 443. 
+
+The container itself is just a simple nginx image not even a docker image that I build.  I deploy it onto my production machine using a docker-compose file.  The docker-compose file is a simple YAML file that describes the container and what it is going to do.  The proxy server which is another nginx container is going to be listening on port 443 and it is going to send the traffic to this container when the dns entry matches.  The nginx image is just a simple container that is going to be listening on port 80 and serving the files from the shared volume.  The shared volume is a directory that is shared between the container and the Production host machine. 
+```
+    badge-server:
+        image: nginx
+        container_name: badge-server
+        volumes:
+            - /docker/badge:/usr/share/nginx/html
+        restart: always
+        environment:
+            - "VIRTUAL_HOST=dns_cname_to_your_server"
+            - "VIRTUAL_PORT=80"
+            - "LETSENCRYPT_HOST=dns_cname_to_your_server"
+        networks: 
+            - app-net
+```
+
+From the Jenkins pipeline we ssh into the Production host machine and copy the images that we just created into the shared volume that is share between the machines and the container.  The container will see this file and when asked for by the GitHub Readme pages it displays the image that we called up.  The following code snippet is from the Jenkins pipeline using the ssh plugin.  I have setup my credentials in a Jenkins credentials plugin that keeps them secret and out of my source.  What follows after that are five shell commands that I am running on the Production host machine.
+
+```
+    sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
+        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+        sh "scp ./blogBuild.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogProd.svg"
+        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogProd.svg"
+        sh "curl -X PURGE https://camo.githubusercontent.com/ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667"
+        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+    } 
+```
+
+The story could almost end there except that GitHub has gone out of its way to make things secure for you as much as possible. It uses a camo server to create these random keys to hide the actual location of the file it is serving up.  The problem here is that this is also cached so you can update your image and your cached one is the one that keeps getting displayed.  It is not your browser cache, it is GitHubs cache.  Let's solve that in the next step.
+
+#### Step 3. purge the GitHub cache
