@@ -41,4 +41,4 @@ jobs:
         echo "${{ steps.gitversion.outputs.BranchName }}"
         
     - name: "Calling the Jenkins Job"
-      run: curl "https://jenkins.t3winc.com/buildByToken/buildWithParameters?job=blog&token=c0d81c87-f7d5-4ef1-a682-b23cc7a315c9&semver=${{ steps.replacer.outputs.replaced }}&branchname=${{ steps.gitversion.outputs.BranchName }}"
+      run: curl -X POST -F 'job_id=blog' -F 'token=c0d81c87-f7d5-4ef1-a682-b23cc7a315c9' -F "semver=${{ steps.replacer.outputs.replaced }}" -F "branchname=${{ steps.gitversion.outputs.BranchName }}" "https://build.t3winc.com/jobs"      
