@@ -7,17 +7,21 @@ pipeline {
          description: 'the actual branch name that triggered the build as precurred from gitVersion') 
     }
     environment {
-        REGISTRY='registry.t3winc.com'
-        RELEASE='1.12.0'
+        RELEASE="${params.semver}"
         BRANCH_NAME="${params.branchname}"        
     }
     stages {
+        
         stage("Initialization"){
             steps {
                 buildName "${params.semver}"
                 buildDescription "${params.branchname}"
+                sh "curl -X PURGE https://camo.githubusercontent.com/132bc0b92c4749ac87e46bd5b905e7f9bf8be431c5cc8b350277d0fb007b05e4/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674275696c642e737667"
+                sh "curl -X PURGE https://camo.githubusercontent.com/d2745624399891de7f0043604a22cb34d604058c0cc1faf0e07fd78605f9aa25/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674465762e737667"
+                sh "curl -X PURGE https://camo.githubusercontent.com/ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667"
             }
         }
+        
         stage('Verify'){
             steps {
                 sh 'chmod +x ./build/ci/00-verify.sh'
@@ -26,6 +30,7 @@ pipeline {
                 echo "BRANCH_NAME: ${env.BRANCH_NAME}"
             }
         }
+
         stage('Version') {
             steps {
                 echo "my semver version is: ${params.semver}"
@@ -33,12 +38,14 @@ pipeline {
                 sh './build/ci/01-version.sh'
             }
         }
+        
         stage('Build'){
             steps {
                 sh 'chmod +x ./build/ci/02-build.sh'
                 sh './build/ci/02-build.sh'
             }
         }
+
         stage('Test-Image'){
             steps {
                 script {
@@ -65,6 +72,8 @@ pipeline {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
                         sh "scp ./blogBuild.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogBuild.svg"
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogBuild.svg"
+                        sh "curl -X PURGE https://camo.githubusercontent.com/132bc0b92c4749ac87e46bd5b905e7f9bf8be431c5cc8b350277d0fb007b05e4/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674275696c642e737667"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
                     }
                 }
                 failure {
@@ -75,7 +84,9 @@ pipeline {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
                         sh "scp ./blogBuild.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogBuild.svg"
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogBuild.svg"
-                    }                    
+                        sh "curl -X PURGE https://camo.githubusercontent.com/132bc0b92c4749ac87e46bd5b905e7f9bf8be431c5cc8b350277d0fb007b05e4/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674275696c642e737667"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                    }                   
                 }
             }
         }
@@ -86,6 +97,7 @@ pipeline {
                 sh "./build/ci/03-publish-testing.sh ${params.semver}"
             }
         }
+
         stage('Publish-Master'){
             when {
                 environment name: 'BRANCH_NAME', value: 'master'
@@ -95,11 +107,18 @@ pipeline {
                 sh "./build/ci/03-publish.sh ${params.semver}"
             }
         }
+
         stage('Deploy'){
             steps {
                 sh 'chmod +x ./build/ci/04-deploy.sh'
                 sh "./build/ci/04-deploy.sh ${params.semver}"
             }
+        }
+
+        stage('Test-Deplopy'){
+            steps {
+                tpJobRun projectId: 'GYqn1YCHbUKFcsUnHsr-Tg', jobId: 'dMtILq6XMUCf-z0_qsOOkw', agentId: 'H3zXuEhE-kuxBS4mX_W9tg', waitJobFinishSeconds: 600
+            }                       
             post {
                 success {
                     script {
@@ -109,7 +128,9 @@ pipeline {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
                         sh "scp ./blogBuild.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogDev.svg"
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogDev.svg"
-                    }                     
+                        sh "curl -X PURGE https://camo.githubusercontent.com/d2745624399891de7f0043604a22cb34d604058c0cc1faf0e07fd78605f9aa25/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674465762e737667"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                    }                    
                 }
                 failure {
                     script {
@@ -119,10 +140,13 @@ pipeline {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
                         sh "scp ./blogBuild.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogDev.svg"
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogDev.svg"
-                    }                     
+                        sh "curl -X PURGE https://camo.githubusercontent.com/d2745624399891de7f0043604a22cb34d604058c0cc1faf0e07fd78605f9aa25/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674465762e737667"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                    }                    
                 }
             }
         }
+
         stage('Release'){
             agent{
                 label 'AWS-Jenkins-Slave'
@@ -145,7 +169,9 @@ pipeline {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
                         sh "scp ./blogBuild.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogProd.svg"
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogProd.svg"
-                    }                     
+                        sh "curl -X PURGE https://camo.githubusercontent.com/ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                    }                   
                 }
                 failure {
                     script {
@@ -155,19 +181,25 @@ pipeline {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
                         sh "scp ./blogBuild.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogProd.svg"
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogProd.svg"
-                    }                     
+                        sh "curl -X PURGE https://camo.githubusercontent.com/ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                    }                   
                 }
             }
         }
     }
+
     post {
-        always {                      
+        always {
             cleanWs(cleanWhenNotBuilt: false,
                     deleteDirs: true,
                     disableDeferredWipeout: true,
                     notFailBuild: true,
                     patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
-                               [pattern: '.propsfile', type: 'EXCLUDE']])
+                               [pattern: '.propsfile', type: 'EXCLUDE']])            
+            sh "curl -X PURGE https://camo.githubusercontent.com/132bc0b92c4749ac87e46bd5b905e7f9bf8be431c5cc8b350277d0fb007b05e4/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674275696c642e737667"
+            sh "curl -X PURGE https://camo.githubusercontent.com/d2745624399891de7f0043604a22cb34d604058c0cc1faf0e07fd78605f9aa25/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674465762e737667"
+            sh "curl -X PURGE https://camo.githubusercontent.com/ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667"
         }
     }
 }
