@@ -8,7 +8,8 @@ pipeline {
     }
     environment {
         RELEASE="${params.semver}"
-        BRANCH_NAME="${params.branchname}"        
+        BRANCH_NAME="${params.branchname}" 
+        DOCKER_TOKEN=credentials('docker_token')       
     }
     stages {
         
@@ -19,30 +20,14 @@ pipeline {
                 sh "curl -X PURGE https://camo.githubusercontent.com/132bc0b92c4749ac87e46bd5b905e7f9bf8be431c5cc8b350277d0fb007b05e4/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674275696c642e737667"
                 sh "curl -X PURGE https://camo.githubusercontent.com/d2745624399891de7f0043604a22cb34d604058c0cc1faf0e07fd78605f9aa25/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674465762e737667"
                 sh "curl -X PURGE https://camo.githubusercontent.com/ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667"
+                sh "docker version && docker-compose version"
             }
         }
-        
-        stage('Verify'){
-            steps {
-                sh 'chmod +x ./build/ci/00-verify.sh'
-                sh './build/ci/00-verify.sh'
-                echo "GIT_BRANCH: ${env.GIT_BRANCH}"
-                echo "BRANCH_NAME: ${env.BRANCH_NAME}"
-            }
-        }
-
-        stage('Version') {
-            steps {
-                echo "my semver version is: ${params.semver}"
-                sh 'chmod +x ./build/ci/01-version.sh'
-                sh './build/ci/01-version.sh'
-            }
-        }
-        
+                
         stage('Build'){
-            steps {
-                sh 'chmod +x ./build/ci/02-build.sh'
-                sh './build/ci/02-build.sh'
+            steps {                
+                sh 'docker image build --rm -f ./build/Dockerfile -t donaldonsoftware .'
+                sh 'docker image prune --filter label=stage=builder'
             }
         }
 
@@ -93,7 +78,7 @@ pipeline {
         
         stage('Publish-Topic'){
             steps {
-              sh "cat /var/jenkins_home/my_password.txt | docker login -u schulzdl --password-stdin"
+                sh 'docker login -u schulzdl -p $DOCKER_TOKEN'
                 sh "docker tag donaldonsoftware schulzdl/donaldonsoftware:v${params.semver}"
                 sh "docker push schulzdl/donaldonsoftware:v${params.semver}"
             }
@@ -104,7 +89,7 @@ pipeline {
                 environment name: 'BRANCH_NAME', value: 'master'
             }
             steps {
-                sh "cat /var/jenkins_home/my_password.txt | docker login -u schulzdl --password-stdin"
+                sh 'docker login -u schulzdl -p $DOCKER_TOKEN'
                 sh "docker tag schulzdl/donaldonsoftware:v${params.semver} schulzdl/donaldonsoftware:latest"
                 sh "docker push schulzdl/donaldonsoftware:latest"
             }
@@ -112,8 +97,7 @@ pipeline {
 
         stage('Deploy'){
             steps {
-                sh 'chmod +x ./build/ci/04-deploy.sh'
-                sh "./build/ci/04-deploy.sh ${params.semver}"
+                sh 'docker-compose -f ./build/docker-compose-dev.yml up -d'
             }
         }
 
@@ -158,8 +142,7 @@ pipeline {
             }
             steps {
                 input 'Release to Production?'
-                sh 'chmod +x ./build/ci/04-release.sh'
-                sh "./build/ci/04-release.sh ${params.semver}"
+                sh 'docker-compose -f ./build/docker-compose-prod.yml up -d'
             }
             post {
                 success {
