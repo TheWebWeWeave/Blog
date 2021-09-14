@@ -66,7 +66,7 @@ pipeline {
             post {
                 success {
                     script {
-                        sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Green.svg"
+                        sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-success.svg"
                     }
                     sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
@@ -78,7 +78,7 @@ pipeline {
                 }
                 failure {
                     script {
-                        sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Red.svg"
+                        sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-critical.svg"
                     }
                     sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
@@ -124,7 +124,7 @@ pipeline {
             post {
                 success {
                     script {
-                        sh "curl -o blogDev.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Green.svg"
+                        sh "curl -o blogDev.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-success.svg"
                     }
                     sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
@@ -136,7 +136,7 @@ pipeline {
                 }
                 failure {
                     script {
-                        sh "curl -o blogDev.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Red.svg"
+                        sh "curl -o blogDev.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-critical.svg"
                     }
                     sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
@@ -165,7 +165,7 @@ pipeline {
                 success {
                     steps {                        
                         script {
-                            sh "curl -o blogProd.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Green.svg"
+                            sh "curl -o blogProd.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-success.svg"
                         }
                         sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
                             sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
@@ -180,7 +180,7 @@ pipeline {
                 failure {
                     steps {
                         script {
-                            sh "curl -o blogProd.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Red.svg"
+                            sh "curl -o blogProd.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-critical.svg"
                         }
                         sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
                             sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
