@@ -119,7 +119,7 @@ pipeline {
 
         stage('Test-Deplopy'){
             steps {
-                tpJobRun projectId: 'GYqn1YCHbUKFcsUnHsr-Tg', jobId: 'dMtILq6XMUCf-z0_qsOOkw', agentId: 'H3zXuEhE-kuxBS4mX_W9tg', waitJobFinishSeconds: 600
+                tpJobRun projectId: 'GYqn1YCHbUKFcsUnHsr-Tg', jobId: 'dMtILq6XMUCf-z0_qsOOkw', agentId: 'H3zXuEhE-kuxBS4mX_W9tg', waitJobFinishSeconds: 1600
             }                       
             post {
                 success {
