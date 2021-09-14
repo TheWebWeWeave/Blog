@@ -163,28 +163,32 @@ pipeline {
             }
             post {
                 success {
-                    sh "python3 /var/jenkins_home/workspace/Affirm_Store/build/scripts/src/calendar-api.py Blog-DoS ${params.semver} 1199934081217038"
-                    script {
-                        sh "curl -o blogProd.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Green.svg"
-                    }
-                    sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
-                        sh "scp ./blogProd.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogProd.svg"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogProd.svg"
-                        sh "curl -X PURGE https://camo.githubusercontent.com/ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
-                    }                   
+                    steps {
+                        sh "python3 /var/jenkins_home/workspace/Affirm_Store/build/scripts/src/calendar-api.py Blog-DoS ${params.semver} 1199934081217038"
+                        script {
+                            sh "curl -o blogProd.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Green.svg"
+                        }
+                        sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
+                            sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                            sh "scp ./blogProd.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogProd.svg"
+                            sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogProd.svg"
+                            sh "curl -X PURGE https://camo.githubusercontent.com/ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667"
+                            sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                        }  
+                    }                 
                 }
                 failure {
-                    script {
-                        sh "curl -o blogProd.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Red.svg"
-                    }
-                    sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
-                        sh "scp ./blogProd.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogProd.svg"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogProd.svg"
-                        sh "curl -X PURGE https://camo.githubusercontent.com/ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                    steps {
+                        script {
+                            sh "curl -o blogProd.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Red.svg"
+                        }
+                        sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
+                            sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                            sh "scp ./blogProd.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogProd.svg"
+                            sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogProd.svg"
+                            sh "curl -X PURGE https://camo.githubusercontent.com/ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667"
+                            sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                        }
                     }                   
                 }
             }
