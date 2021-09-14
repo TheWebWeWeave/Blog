@@ -93,8 +93,9 @@ pipeline {
         
         stage('Publish-Topic'){
             steps {
-                sh 'chmod +x ./build/ci/03-publish-testing.sh'
-                sh "./build/ci/03-publish-testing.sh ${params.semver}"
+              sh "cat /var/jenkins_home/my_password.txt | docker login -u schulzdl --password-stdin"
+                sh "docker tag donaldonsoftware schulzdl/donaldonsoftware:v${params.semver}"
+                sh "docker push schulzdl/donaldonsoftware:v${params.semver}"
             }
         }
 
@@ -103,8 +104,9 @@ pipeline {
                 environment name: 'BRANCH_NAME', value: 'master'
             }
             steps {
-                sh 'chmod +x ./build/ci/03-publish.sh'
-                sh "./build/ci/03-publish.sh ${params.semver}"
+                sh "cat /var/jenkins_home/my_password.txt | docker login -u schulzdl --password-stdin"
+                sh "docker tag schulzdl/donaldonsoftware:v${params.semver} schulzdl/donaldonsoftware:latest"
+                sh "docker push schulzdl/donaldonsoftware:latest"
             }
         }
 
