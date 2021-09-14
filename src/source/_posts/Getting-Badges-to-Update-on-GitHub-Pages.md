@@ -24,12 +24,12 @@ Build --> Dev --> Prod
 ```
 So at this time I just want to show three (3) badges one for each of these steps that I indicated.  So after my build step but still within it I want to add a post with a success and failure sections.  So at the end of the steps (just to recap the hierarchy of the pipeline is stages --> stage --> steps -->) and the post would be in parallel to the steps but still inside of the stage.  Then for the success step you would run the following curl command:
 ```
-sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-Green.svg"
+sh "curl -o blogBuild.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-success.svg"
 ```
 This URL that I am using is a simplified version from some of the others that I found.  However, in that simplicity there is a very specific syntax that you must follow.  There are three parts to the instructions I am sending in:
 1. The left side of the text (in my case this is Blog_DoS)
 2. The right side of the text (here I set my version number which I have stored in the parameter params.semver)
-3. Finally this is the color of the badge.  (Green is good, Red is bad, you can add other colors for other ideas.)
+3. Finally this is the color of the badge.  [(success is green, critical is red, you can add other colors for other ideas.)](https://shields.io)
 
 These three elements are separated by a **"-"** so you want to make sure you are not using the dash in your names or version numbers.
 #### Step 2. Copy the Badge to a public shared location

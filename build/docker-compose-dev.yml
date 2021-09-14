@@ -7,7 +7,7 @@ networks:
          
 services:
     dev_donaldonsoftware:
-        image: schulzdl/donaldonsoftware:${semver}
+        image: schulzdl/donaldonsoftware:v${semver}
         container_name: dev_donaldonsoftware
         restart: always
         expose:
