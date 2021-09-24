@@ -8,6 +8,8 @@
 
 Currently this is the same content that we have always had out there but it uses simple markdown which gets chured through Hexo and generates static web pages which are perfect and wonderful and the best part is that the articles and blogs are exactly where I have always wanted them which is in source control.
 
+*We have to keep changing the branch before we build as this does not seem to be working right now.  I am sure that it worked in the past and it might be because we have too many branches right now and it is confusing things.*
+
 ### [Hexo commands](docs/commands.md)
 ### [Blog Workflow](docs/workflow.md)
 ### [Steps](docs/steps.md)
