@@ -3,10 +3,14 @@
 <div class="columns">
     <div class="column is-9">
         <div class="tile is-child box">
+            <b><center>First Published on {{ .Date.Format "January 2, 2006" }} by Donald on Software <br>
+                <i>{{ .ReadingTime }} min read</i></center></b><br/>
             <div class="content">
                 {{ .Content }}
             </div>
         </div>
+        {{ partial "disqus" .}}
+        
     </div>
     <div class="column is-3">
         {{ partial "widget-categories.html" .}}<br>
@@ -14,6 +18,7 @@
         {{ partial "widget-recent.html" . }}<br>
         {{ partial "widget-related.html" . }}<br>
         {{ partial "widget-archives.html" . }}
+        {{ partial "disqus-counter" .}}
     </div>
 </div>
 
