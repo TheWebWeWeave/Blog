@@ -10,11 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    #- run: GitVersion
-    - name: Install gitversion
-      run: "choco install GitVersion.Portable -Y"
-      shell: pwsh
-    
+    #- run: GitVersion    
     - name: GitVersion
       id: gitversion
       uses: nmcc/actions-gitversion@v1
