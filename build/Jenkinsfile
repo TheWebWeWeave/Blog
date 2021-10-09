@@ -27,7 +27,7 @@ pipeline {
         stage('Build'){
             steps {                
                 sh 'docker image build --rm -f ./build/Dockerfile -t donaldonsoftware .'
-                sh 'docker image prune --filter label=stage=builder'
+                //sh 'docker image prune --filter label=stage=builder'
             }
         }
 
