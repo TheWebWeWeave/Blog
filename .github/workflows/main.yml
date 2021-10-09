@@ -12,8 +12,8 @@ jobs:
 
     #- run: GitVersion
     - name: Install gitversion
-      id: GitVersionInstall
-      run: cmd "choco install GitVersion.Portable -Y"
+      run: "choco install GitVersion.Portable -Y"
+      shell: pwsh
     
     - name: GitVersion
       id: gitversion
