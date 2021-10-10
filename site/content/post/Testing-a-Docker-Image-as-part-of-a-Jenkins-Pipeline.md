@@ -1,11 +1,7 @@
 ---
 title: Testing a Docker Image as part of a Jenkins Pipeline
 date: 2021-01-15 09:08:01
-tags: [
-  "DevOps",
-  "Jenkins",
-  "Testing",
-  "Docker"]
+tags: ["DevOps", "Jenkins", "Testing", "Docker"]
 categories: ["technology"]
 next: "Posting a Release on an Asana Calendar"
 archives: 2021

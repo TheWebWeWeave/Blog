@@ -4,10 +4,7 @@ date: 2021-07-06 14:48:07
 archives: 2021
 menu: "main"
 title: Getting Badges to Update on GitHub Pages
-tags: [
-    "Jenkins",
-    "DevOps",
-    "Dashboard"]
+tags: ["Jenkins", "DevOps", "Dashboard"]
 categories: ["technology"]
 prev: "Posting a Release on an Asana Calendar"
 ---

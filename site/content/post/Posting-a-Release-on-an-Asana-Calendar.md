@@ -1,11 +1,7 @@
 ---
 title: Posting a Release on an Asana Calendar
 date: 2021-03-21 14:31:44
-tags: [
-    "DevOps",
-    "Jenkins",
-    "Dashboard",
-    "Python"]
+tags: ["DevOps", "Jenkins", "Dashboard", "Python"]
 categories: ["technology"]
 archives: 2021
 menu: "main"

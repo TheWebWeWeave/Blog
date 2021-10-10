@@ -3,6 +3,9 @@ title: "Santa Sleeps During the Day"
 date: 2020-12-31 16:40:35
 tags: ["Christmas"]
 categories: ["humor"] 
+archives: 2020
+author: "Donald L. Schulz"
+menu: "main"
 ---
 This blog is usually about technology and projects that I am working on or helping customers. This being that it is December and many of us having been working from home for the past 9 months I thought I would lighten things up. I want to talk about something that  strikes me as pretty funny.
 
