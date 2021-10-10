@@ -6,6 +6,7 @@ categories: ["technology"]
 next: "Posting a Release on an Asana Calendar"
 archives: 2021
 author: "Donald L. Schulz"
+menu: "main"
 ---
 One of the things that I have wanted to do is to test the structure of a docker image that I have just built.  This should come right after the build stage so that if the structure is not what I expected, it would fail the build so that I don't have a bunch of broken images sitting in my docker registry.  I guess that this happens because I am using a docker image to build my project and the result of that output is copied into a clean docker image that will be my final image that can then be run as a docker container.  The builder image should have been removed through this process but I have had things go wrong and then I don't see the problem until I deploy it into my development environment.  However, that then means that my broken image was published to my docker registry which is where the deployment would be pulling it from.
 

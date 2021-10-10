@@ -5,6 +5,7 @@ tags: ["ALM", "git", "DevOps"]
 categories: ["technology"]
 author: "Donald L. Schulz"
 archives: 2017
+menu: "main"
 ---
 Before I moved to git, I had the same situation that many of you have had when it comes to managing build definitions.  I had a build definition for each branch and for a single product this could have been several all doing the same thing.  Yea, sure they were clones of each other and all I really needed to do was to change the path to the source in each case.  Then in order to keep track of what each of these builds was for and what might have triggered it I would develop some sort of naming convention so that I could sort of tell without having to open it up.  This really felt dirty and raised a red flag for me because once again we were introducing something into our environment that was not the same, but sort of the same.  Wouldn't it be better to actually have one build definition that we can use for all these various types of builds and different branches?
 
