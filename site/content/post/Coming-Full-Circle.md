@@ -7,12 +7,14 @@ archives: 2020
 menu: "main"
 author: "Donald L. Schulz"
 ---
-!["Full Circle"](/images/FullCircle.jpg)  
+
+{{<figure src="/images/FullCircle.jpg" class="left" width="200">}}  
 I have recently changed jobs and the whole experience has made me take a step back and take a look at where I have come from.  What roads did I have to cross to get here.   My current position is working with various business units of a large company to adopt a DevOps culture.  For the past nine years I have been working as a consultant helping clients to achieve a better DevOps experience around TFS and then Azure DevOps.  Today I am in an environment that is not centered around Microsoft tooling, there are some products that they build that are but this is a very minor number compared to the other technology that is going on here.  There is a bit of a learning curve for me as far as the technology goes, but the basic concepts of a DevOps culture are the same and that is what I will bring to the table and as far as the different tools go, I am really ready for some new challenges.
 
 ## A Little History
 How did I get here and what makes me qualified to bring a DevOps culture to a large organization.  First in case you don't know I think we should define what DevOps really is.  DevOps is really the coming together of Development and Operations to bring value to the end user.  I have spent the majority of my time in the tech spectrum on the development side of the house.  What's interesting about this fact is that my training in college was more operations based and specifically more in the area of networks.  In order to understand how this came about we need to step back to the late 1980's where I was working as an accountant in the family owned business and I was looking for software that would make my life easier.  The problem with software in the late 80's was that they were designed by computer scientist's that were not accountants.  Back then you were expected to simulate the work that was done by entering it in the computer.  I wanted a cheap system that could capture this data at the moment the transaction occured.  Today, that is how computer systems work, but back then they did not as I could not find anything that would work this way. 
-!["Remember Clipper?"](/images/Clipper.jpg)
+
+{{<figure src="/images/Clipper.jpg" class="right">}}
 
 However, I did find some source code that was written in dBase III and was supposed to be Clipper ready.  Clipper was a dbase like language that could compile the dbase code into a self running executable.  Sorry to say that the code I purchased just would not compile.  I had a CompuServe account and I found a Clipper User Group online where I would explain my errors and they would give me ideas that I could try to get past them.  This went on for about 2 months, but I finally got it to work and this really saved me a lot of time and was my initial introduction to programing.  I went on to learn a number of other languages through some correspondance courses and eventually went back to college to start a new career in technology.
 

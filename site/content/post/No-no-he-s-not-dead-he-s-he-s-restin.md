@@ -7,7 +7,7 @@ tags: ["Blogs"]
 categories: ["humor"]
 author: "Donald L. Schulz"
 ---
-!["The blog grim reaper"](/images/blog_grim_reaper.gif) 
+{{<figure alt="The blog grim reaper" src="/images/blog_grim_reaper.gif">}}
 
 Just in case you did not get the Monty Python reference here is a cartoon courtesy of *Blaugh* which gets right to the point.  I have been away from writing anything for my web site for a very, very, long time.  Where have I been?  Where do I begin?  I have been quite busy developing software for a number of clients that I cannot name because of none disclosure clauses in my contracts.  I never did understand how disclosing who the actual client is in a public forum would be such a big deal but I can only descibe what I have been doing over the last four years as having worked in the hospitality, mortgage, back to hospitality and now property cost industry.  While that has been keeping me busy with all the work that these projects generate, Mary and I have continued to develop and support our [AGP Maker](http://www.agpmaker.com) program.
 

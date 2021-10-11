@@ -15,7 +15,7 @@ My needs are quite simple as this is my own personal project and do all the deve
 ### Badges
 I realize that all I really need were some build and deployment badges that would tell me what was successfully deployed at each environment.  If I had that and it was updated automatically this would solve my problem and I could stop looking for a simple CD solution.  I could get everything I needed from the Jenkins pipeline and not feel like I have some process that really just feels like over kill.
 
-![Table of badges I maintain on my README page](/images/Badges.png)
+{{<figure src="/images/Badges.png" alt="Table of badges I maintain on my README page">}}
 
 In today's post I will show you how I constructed the badges and then how I consume them on the README.md page.  There is a plugin that you can use in Jenkins but I did not find it all that useful as the result was a url back onto my Jenkins Server which is on a box that GitHub cannot call directly.  What I needed was an actual file that I can put onto a share that my github pages could access them from.  My stage/test/dev environment is closed to all IP address except for mine.  This is part of a security thing, I don't want anyone being able to reach the half backed updates as they go through their testing cycles.  My production environment is different as it is exposed to the world through a secure SSL connection.  This connection is open to all IP addresses so I wanted a simple docker container that could live in my production environment.  From here my github ReadMe files could easily get the images from this server and would have access to these files 24/7.  My first trick is to produce the badge and get it over to the underlying shared volume of the docker container.
 

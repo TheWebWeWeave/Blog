@@ -7,7 +7,7 @@ menu: "main"
 author: "Donald L. Schulz"
 archives: 2020
 ---
-!["Golden Image"](/images/goldenImage.jpg) 
+{{<figure class="right" width="400" alt="Golden Image" src="/images/goldenImage.jpg">}} 
 Today I wanted to take you down an unusual path as I disclose some of the docker structure that I have configured recently in my environment.  It has been my goal for a while now to run everything that I can in a docker container.  What I mean by everything is that it is more than just my web sites and applications that I have been working as side projects for years but also includes some of the open source support tools that I use.  This blog post is going to mostly cover these tools and here is a list of just a few of them to give you an idea of what I am talking about.
 1. Jenkins Server
 1. Portainer
@@ -21,12 +21,12 @@ Okay, this sounds okay and not that big of a deal as many of these open source p
 
 Jenkins Needs Docker Installed
 ------------------------------
-!["Jenkins"](/images/Jenkins.png)
+{{<figure class="left" width="200" alt="Jenkins" src="/images/Jenkins.png">}}
 First off on my Jenkins image I needed a few things to be part of the image so we need to add some layers to the already available Jenkins Image.  The best way to handle this is to create a new repository for this project.  Not like it is going to contain any C# code but it will contain my Dockerfile and Docker-Compose files to put these pieces together.  New software to be installed should be part of the Dockerfile, this way I even have a full history of what was in this image and say that there is a newer version of Jenkins I want to update to I just update the base image in the Dockerfile and I get all the pieces that I have installed are part of that image as well.  I am getting a little ahead of myself so lets look at that Dockerfile.
 
 Dockerfile
 ----------
-!["Docker"](/images/docker.png) 
+{{<figure class="right" width="250" alt="Docker" src="/images/docker.png">}} 
 The Dockerfile is the key to building a new image and adding additional layers to existing images.  Just before I share and go over the details of what I have in this Dockerfile I want to go over the structure of this project as it sits in my GitHub repository.  This is going to be the base image for my Jenkins Server so I have called my repository Jenkins-Base and in this repository I have three folders:
 1. .github/workflows
 1. build
@@ -83,7 +83,7 @@ That more or less wraps things up for the source of this image lets now look at 
 
 Jenkinfile
 ----------
-!["Jenkins"](/images/Jenkins.png)
+{{<figure class="left" width="100" alt="Jenkins" src="/images/Jenkins.png">}}
 The Jenkinfile is the only file directly inside the build folder.  Inside the build folder I do have another folder that I have named **ci** which contains a number of shell scripts that are called from the Jenkinsfile which is the pipeline for the operation.  We will get to the contents of the ci folder in a minute, right now here is the contents of my Jenkinfile.
 ```
 pipeline {
@@ -191,7 +191,7 @@ As you can see this shell script is very similar to the Publish-Topic shell scri
 
 Operations
 ----------
-!["Operations"](/images/Operations.jpg)
+{{<figure class="right" width="250" alt="Operations" src="/images/Operations.jpg">}}
 
 This last and final stage of the pipeline is the most important part of this process.  As you probably figured out, there is no way that I can call the docker-compose.yml file for my operations infrastructure which is what my Jenkins server is a part of.  I need this to be called from outside this current operation.
 

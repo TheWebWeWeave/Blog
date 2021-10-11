@@ -43,19 +43,19 @@ git commit -a -m "initial commit after conversion"
 ```
 We need a git repository on TFS that we want to push this repository to.  So from TFS in the Project that you want this new repository:
 
-!["Create a new Repository"](/images/TFSNewRepo.png)
+{{<figure alt="Create a new Repository" src="/images/TFSNewRepo.png">}}
 
 1. Click on the Code tab
 1. Click on the repository dropdown
-1. Click on the New Repoisotry big "+" sign.
+1. Click on the New Repository big "+" sign.
 
-!["Name your Repository"](/images/NewRepoDialog.png)
+{{<figure alt="Name your Repository" src="/images/NewRepoDialog.png">}}
 
 1. Make sure the type is Git
 1. Give it a Name
 1. Click on the Create button.
 
-!["Useful Git Information"](/images/FinishResults.png)
+{{<figure alt="Useful Git Information" src="/images/FinishResults.png">}}
 
 The result page gives you all the information that you need to finish off your migration process.
 1. This command adds the remote address to your local repository so that it knows where to put it.

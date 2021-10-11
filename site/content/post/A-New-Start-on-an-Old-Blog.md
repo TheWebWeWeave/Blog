@@ -8,8 +8,7 @@ archives: 2016
 author: "Donald L. Schulz"
 ---
 
-!["Fall colors in California"](/images/V__FD25.jpg)
-It has been quite a while since I have posted my last blog so today I thought I would bring you up to speed on what I have been doing with this site.  The last time I did a post like this was back in June of 2008.  Back then I talked about the transition that I made going from City Desk to Microsoft Content Management System which eventually was merged into SharePoint and from there we changed the blog into DotNetNuke.
+{{<figure src="/images/V__FD25.jpg" class="right" width="400" alt="Fall colors in California">}} It has been quite a while since I have posted my last blog so today I thought I would bring you up to speed on what I have been doing with this site.  The last time I did a post like this was back in June of 2008.  Back then I talked about the transition that I made going from City Desk to Microsoft Content Management System which eventually was merged into SharePoint and from there we changed the blog into DotNetNuke.
 
 Since that time we have not created any new content but have moved that material to [BlogEngine.Net](http://dotnetblogengine.net/) and this really is a great tool but not the way I wanted to work.  I really do not want a Content Management system for my blog, I don't want pages that are rendered dynamically and the content pulled from a database.  What I really wanted were static pages and the content for those pages be stored and built the same way that I build all my software, stored in Version Control.
 
@@ -17,7 +16,7 @@ Just before I move on and tell you more about my new blog workflow I thought I w
 
 ## Hexo
 
-!["Hexo Logo"](/images/hexo.jpg)
+{{<figure src="/images/hexo.jpg" class="right" width="100">}}
 
 [Hexo](https://hexo.io/) is a static page generator program that takes [simple markup](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) and turns it into static html pages.  This means I can deploy this anywhere from a build that I can generate it just like a regular [ALM](https://en.wikipedia.org/wiki/Application_lifecycle_management) build because all the pieces are in source control.  It fully embrasses git and is a github open source project.  I thought that moving my blog to Hexo would help me in too ways, besides giving me the output that I am really looking for but also to use as a teaching tool on how the new Build system that is part of TFS 2015 fully embraces other technologies outside of dotNet and the Visual Studio family.  From here I check-in my new blogs into source control and that triggers a build which puts the source into a drop folder which is then deployed to my web site which is hosted on Azure.
 

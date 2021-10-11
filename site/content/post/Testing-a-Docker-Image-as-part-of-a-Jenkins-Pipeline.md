@@ -61,7 +61,7 @@ If you run the code against a fresh image the results of the docker build comman
 ```
 container-structure-test test --image '<replace with image name>' --config './test/DockerTest/unit-test.yaml'
 ```
-!["Docker Test Results"](/images/docker-test-results.png)
+{{<figure class="left" width="350" alt="Docker Test Results" src="/images/docker-test-results.png">}}
 As you can see from just running the program locally from my WSL Ubuntu distro on my Windows 10 machine I get a really nice report which would tell me which tests passed and which failed.  In this case I was successful and all of my tests have passed.
 
 The real challenge in getting this to run within the context of a Jenkins pipeline is somehow letting Jenkins know that the tests failed when they do.  If we just ran this in a shell script it would just carry on because there is no exceptions so all must be good.  We need to introduce a couple of additional elements to this story.  Instead of getting a nice report like this we need to return the results as json and then pipe that into something that can parse json and return the number of failures.  Anything that is larger than 0 is a failure.
