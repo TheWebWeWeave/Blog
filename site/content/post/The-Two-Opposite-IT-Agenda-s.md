@@ -1,5 +1,5 @@
 ---
-title: "The Two Opposite IT Agenda's"
+title: "The Two Opposite IT Agendas"
 date: 2009-08-17
 tags: ["Politics"]
 categories: ["technology"]
