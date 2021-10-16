@@ -6,7 +6,7 @@ theme = "jeffprod"
 author = "@DonaldLSchulz"
 copyright = "Copyright © 2008–2021, @DonaldLSchulz"
 canonifyurls = true
-paginate = 4
+paginate = 7
 
 [permalinks]
   post = "/:year/:month/:filename"

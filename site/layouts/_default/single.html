@@ -3,8 +3,12 @@
 <div class="columns">
     <div class="column is-9">
         <div class="tile is-child box">
-            <b><center>First Published on {{ .Date.Format "January 2, 2006" }} by Donald on Software <br>
-                <i>{{ .ReadingTime }} min read</i></center></b><br/>
+            <center><h1 class="title is-size-1 has-text-grey">{{ .Title }}</h1></center><br />
+            <p class="subtitle is-size-6 has-text-grey-light">
+                Published on {{ .Date.Format "January 2, 2006" }} &middot;
+                <i class="far fa-clock"></i>&nbsp;&nbsp;{{.ReadingTime}} min read
+            </p>            
+
             <div class="content">
                 {{ .Content }}
             </div>
