@@ -17,35 +17,23 @@
 </head>
 <body>
 
+    <!-- nav -->
     <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
+            <a class="navbar-item" href="{{ .Site.BaseURL | absURL }}">Home</a>
+            <a class="navbar-item" href="{{ "/about" | absURL }}">About</a>
         </div>
-        
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-                <a class="navbar-item" href="{{ .Site.BaseURL | absURL }}">
-                    Home
-                </a>
-            
-                <a class="navbar-item" href="{{ "/about" | absURL }}">
-                    About
-                </a>        
-            </div>
-        
-            <div class="navbar-end">
+        <div class="navbar-end">
             <div class="navbar-item">
-                <div class="is-size-4">                    
-                    <strong>Donald on Software</strong>                                   
+                <div class="buttons">
+                    <a class="button is-primary" href="/">
+                        <strong>Donald on Software</strong>
+                    </a>
                 </div>
-            </div>
             </div>
         </div>
     </nav>
+    <!-- /nav -->
 
     <!-- hero -->
     <section class="hero is-info is-medium">
