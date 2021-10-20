@@ -27,7 +27,7 @@ pipeline {
         stage('Build'){
             steps {                
                 sh 'docker image build --rm -f ./build/Dockerfile -t donaldonsoftware .'
-                sh 'docker image prune --filter label=stage=builder'
+                //sh 'docker image prune --filter label=stage=builder'
             }
         }
 
@@ -36,7 +36,7 @@ pipeline {
                 script {
                     try {                           
                         def status = 0
-                        status = sh(returnStdout: true, script: "container-structure-test test --image 'donaldonsoftware' --config './test/src/DockerTest/unit-test.yaml' --verbosity 'debug' --json | jq .Fail") as Integer
+                        status = sh(returnStdout: true, script: "container-structure-test test --image 'donaldonsoftware' --config './test/DockerTest/unit-test.yaml' --verbosity 'debug' --json | jq .Fail") as Integer
                         echo "$status"
                         if (status != 0) {                            
                             error 'Image Test has failed'
@@ -103,7 +103,7 @@ pipeline {
 
         stage('Test-Deplopy'){
             steps {
-                tpJobRun projectId: 'GYqn1YCHbUKFcsUnHsr-Tg', jobId: 'dMtILq6XMUCf-z0_qsOOkw', agentId: 'H3zXuEhE-kuxBS4mX_W9tg', waitJobFinishSeconds: 1600
+                tpJobRun projectId: 'GYqn1YCHbUKFcsUnHsr-Tg', jobId: 'ObfT_1cQYkGy-f_mU3QP4g', agentId: 'H3zXuEhE-kuxBS4mX_W9tg', waitJobFinishSeconds: 1600
             }                       
             post {
                 success {

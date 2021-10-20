@@ -1,8 +1,15 @@
 mode: Mainline
 next-version: "2.0.0"
 branches:
-  major:
+  breaking:
+    regex: ^breaking?[/-]
     tag: "preview"
+    source-branches:
+    - develop
+    - feature
+    - hotfix
+    - support
+    is-mainline: false
   feature:
     tag: "alpha"
   hotfix:

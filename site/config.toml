@@ -1,0 +1,21 @@
+baseURL = "https://dev.donaldonsoftware.com/"
+aboutURL = "https://dev.donaldonsoftware.com/about/"
+languageCode = "en-us"
+title = "Donald on Software"
+theme = "jeffprod"
+author = "@DonaldLSchulz"
+copyright = "Copyright © 2008–2021, @DonaldLSchulz"
+canonifyurls = true
+paginate = 7
+
+[permalinks]
+  post = "/:year/:month/:filename"
+
+[taxonomies]
+  tag = "tags"
+  archive = "archives"
+  category = "categories"
+
+[params]
+  disqus = "donaldonsoftware"
+
