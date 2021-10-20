@@ -1,7 +1,7 @@
 ---
 title: Who left the Developers in the Design Room
 date: 2016-05-23 16:53:51
-tags: ["Testing", "Soap Box", "User Experience (UX)"]
+tags: ["Testing", "Soap-Box", "User Experience (UX)"]
 categories: ["technology"]
 archives: 2016
 menu: "main"

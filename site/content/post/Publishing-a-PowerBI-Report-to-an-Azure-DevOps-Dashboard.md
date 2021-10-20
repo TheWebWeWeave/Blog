@@ -1,7 +1,7 @@
 ---
 title: Publishing a PowerBI Report to an Azure DevOps Dashboard
 date: 2020-04-15 17:40:15
-tags: ["PowerBI", "TFS", "DevOps", "Dashboards"]
+tags: ["PowerBI", "TFS", "DevOps", "Dashboard"]
 categories: ["technology"]
 archives: 2020
 menu: "main"
@@ -11,7 +11,7 @@ I have been working with Power-BI lately using data from my Azure DevOps Service
 
 Although this is all pretty cool, I am viewing this from within the Power BI Desktop tool.  Where I would like to view this report is on a Dashboard page on my Azure DevOps Instance.  That is what this post is all about, getting it from this Power BI Desktop tool to getting it onto an Azure DevOps Dashboard page.
 1. First we will start with downloading the FlowViz template from the Marketplace.  https://marketplace.visualstudio.com/items?itemName=agile-extensions.flowviz   This will consist of two .pbit files which are Power BI templates, the site has some pretty good documentation on getting this setup for your environment so I won't go over that information here.  Follow the instructions on the marketplace page.
-{% asset_img 2020-04-16_14-05-06.png "Flowviz Install Page" %} 
+{{<figure src="/images/2020-04-16_14-05-06.png" alt="Flowviz Install Page">}} 
 1. There is one thing that did take me a little while to figure out and that was the authentication with an OData connection string. The trick is to use the **Basic Authentication** tab.  In there for the User name I just put in my usual Junky name because that part doesn't even matter, but I use a [Personal Access Token (PAT)](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=preview-page) for the password.
 {{<figure src="/images/2020-04-16_14-17-37.png" alt="OData feed authentication">}}
 1. The charts will fill up like magic because the formulas and data that we are pulling in is all setup to give us some very unique and power data about our work items.
