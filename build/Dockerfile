@@ -1,22 +1,5 @@
-FROM t3winc/hexo-base:v1.0.1 as builder
+FROM t3winc/hugo:latest as builder
 LABEL stage=builder
 
-# set the workdir
-WORKDIR /app/blog
-COPY ./src/source/ ./source/
-RUN ls -la /app/blog/source/*
-COPY ./src/themes/ ./themes
-RUN ls -la /app/blog/themes/*
-WORKDIR /app/blog
-COPY ./src/_config.yml .
-
-# tweak the hexo modules a little
-RUN npm install
-RUN npm install hexo-generator-feed --save
-
-# generate the website
-RUN hexo generate
-
-# app image
 FROM nginx
-COPY  --from=builder /app/blog/public/ /usr/share/nginx/html/
+COPY --from=builder /usr/share/nginx/html /usr/share/nginx/html
