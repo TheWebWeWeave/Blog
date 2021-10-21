@@ -7,6 +7,7 @@ author = "@DonaldLSchulz"
 copyright = "Copyright © 2008–2021, @DonaldLSchulz"
 canonifyurls = true
 paginate = 7
+disablePathToLower = true
 
 [permalinks]
   post = "/:year/:month/:filename"
