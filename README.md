@@ -1,4 +1,4 @@
-# Blog Powered by Hexo
+# Blog Powered by Hugo
 
 |Build|Status|Stage|Status|
 |-----|------|------|------|
