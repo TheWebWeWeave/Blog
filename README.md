@@ -10,7 +10,7 @@ Currently this is the same content that we have always had out there but it uses
 
 *We have to keep changing the branch before we build as this does not seem to be working right now.  I am sure that it worked in the past and it might be because we have too many branches right now and it is confusing things.*
 
-### [Hexo commands](docs/commands.md)
+### [Hugo commands](docs/commands.md)
 ### [Blog Workflow](docs/workflow.md)
 ### [Steps](docs/steps.md)
 ### [Version](docs/version.md)
