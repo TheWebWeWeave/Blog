@@ -1,4 +1,7 @@
 # [Steps](/README.md)
+## Oct 21, 2021 - Deprecated Document
+Nothing on this page is applicable to the current version of the documentation.
+>TL;DR:
 ## Jan 8, 2020 - Release Pipeline
 I am not sure when this changed but it has been for quite some time that we have not used ftp to deploy these artifacts to the production or any other servers.  There have been several changes over the years since 2016 and I will try to quickly summarize the changes over the next couple of paragraphs.
 

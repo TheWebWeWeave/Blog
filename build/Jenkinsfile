@@ -146,7 +146,7 @@ pipeline {
             }
             post {
                 success {
-                       
+                    sh "python3 /var/jenkins_home/workspace/Affirm_Store/build/scripts/src/calendar-api.py Blog-DoS ${params.semver} 1199934081217038"   
                     script {
                         sh "curl -o blogProd.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-success.svg"
                     }
@@ -161,7 +161,7 @@ pipeline {
                 failure {
 
                     script {
-                        sh "curl -o blogProd.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-critical.svg"
+                        sh "curl -o blogProd.svg https://img.shields.io/badge/Blog-DoS-v${params.semver}-critical.svg"
                     }
                     sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"

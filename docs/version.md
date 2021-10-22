@@ -6,5 +6,5 @@ The following table will be the guide for what should be in the comment of the f
 | Action | Commit Message |
 |--------|----------------|
 |New Blog Post|+semver: feature|
-|Fixing a Blog no new content|+semver: fix |
+|Fixing a Blog no new content|+semver: hotfix |
 |Change the Style or Engine| +semver: breaking |

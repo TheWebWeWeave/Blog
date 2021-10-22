@@ -1,35 +1,29 @@
 # [Commands](/README.md)
 
-These commands will assume that you are in the src directory of this Blog Repository
+These commands will assume that you are in the site directory of this Blog Repository
 
-1. Hexo new "Title of the new blog" (you will find the new skeleton under Source\_posts
-2. Hexo Server (this starts hexo up so that you can preview the pages locally at http://localhost:4000
-3. Hexo Publish (this moves the draft blogs into publish mode and will get its pages visible to the world next time we deploy)
-4. Hexo Generate
+1. Hugo new post/"Title of the new blog" (you will find the new skeleton under archetypes folder)
+2. Hugo Server (this starts hugo up so that you can preview the pages locally at http://localhost:1313
+4. Hugo (this generates the static site into the public folder)
 
-## Image Macros
-1. Image displays on the right hand side of a post.  Assumption: you have the image stored in the images folder at the same level as the _posts and in this example we are diplaying the Hexo logo. 
+## Image Shortcodes
+1. Image displays on the right hand side of a post.  Assumption: you have the image stored in the images folder under the static folder. NOTE: All images are stored in this one location. 
 ```
-{% img right /images/hexo.jpg 100 100 "Hexo Logo" %}
+{{<figure class="right" src="/images/hexo.jpg" width="100" alt="Hexo Logo">}}
 ```
-2. Image display on the left hand side of a post.  Assumption: you have the image stored in the images folder at the same level as the _posts and in this example we are displaying the Hexo logo.
+1. Image displays on the left hand side of a post.  Assumption: you have the image stored in the images folder under the static folder. NOTE: All images are stored in this one location.   
 ```
-{% img left /images/hexo.jpg 100 100 "Hexo Logo" %}
+{{<figure class="left" src="/images/hexo.jpg" width="100" alt="Hexo Logo">}}
 ```
-3. Image stored in a folder that matches the name of the post.  Much cleaner way to store and maintain the images for each post but are limited to what you can do with the images like having them appear on the left or right side of the post.  This option only has one and it will be posted in its own space across the width of the post.
+3. Image just displays in the center of the post the full size of the image with a max to the amount of space allowed and available for the post.  Images will never be overflowing or clipped as they will be automatically sized to fit.
 ```
-{% asset_img image.jpg "Time I spent away from my family in September" %}
+{{<figure src="/images/image.jpg" alt="Time I spent away from my family in September">}}
 ```
 
 ## Implement Tags
-I never seem to remember how to implement tags in my blogs so the following example should refresh my memory.  This goes after the tags: and each line starts with a "-"
+I never seem to remember how to implement tags in my blogs so the following example should refresh my memory.  This goes after the tags: and each tag goes in the square brackets (array) and each item is surrounded by quotes and separated by commas.
 ```
-tags:
-- ALM
-- DevOps
-- NuGet
-- PowerShell
----
+tags: ["ALM", "DevOps", "NuGet", "PowerShell"]
 ```
 ## Tag List
 * 3WInc
