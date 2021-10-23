@@ -99,12 +99,6 @@ pipeline {
             steps {
                 sh 'docker-compose -f ./build/docker-compose-dev.yml up -d'
             }
-        }
-
-        stage('Test-Deplopy'){
-            steps {
-                tpJobRun projectId: 'GYqn1YCHbUKFcsUnHsr-Tg', jobId: 'ObfT_1cQYkGy-f_mU3QP4g', agentId: 'H3zXuEhE-kuxBS4mX_W9tg', waitJobFinishSeconds: 1600
-            }                       
             post {
                 success {
                     script {
@@ -112,7 +106,7 @@ pipeline {
                     }
                     sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
-                        sh "scp ./blogBuild.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogDev.svg"
+                        sh "scp ./blogDev.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogDev.svg"
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogDev.svg"
                         sh "curl -X PURGE https://camo.githubusercontent.com/d2745624399891de7f0043604a22cb34d604058c0cc1faf0e07fd78605f9aa25/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674465762e737667"
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
@@ -124,8 +118,43 @@ pipeline {
                     }
                     sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
-                        sh "scp ./blogBuild.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogDev.svg"
+                        sh "scp ./blogDev.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogDev.svg"
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogDev.svg"
+                        sh "curl -X PURGE https://camo.githubusercontent.com/d2745624399891de7f0043604a22cb34d604058c0cc1faf0e07fd78605f9aa25/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674465762e737667"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                    }                    
+                }
+            }            
+        }
+        
+
+        stage('Test-Deplopy'){
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    tpJobRun projectId: 'GYqn1YCHbUKFcsUnHsr-Tg', jobId: 'ObfT_1cQYkGy-f_mU3QP4g', agentId: 'H3zXuEhE-kuxBS4mX_W9tg', waitJobFinishSeconds: 1600
+                }
+            }                       
+            post {
+                success {
+                    script {
+                        sh "curl -o blogTest.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-success.svg"
+                    }
+                    sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                        sh "scp ./blogTest.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogTest.svg"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogTest.svg"
+                        sh "curl -X PURGE https://camo.githubusercontent.com/d2745624399891de7f0043604a22cb34d604058c0cc1faf0e07fd78605f9aa25/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674465762e737667"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                    }                    
+                }
+                failure {
+                    script {
+                        sh "curl -o blogTest.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-critical.svg"
+                    }
+                    sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
+                        sh "scp ./blogTest.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogTest.svg"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogTest.svg"
                         sh "curl -X PURGE https://camo.githubusercontent.com/d2745624399891de7f0043604a22cb34d604058c0cc1faf0e07fd78605f9aa25/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674465762e737667"
                         sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
                     }                    
