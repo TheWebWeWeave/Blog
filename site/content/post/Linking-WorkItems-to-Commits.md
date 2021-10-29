@@ -1,7 +1,7 @@
 ---
 title: Linking WorkItems to Commits
 date: 2020-02-22 16:40:03
-tags: ["git", "ALM", "TFS"]
+tags: ["Git", "ALM", "TFS"]
 categories: ["technology"]
 archives: 2020
 menu: "main"

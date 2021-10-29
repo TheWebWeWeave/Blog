@@ -1,7 +1,7 @@
 ---
 title: Migrate from TFVC to Git in TFS with Full History
 date: 2016-02-01 23:00:44
-tags: ["ALM", "git", "git-tf", "TFS"]
+tags: ["ALM", "Git", "Git-TF", "TFS"]
 categories: ["technology"]
 menu: "main"
 author: "Donald L. Schulz"
