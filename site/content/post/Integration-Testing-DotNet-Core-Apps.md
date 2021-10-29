@@ -1,7 +1,7 @@
 ---
 title: Integration Testing DotNet Core
 date: 2020-01-17 09:25:01
-tags: ["Testing", "TFS", "ALM", "DevOps", "dotNet Core"]
+tags: ["Testing", "TFS", "ALM", "DevOps", "DotNet-Core"]
 categories: ["technology"]
 archives: 2020
 menu: "main"

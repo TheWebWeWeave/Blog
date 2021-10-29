@@ -1,7 +1,7 @@
 ---
 title: Let the Test Plan Tell the Story
 date: 2016-04-05 09:02:37
-tags: ["ALM", "Testing", "dotNet"]
+tags: ["ALM", "Testing", "DotNet"]
 categories: ["technology"]
 archives: 2016
 menu: "main"

@@ -1,0 +1,19 @@
+version: '3.3'
+
+networks:
+    app-net:
+        external:
+            name: nat
+         
+services:
+    qa_donaldonsoftware:
+        image: schulzdl/donaldonsoftware:v${semver}
+        container_name: qa_donaldonsoftware
+        restart: always
+        expose:
+            - 80
+        environment: 
+            - "VIRTUAL_HOST=qa.donaldonsoftware.com"
+            - "LETSENCRYPT_HOST=qa.donaldonsoftware.com"        
+        networks: 
+            - app-net

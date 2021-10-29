@@ -1,7 +1,7 @@
 ---
 title: Easy Configuration Updates During Deployment
 date: 2019-10-24 09:39:35
-tags: ["DevOps", "TFS", "dotNet"]
+tags: ["DevOps", "TFS", "DotNet"]
 categories: ["technology"]
 archives: 2019
 menu: "main"

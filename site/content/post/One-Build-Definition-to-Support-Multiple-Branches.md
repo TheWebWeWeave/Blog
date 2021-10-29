@@ -1,7 +1,7 @@
 ---
 title: One Build Definition to Support Multiple Branches
 date: 2017-06-01 10:23:26
-tags: ["ALM", "git", "DevOps"]
+tags: ["ALM", "Git", "DevOps"]
 categories: ["technology"]
 author: "Donald L. Schulz"
 archives: 2017

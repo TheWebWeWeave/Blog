@@ -1,7 +1,7 @@
 ---
 title: My Experience with Git Sub-modules
 date: 2016-09-12 20:43:37
-tags: ["git", "Blogs"]
+tags: ["Git", "Blogs"]
 categories: ["technology"]
 archives: 2016
 menu: "main"

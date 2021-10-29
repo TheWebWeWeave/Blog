@@ -1,7 +1,7 @@
 ---
 title: 'C#.net or VB.net'
 date: 2008-06-21
-tags: ["dotNet", "C#", "vb"] 
+tags: ["DotNet", "C-Sharp", "VB"] 
 categories: ["technology"]
 archives: 2008
 menu: "main"
