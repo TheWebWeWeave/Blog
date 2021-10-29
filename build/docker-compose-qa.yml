@@ -6,7 +6,7 @@ networks:
             name: nat
          
 services:
-    dev_donaldonsoftware:
+    qa_donaldonsoftware:
         image: schulzdl/donaldonsoftware:v${semver}
         container_name: qa_donaldonsoftware
         restart: always
