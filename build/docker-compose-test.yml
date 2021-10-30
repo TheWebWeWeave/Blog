@@ -1,0 +1,18 @@
+version: '3.3'
+
+networks:
+    app-net:
+        external:
+            name: nat
+         
+services:
+    test_donaldonsoftware:
+        image: schulzdl/donaldonsoftware:v${semver}
+        container_name: test_donaldonsoftware
+        restart: always
+        expose:
+            - 8888
+        ports:
+            - 8888:80      
+        networks: 
+            - app-net
