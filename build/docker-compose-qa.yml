@@ -13,7 +13,6 @@ services:
         expose:
             - 80
         environment: 
-            - "VIRTUAL_HOST=qa.donaldonsoftware.com"
-            - "LETSENCRYPT_HOST=qa.donaldonsoftware.com"        
+            - "VIRTUAL_HOST=qa.donaldonsoftware.com"       
         networks: 
             - app-net
