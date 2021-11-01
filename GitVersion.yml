@@ -1,5 +1,5 @@
 mode: Mainline
-next-version: "2.0.7"
+next-version: "2.0.8"
 branches:
   breaking:
     regex: ^breaking?[/-]
