@@ -56,7 +56,7 @@ pipeline {
                     createSuccessBadge(
                         imageName: 'blogBuild.svg',
                         prodName: 'Blog_DoS',
-                        semver: '${params.semver}',
+                        semver: "${params.semver}",
                         token: '132bc0b92c4749ac87e46bd5b905e7f9bf8be431c5cc8b350277d0fb007b05e4/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674275696c642e737667'
                     )                    
                 }
@@ -64,7 +64,7 @@ pipeline {
                     createFailureBadge(
                         imageName: 'blogBuild.svg',
                         prodName: 'Blog_DoS',
-                        semver: '${params.semver}',
+                        semver: "${params.semver}",
                         token: '132bc0b92c4749ac87e46bd5b905e7f9bf8be431c5cc8b350277d0fb007b05e4/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674275696c642e737667'
                         )                                      
                 }
@@ -99,7 +99,7 @@ pipeline {
                     createSuccessBadge(
                         imageName: 'blogDev.svg',
                         prodName: 'Blog_DoS',
-                        semver: '${params.semver}',
+                        semver: "${params.semver}",
                         token: 'd2745624399891de7f0043604a22cb34d604058c0cc1faf0e07fd78605f9aa25/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674465762e737667'
                     )                                       
                 }
@@ -107,7 +107,7 @@ pipeline {
                     createFailureBadge(
                         imageName: 'blogDev.svg',
                         prodName: 'Blog_DoS',
-                        semver: '${params.semver}',
+                        semver: "${params.semver}",
                         token: 'd2745624399891de7f0043604a22cb34d604058c0cc1faf0e07fd78605f9aa25/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674465762e737667'
                     )                                      
                 }
@@ -126,7 +126,7 @@ pipeline {
                     createSuccessBadge(
                         imageName: 'blogTest.svg',
                         prodName: 'Blog_DoS',
-                        semver: '${params.semver}',
+                        semver: "${params.semver}",
                         token: 'd2745624399891de7f0043604a22cb34d604058c0cc1faf0e07fd78605f9aa25/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674465762e737667'
                     )                                                           
                 }
@@ -134,7 +134,7 @@ pipeline {
                     createFailureBadge(
                         imageName: 'blogTest.svg',
                         prodName: 'Blog_DoS',
-                        semver: '${params.semver}',
+                        semver: "${params.semver}",
                         token: 'd2745624399891de7f0043604a22cb34d604058c0cc1faf0e07fd78605f9aa25/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674465762e737667'
                     )                  
                 }
@@ -155,29 +155,20 @@ pipeline {
             post {
                 success {
                     sh "python3 /var/jenkins_home/workspace/Affirm_Store/build/scripts/src/calendar-api.py Blog-DoS ${params.semver} 1199934081217038"   
-                    script {
-                        sh "curl -o blogProd.svg https://img.shields.io/badge/Blog_DoS-v${params.semver}-success.svg"
-                    }
-                    sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
-                        sh "scp ./blogProd.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogProd.svg"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogProd.svg"
-                        sh "curl -X PURGE https://camo.githubusercontent.com/ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
-                    }                
+                    createSuccessBadge(
+                        imageName: 'blogProd.svg',
+                        prodName: 'Blog_DoS',
+                        semver: "${params.semver}",
+                        token: 'ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667'
+                    )               
                 }
                 failure {
-
-                    script {
-                        sh "curl -o blogProd.svg https://img.shields.io/badge/Blog-DoS-v${params.semver}-critical.svg"
-                    }
-                    sshagent(['83635231-8fbd-41cd-8899-efd9d11937ed']) {
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
-                        sh "scp ./blogProd.svg ubuntu@prod.t3winc.com:/docker/badge/images/blogProd.svg"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com chmod 0777 /docker/badge/images/blogProd.svg"
-                        sh "curl -X PURGE https://camo.githubusercontent.com/ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@prod.t3winc.com ls /docker/badge -l"
-                    }                  
+                    createFailureBadge(
+                        imageName: 'blogProd.svg',
+                        prodName: 'Blog_DoS',
+                        semver: "${params.semver}",
+                        token: 'ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667'
+                    )                
                 }
             }
         }
