@@ -1,6 +1,6 @@
 ---
 title: "About Donald on Software"
-date: "2014-04-09"
+date: "2021-10-20"
 menu: "about"
 type: about  
 ---
@@ -16,3 +16,4 @@ If I have something that I am working on that was interesting and usually solves
 
 # But You are Completely Wrong. How Can I Let You Know?
 Ah, yes, for this purpose I have comments on for each and every article that I write.  Please, no flames, no all caps, no crap. I would appreciate a thumbs up if you liked the article or even a sad face if you were disappointed. In an attempt to reduce or eliminate spam from the comment section, all anonymous comments will go through an approval process.  However, you can register on [Disqus](https://disqus.com/) and as a registered user you will be able to enter comments immediately without going through this approval step.
+***
