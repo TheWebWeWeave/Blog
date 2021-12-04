@@ -83,14 +83,4 @@ Subject to applicable law or regulation, the parties shall maintain the confiden
 *   Any heading, caption, or paragraph title contained in these Terms is inserted only as a matter of convenience and in no way defines or explains any paragraph or provision hereof.
 *   These Terms may be executed in any number of counterparts, which taken together will represent a single document. Digital, facsimile, and other electronic signatures will be deemed to be originals and will be enforceable between the parties.
 *   These Terms together with the Contracts, represent the entire agreement between the parties regarding the subject matter hereof, and supersede all other agreements and understandings
-
-* * *
-<script type='text/javascript'>
-window.__lo_site_id = 303833;
-
-	(function() {
-		var wa = document.createElement('script'); wa.type = 'text/javascript'; wa.async = true;
-		wa.src = 'https://d10lpsik1i8c69.cloudfront.net/w.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wa, s);
-	  })();
-</script>
+***

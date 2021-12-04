@@ -6,9 +6,11 @@
 
             <div class="content">
                 {{ .Content }}
+                <i>Last Updated: {{ .Date.Format "January 2, 2006" }}</i>
             </div>
         </div>        
     </div>
+    
 </div>
 
 {{ end }}

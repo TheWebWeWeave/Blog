@@ -6,7 +6,7 @@ theme = "jeffprod"
 author = "@DonaldLSchulz"
 copyright = "Copyright © 2008–2021, @DonaldLSchulz"
 canonifyurls = true
-paginate = 7
+paginate = 5
 disablePathToLower = true
 
 [permalinks]

@@ -1,6 +1,6 @@
 ---
 title: "Privacy Statement"
-date: "2021-02-15T18:58:00"
+date: "2020-02-15T00:00:00.00022"
 type: "about"
 ---
 
@@ -95,16 +95,4 @@ The Web We Weave, Inc. reserves the right to change this Privacy Statement. We w
 To exercise your rights regarding Student Data (as described above in this Privacy Statement), or if you have any questions about this Privacy Statement or our privacy practices, please contact us at [privacy@thewebweweave.com](mailto:privacy@thewebweweave.com)
 
 We strongly encourage you to use this email to ensure the most efficient handling of your submission. Please do not use this email to report technical problems or to raise other issues that are not directly related to data privacy or this Privacy Statement. For technical issues, contact The Web We Weave, Inc. Customer Support at [help@thewebweweave.com](mailto:help@thewebweweave.com)
-
-    
-_Last Update: February 2020_
-
-<script type='text/javascript'>
-window.__lo_site_id = 303833;
-
-	(function() {
-		var wa = document.createElement('script'); wa.type = 'text/javascript'; wa.async = true;
-		wa.src = 'https://d10lpsik1i8c69.cloudfront.net/w.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wa, s);
-	  })();
-</script>
+***    
