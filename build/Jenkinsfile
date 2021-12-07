@@ -71,6 +71,11 @@ pipeline {
         }
         
         stage('Publish-Topic'){
+            when {
+                not {
+                    branch '*_PullRequest*'
+                }
+            }
             steps {
                 sh 'docker login -u schulzdl -p $DOCKER_TOKEN'
                 sh "docker tag donaldonsoftware schulzdl/donaldonsoftware:v${params.semver}"
@@ -90,6 +95,11 @@ pipeline {
         }
 
         stage('Deploy'){
+            when {
+                not {
+                    branch '*_PullRequest*'
+                }
+            }
             steps {
                 sh 'docker-compose -f ./build/docker-compose-dev.yml up -d'
             }
@@ -115,6 +125,11 @@ pipeline {
         
 
         stage('Test-Deplopy'){
+            when {
+                not {
+                    branch '*_PullRequest*'
+                }
+            }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     tpJobRun projectId: 'GYqn1YCHbUKFcsUnHsr-Tg', jobId: 'ObfT_1cQYkGy-f_mU3QP4g', agentId: 'H3zXuEhE-kuxBS4mX_W9tg', waitJobFinishSeconds: 32000
