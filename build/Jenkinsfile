@@ -132,7 +132,7 @@ pipeline {
             }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    tpJobRun projectId: 'GYqn1YCHbUKFcsUnHsr-Tg', jobId: 'ObfT_1cQYkGy-f_mU3QP4g', agentId: 'H3zXuEhE-kuxBS4mX_W9tg', waitJobFinishSeconds: 32000
+                    tpJobRun projectId: 'GYqn1YCHbUKFcsUnHsr-Tg', jobId: 'ObfT_1cQYkGy-f_mU3QP4g', agentId: 'H3zXuEhE-kuxBS4mX_W9tg', waitJobFinishSeconds: 64000
                 }
             }                       
             post {
