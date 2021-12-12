@@ -73,7 +73,7 @@ pipeline {
         stage('Publish-Topic'){
             when {
                 not {
-                    branch '*_PullRequest*'
+                    branch 'pull/*'
                 }
             }
             steps {
