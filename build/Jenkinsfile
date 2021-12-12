@@ -23,6 +23,11 @@ pipeline {
                 sh "curl -X PURGE https://camo.githubusercontent.com/d2745624399891de7f0043604a22cb34d604058c0cc1faf0e07fd78605f9aa25/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674465762e737667"
                 sh "curl -X PURGE https://camo.githubusercontent.com/ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667"
                 sh "docker version && docker-compose version"
+            }
+        }
+
+        stage("Verification") {
+            steps {
                 echo branch
             }
         }
