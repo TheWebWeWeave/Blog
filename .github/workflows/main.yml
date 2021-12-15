@@ -1,42 +1,42 @@
-name: CI
+# name: CI
 
-# Controls when the action will run. 
-on: [push, pull_request]
+# # Controls when the action will run. 
+# on: [push, pull_request]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  build:
-    runs-on: windows-latest
-    steps:
-    - uses: actions/checkout@v1
+# # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# jobs:
+#   build:
+#     runs-on: windows-latest
+#     steps:
+#     - uses: actions/checkout@v1
 
-    - name: GitVersion
-      id: gitversion
-      uses: nmcc/actions-gitversion@v1
-      with:
-        path-to-gitversion: gitversion
+#     - name: GitVersion
+#       id: gitversion
+#       uses: nmcc/actions-gitversion@v1
+#       with:
+#         path-to-gitversion: gitversion
 
-    - name: Public IP
-      id: ip 
-      uses: haythem/public-ip@v1.2
+#     - name: Public IP
+#       id: ip 
+#       uses: haythem/public-ip@v1.2
 
-    - name: Print Public IP
-      run: |
-        echo ${{ steps.ip.outputs.ipv4 }}
-        echo ${{ steps.ip.outputs.ipv6 }}
+#     - name: Print Public IP
+#       run: |
+#         echo ${{ steps.ip.outputs.ipv4 }}
+#         echo ${{ steps.ip.outputs.ipv6 }}
                   
-    - name: Replace any dashes
-      id: replacer
-      uses: frabert/replace-string-action@v2.0
-      with:
-        pattern: '-'
-        string: "${{ steps.gitversion.outputs.fullSemVer }}"
-        replace-with: '_'
+#     - name: Replace any dashes
+#       id: replacer
+#       uses: frabert/replace-string-action@v2.0
+#       with:
+#         pattern: '-'
+#         string: "${{ steps.gitversion.outputs.fullSemVer }}"
+#         replace-with: '_'
 
-    - name: Assign variables
-      run: |
-        echo "${{ steps.replacer.outputs.replaced }}"
-        echo "${{ steps.gitversion.outputs.BranchName }}"
+#     - name: Assign variables
+#       run: |
+#         echo "${{ steps.replacer.outputs.replaced }}"
+#         echo "${{ steps.gitversion.outputs.BranchName }}"
         
-    - name: "Calling the Jenkins Job"
-      run: curl -X POST -F 'job_id=blog' -F 'token=c0d81c87-f7d5-4ef1-a682-b23cc7a315c9' -F "semver=${{ steps.replacer.outputs.replaced }}" -F "branchname=${{ steps.gitversion.outputs.BranchName }}" "https://build.t3winc.com/jobs"      
+#     - name: "Calling the Jenkins Job"
+#       run: curl -X POST -F 'job_id=blog' -F 'token=c0d81c87-f7d5-4ef1-a682-b23cc7a315c9' -F "semver=${{ steps.replacer.outputs.replaced }}" -F "branchname=${{ steps.gitversion.outputs.BranchName }}" "https://build.t3winc.com/jobs"      

@@ -1,24 +1,23 @@
 @Library('pipeline-library') _
 
 pipeline {
+    
     agent any
-    parameters {
-        string( name: 'semver', defaultValue: '1.0.0',
-         description: 'the resulting semver version number after running gitversion on the source at GitHub')
-        string( name: 'branchname', defaultValue: 'master',
-         description: 'the actual branch name that triggered the build as precurred from gitVersion') 
-    }
+
     environment {
         RELEASE="${params.semver}"
         BRANCH_NAME="${params.branchname}" 
-        DOCKER_TOKEN=credentials('docker_token')       
+        DOCKER_TOKEN=credentials('docker_token')
+        NEWPATH=pwd().replace("/var/", "/docker/")       
     }
+    
     stages {
         
         stage("Initialization"){
             steps {
-                buildName "${params.semver}"
-                buildDescription "${params.branchname}"
+
+                gitVersion(newpath: "${NEWPATH}")
+
                 sh "curl -X PURGE https://camo.githubusercontent.com/132bc0b92c4749ac87e46bd5b905e7f9bf8be431c5cc8b350277d0fb007b05e4/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674275696c642e737667"
                 sh "curl -X PURGE https://camo.githubusercontent.com/d2745624399891de7f0043604a22cb34d604058c0cc1faf0e07fd78605f9aa25/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674465762e737667"
                 sh "curl -X PURGE https://camo.githubusercontent.com/ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667"
