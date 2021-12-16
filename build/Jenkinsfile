@@ -5,8 +5,6 @@ pipeline {
     agent any
 
     environment {
-        RELEASE="${params.semver}"
-        BRANCH_NAME="${params.branchname}" 
         DOCKER_TOKEN=credentials('docker_token')
         NEWPATH=pwd().replace("/var/", "/docker/")       
     }
