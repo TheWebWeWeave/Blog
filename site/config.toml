@@ -9,6 +9,7 @@ canonifyurls = true
 paginate = 5
 disablePathToLower = true
 
+
 [permalinks]
   post = "/:year/:month/:filename"
 
@@ -19,4 +20,5 @@ disablePathToLower = true
 
 [params]
   disqus = "donaldonsoftware"
-
+  Adsclient = "ca-pub-4280808260025039"
+  AdsInArticleSlot = "00000000"
