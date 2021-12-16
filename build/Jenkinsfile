@@ -22,12 +22,6 @@ pipeline {
                 sh "docker version && docker-compose version"
             }
         }
-
-        stage("Verification") {
-            steps {
-                echo branch
-            }
-        }
                 
         stage('Build'){
             steps {                
