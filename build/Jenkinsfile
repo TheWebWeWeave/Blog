@@ -53,7 +53,7 @@ pipeline {
                     createSuccessBadge(
                         imageName: 'blogBuild.svg',
                         prodName: 'Blog_DoS',
-                        semver: "${params.semver}",
+                        semver: "${semver}",
                         token: '132bc0b92c4749ac87e46bd5b905e7f9bf8be431c5cc8b350277d0fb007b05e4/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674275696c642e737667'
                     )                    
                 }
@@ -61,7 +61,7 @@ pipeline {
                     createFailureBadge(
                         imageName: 'blogBuild.svg',
                         prodName: 'Blog_DoS',
-                        semver: "${params.semver}",
+                        semver: "${semver}",
                         token: '132bc0b92c4749ac87e46bd5b905e7f9bf8be431c5cc8b350277d0fb007b05e4/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674275696c642e737667'
                         )                                      
                 }
