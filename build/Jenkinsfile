@@ -1,24 +1,22 @@
 @Library('pipeline-library') _
 
 pipeline {
+    
     agent any
-    parameters {
-        string( name: 'semver', defaultValue: '1.0.0',
-         description: 'the resulting semver version number after running gitversion on the source at GitHub')
-        string( name: 'branchname', defaultValue: 'master',
-         description: 'the actual branch name that triggered the build as precurred from gitVersion') 
-    }
+
     environment {
-        RELEASE="${params.semver}"
-        BRANCH_NAME="${params.branchname}" 
-        DOCKER_TOKEN=credentials('docker_token')       
+        DOCKER_TOKEN=credentials('docker_token')
+        NEWPATH=pwd().replace("/var/", "/docker/")
+        semver=gitVersion(newpath: pwd().replace("/var/", "/docker/")).replace("-", "_")    
     }
+    
     stages {
         
         stage("Initialization"){
             steps {
-                buildName "${params.semver}"
-                buildDescription "${params.branchname}"
+
+                //semver=gitVersion(newpath: "${NEWPATH}")
+
                 sh "curl -X PURGE https://camo.githubusercontent.com/132bc0b92c4749ac87e46bd5b905e7f9bf8be431c5cc8b350277d0fb007b05e4/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674275696c642e737667"
                 sh "curl -X PURGE https://camo.githubusercontent.com/d2745624399891de7f0043604a22cb34d604058c0cc1faf0e07fd78605f9aa25/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674465762e737667"
                 sh "curl -X PURGE https://camo.githubusercontent.com/ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667"
@@ -55,7 +53,7 @@ pipeline {
                     createSuccessBadge(
                         imageName: 'blogBuild.svg',
                         prodName: 'Blog_DoS',
-                        semver: "${params.semver}",
+                        semver: "${semver}",
                         token: '132bc0b92c4749ac87e46bd5b905e7f9bf8be431c5cc8b350277d0fb007b05e4/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674275696c642e737667'
                     )                    
                 }
@@ -63,7 +61,7 @@ pipeline {
                     createFailureBadge(
                         imageName: 'blogBuild.svg',
                         prodName: 'Blog_DoS',
-                        semver: "${params.semver}",
+                        semver: "${semver}",
                         token: '132bc0b92c4749ac87e46bd5b905e7f9bf8be431c5cc8b350277d0fb007b05e4/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674275696c642e737667'
                         )                                      
                 }
@@ -71,10 +69,15 @@ pipeline {
         }
         
         stage('Publish-Topic'){
+            when {
+                not {
+                    branch 'pull/*'
+                }
+            }
             steps {
                 sh 'docker login -u schulzdl -p $DOCKER_TOKEN'
-                sh "docker tag donaldonsoftware schulzdl/donaldonsoftware:v${params.semver}"
-                sh "docker push schulzdl/donaldonsoftware:v${params.semver}"
+                sh "docker tag donaldonsoftware schulzdl/donaldonsoftware:v${semver}"
+                sh "docker push schulzdl/donaldonsoftware:v${semver}"
             }
         }
 
@@ -84,12 +87,17 @@ pipeline {
             }
             steps {
                 sh 'docker login -u schulzdl -p $DOCKER_TOKEN'
-                sh "docker tag schulzdl/donaldonsoftware:v${params.semver} schulzdl/donaldonsoftware:latest"
+                sh "docker tag schulzdl/donaldonsoftware:v${semver} schulzdl/donaldonsoftware:latest"
                 sh "docker push schulzdl/donaldonsoftware:latest"
             }
         }
 
         stage('Deploy'){
+            when {
+                not {
+                    branch 'pull/*'
+                }
+            }
             steps {
                 sh 'docker-compose -f ./build/docker-compose-dev.yml up -d'
             }
@@ -98,7 +106,7 @@ pipeline {
                     createSuccessBadge(
                         imageName: 'blogDev.svg',
                         prodName: 'Blog_DoS',
-                        semver: "${params.semver}",
+                        semver: "${semver}",
                         token: 'd2745624399891de7f0043604a22cb34d604058c0cc1faf0e07fd78605f9aa25/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674465762e737667'
                     )                                       
                 }
@@ -106,7 +114,7 @@ pipeline {
                     createFailureBadge(
                         imageName: 'blogDev.svg',
                         prodName: 'Blog_DoS',
-                        semver: "${params.semver}",
+                        semver: "${semver}",
                         token: 'd2745624399891de7f0043604a22cb34d604058c0cc1faf0e07fd78605f9aa25/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f674465762e737667'
                     )                                      
                 }
@@ -115,9 +123,14 @@ pipeline {
         
 
         stage('Test-Deplopy'){
+            when {
+                not {
+                    branch 'pull/*'
+                }
+            }
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    tpJobRun projectId: 'GYqn1YCHbUKFcsUnHsr-Tg', jobId: 'ObfT_1cQYkGy-f_mU3QP4g', agentId: 'H3zXuEhE-kuxBS4mX_W9tg', waitJobFinishSeconds: 32000
+                    tpJobRun projectId: 'GYqn1YCHbUKFcsUnHsr-Tg', jobId: 'ObfT_1cQYkGy-f_mU3QP4g', agentId: 'H3zXuEhE-kuxBS4mX_W9tg', waitJobFinishSeconds: 64000
                 }
             }                       
             post {
@@ -125,7 +138,7 @@ pipeline {
                     createSuccessBadge(
                         imageName: 'blogTest.svg',
                         prodName: 'Blog_DoS',
-                        semver: "${params.semver}",
+                        semver: "${semver}",
                         token: '88e911920f71c20e08f567a1fd76e1811e24dcfd7f2034e74ccecc2ab22a4f70/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f67546573742e737667'
                     )                                                           
                 }
@@ -133,7 +146,7 @@ pipeline {
                     createFailureBadge(
                         imageName: 'blogTest.svg',
                         prodName: 'Blog_DoS',
-                        semver: "${params.semver}",
+                        semver: "${semver}",
                         token: '88e911920f71c20e08f567a1fd76e1811e24dcfd7f2034e74ccecc2ab22a4f70/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f67546573742e737667'
                     )                  
                 }
@@ -153,11 +166,11 @@ pipeline {
             }
             post {
                 success {
-                    sh "python3 /var/jenkins_home/workspace/Affirm_Store/build/scripts/src/calendar-api.py Blog-DoS ${params.semver} 1199934081217038"   
+                    sh "python3 /var/jenkins_home/workspace/Affirm_Store/build/scripts/src/calendar-api.py Blog-DoS ${semver} 1199934081217038"   
                     createSuccessBadge(
                         imageName: 'blogProd.svg',
                         prodName: 'Blog_DoS',
-                        semver: "${params.semver}",
+                        semver: "${semver}",
                         token: 'ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667'
                     )               
                 }
@@ -165,7 +178,7 @@ pipeline {
                     createFailureBadge(
                         imageName: 'blogProd.svg',
                         prodName: 'Blog_DoS',
-                        semver: "${params.semver}",
+                        semver: "${semver}",
                         token: 'ed74a5de223ce09bba3b0a1f10d032275e5d7de0f59bc93004e4bf60421a0ddc/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f6750726f642e737667'
                     )                
                 }
