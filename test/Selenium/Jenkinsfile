@@ -1,0 +1,10 @@
+pipeline {
+    agent any
+    stages {
+        stage("Test"){
+            steps {
+                sh "dotnet test blog_xunit/blog.xunit.csproj"
+            }
+        }
+    }
+}

@@ -10,6 +10,7 @@ RUN dotnet restore "blog_xunit/blog_xunit.csproj"
 COPY . .
 WORKDIR "/src/blog_xunit"
 RUN dotnet build "blog_xunit.csproj" -c Release -o /app/build
+#RUN dotnet test "blog_xunit.csproj" --test-adapter-path:. --logger:xunit
 
 FROM build AS publish
 RUN dotnet publish "blog_xunit.csproj" -c Release -o /app/publish
@@ -17,4 +18,5 @@ RUN dotnet publish "blog_xunit.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+RUN dotnet test
 ENTRYPOINT ["dotnet", "blog_xunit.dll"]

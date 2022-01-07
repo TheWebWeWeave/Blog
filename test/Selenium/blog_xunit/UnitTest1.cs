@@ -13,11 +13,6 @@ public class UnitTest1 : IClassFixture<DriverFixture>
         this.driverFixture = driverFixture;
     }
 
-    [Fact]
-    public void Test1()
-    {
-        driverFixture.Driver.Navigate().GoToUrl("http://localhost:1313/");
-    }
 
     [Fact]
     public void AboutPageIsReachable()
@@ -36,9 +31,20 @@ public class UnitTest1 : IClassFixture<DriverFixture>
     {
         driverFixture.Driver.Navigate().GoToUrl("https://blog.t3winc.com/");
 
-        Debug.WriteLine($"{Category} - {Post_Title} - {Archive_Year}");
-
         driverFixture.Driver.FindElementByLinkText(Archive_Year).Click();
+        driverFixture.Driver.FindElementByLinkText(Post_Title).Click();
+        var postTitle = driverFixture.Driver.FindElementByCssSelector("h1.title");
+
+        Assert.Equal(Post_Title, postTitle.Text);
+    }
+
+    [Theory]
+    [CsvData("./Parameters.csv")]
+    public void PageExitsFromCategory(string Category, string Post_Title, string Archive_Year)
+    {
+        driverFixture.Driver.Navigate().GoToUrl("https://blog.t3winc.com/");
+
+        driverFixture.Driver.FindElementByLinkText(Category).Click();
         driverFixture.Driver.FindElementByLinkText(Post_Title).Click();
         var postTitle = driverFixture.Driver.FindElementByCssSelector("h1.title");
 
