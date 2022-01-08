@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage("Test"){
             steps {
-                sh "dotnet test ./test/Selenium/blog_xunit/blog_xunit.csproj"
+                sh "dotnet test ./test/Selenium/blog_xunit/blog_xunit.csproj --test-adapter-path:. --logger:xunit"
             }
         }
     }
