@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "blog_xunit": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

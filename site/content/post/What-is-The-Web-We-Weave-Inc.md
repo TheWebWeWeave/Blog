@@ -1,5 +1,5 @@
 ---
-title: 'What is The Web We Weave, Inc?'
+title: 'What is The Web We Weave?'
 date: 2008-06-14
 tags: ["3WInc", "Corporation", "Products"] 
 categories: ["technology"]

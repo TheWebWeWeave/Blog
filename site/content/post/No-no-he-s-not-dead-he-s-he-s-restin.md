@@ -1,5 +1,5 @@
 ---
-title: "No no he is not dead, he is resting!"
+title: "No no he is not DEAD! He is resting!"
 date: 2008-06-21
 archives: 2008
 menu: "main"

@@ -1,5 +1,5 @@
 ---
-title: 'Master Only in Production, an Improvement'
+title: 'Master Only in Production (an Improvement)'
 date: 2017-07-05 07:15:07
 tags: ["DevOps", "ALM"]
 categories: ["technology"]

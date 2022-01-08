@@ -1,5 +1,5 @@
 ---
-title: 'Teams, SubTeams, and Area Paths'
+title: 'Teams (SubTeams) and Area Paths'
 date: 2019-03-22 10:31:47
 tags: ["DevOps", "TFS"]
 categories: ["technology"]
