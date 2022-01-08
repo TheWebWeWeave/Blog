@@ -130,8 +130,7 @@ pipeline {
             }
             steps {
                     sh "dotnet test ./test/Selenium/blog_xunit/blog_xunit.csproj --test-adapter-path:. --logger:xunit"
-                }
-            }                       
+            }                                   
             post {
                 success {                    
                     createSuccessBadge(
