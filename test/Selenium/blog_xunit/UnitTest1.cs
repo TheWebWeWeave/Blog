@@ -1,5 +1,7 @@
+using blog_xunit.Helper;
 using System;
 using System.Diagnostics;
+using System.Net.Http;
 using Xunit;
 
 namespace blog_xunit;
@@ -36,6 +38,11 @@ public class UnitTest1 : IClassFixture<DriverFixture>
         var postTitle = driverFixture.Driver.FindElementByCssSelector("h1.title");
 
         Assert.Equal(Post_Title, postTitle.Text);
+
+        FindBrokenImages imageTest = new FindBrokenImages();
+        var broken = imageTest.TestForBrokenImages(driverFixture);
+
+        Assert.Equal(0, broken.Result);
     }
 
     [Theory]
@@ -49,5 +56,20 @@ public class UnitTest1 : IClassFixture<DriverFixture>
         var postTitle = driverFixture.Driver.FindElementByCssSelector("h1.title");
 
         Assert.Equal(Post_Title, postTitle.Text);
+    }
+
+    [Theory]
+    [CsvData("./Parameters.csv")]
+    public void NoImagesAreBrokenOnThePage(string Category, string Post_Title, string Archive_Year)
+    {
+        int broken_images = 0;
+        FindBrokenImages imageTest = new FindBrokenImages();
+        driverFixture.Driver.Navigate().GoToUrl("https://blog.t3winc.com/");
+
+        driverFixture.Driver.FindElementByLinkText(Category).Click();
+        driverFixture.Driver.FindElementByLinkText(Post_Title).Click();
+        broken_images = imageTest.TestForBrokenImages(driverFixture).Result;
+
+        Assert.Equal(0, broken_images);
     }
 }
