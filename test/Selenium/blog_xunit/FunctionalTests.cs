@@ -90,19 +90,19 @@ public class FunctionalTests : IClassFixture<DriverFixture>
         Assert.Equal(0, broken_links);
     }
 
-    //[Fact]
-    //public void QuickTest()
-    //{
-    //    int broken_links = 0;
-    //    FindBrokenLinks linkTest = new FindBrokenLinks();
-    //    IWebDriver driver = new ChromeDriver("C:/tools/selenium/");
-    //    driver.Navigate().GoToUrl("https://blog.t3winc.com");
+    [Fact]
+    public void QuickTest()
+    {
+        int broken_links = 0;
+        FindBrokenLinks linkTest = new FindBrokenLinks();
+        IWebDriver driver = new ChromeDriver("C:/tools/selenium/");
+        driver.Navigate().GoToUrl("https://blog.t3winc.com");
 
-    //    driver.FindElement(By.LinkText("2016")).Click();
-    //    driver.FindElement(By.LinkText("A New Start on an Old Blog")).Click();
-    //    broken_links = linkTest.TestForBrokenLinks(driver).Result;
+        driver.FindElement(By.LinkText("2016")).Click();
+        driver.FindElement(By.LinkText("Some MSDeploy Tricks I have Learned")).Click();
+        broken_links = linkTest.TestForBrokenLinks(driver).Result;
 
-    //    Assert.Equal(0, broken_links);
-    //}
+        Assert.Equal(0, broken_links);
+    }
 
 }
