@@ -18,8 +18,7 @@ namespace blog_xunit
             var chromeOption = new ChromeOptions();
             chromeOption.AddAdditionalOption("se:recordVideo", true);
             chromeOption.AddArgument("--disable-dev-shm-usage");
-            //driver = new RemoteWebDriver(new Uri("https://testing.t3winc.com/"), chromeOption);
-            driver = new RemoteWebDriver(new Uri("http://localhost:4444/"), chromeOption);           
+            driver = new RemoteWebDriver(new Uri("https://testing.t3winc.com/"), chromeOption);          
         }
 
         public RemoteWebDriver Driver => driver;
