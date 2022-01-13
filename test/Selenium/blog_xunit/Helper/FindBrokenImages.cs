@@ -23,11 +23,11 @@ namespace blog_xunit.Helper
                     HttpResponseMessage response = await client.GetAsync(img.GetAttribute("src"));
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        System.Console.WriteLine("Image at the link " + img.GetAttribute("src") + " is OK, status is " + response.StatusCode);
+                        System.Console.WriteLine($"Image at the link {img.GetAttribute("src")} is OK, status is {response.StatusCode}");
                     }
                     else
                     {
-                        System.Console.WriteLine("Image at the link " + img.GetAttribute("src") + " is Broken, status is " + response.StatusCode);
+                        System.Console.WriteLine($"Image at the link {img.GetAttribute("src")} is Broken, status is {response.StatusCode}");
                         broken_images++;
                     }
                 }
@@ -41,7 +41,7 @@ namespace blog_xunit.Helper
             }
 
             System.Threading.Thread.Sleep(2000);
-            Console.WriteLine("\nThe page " + driver.Driver.Url + " has " + broken_images + " broken images");
+            Console.WriteLine($"\nThe page {driver.Driver.Url} has {broken_images} broken images");
             return broken_images;
         }
     }
