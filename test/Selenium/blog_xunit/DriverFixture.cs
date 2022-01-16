@@ -16,20 +16,20 @@ namespace blog_xunit
     {
         RemoteWebDriver driver;
 
-        public DriverFixture()
-        {
-            var chromeOption = new ChromeOptions();
-            chromeOption.AddAdditionalOption("se:recordVideo", true);
-            chromeOption.AddArgument("--disable-dev-shm-usage");
-            driver = new RemoteWebDriver(new Uri("https://testing.t3winc.com/"), chromeOption);          
-        }
-
-        // public DriverFixture(BrowserType browserType)
+        // public DriverFixture()
         // {
-        //     var browserOption = GetBrowserOptions(browserType);
-        //     browserOption.AddArgument("--disable-dev-shm-usage");
-        //     driver = new RemoteWebDriver(new Uri("https://testing.t3winc.com/"), browserOption);
+        //     var chromeOption = new ChromeOptions();
+        //     chromeOption.AddAdditionalOption("se:recordVideo", true);
+        //     chromeOption.AddArgument("--disable-dev-shm-usage");
+        //     driver = new RemoteWebDriver(new Uri("https://testing.t3winc.com/"), chromeOption);          
         // }
+
+        public void Setup(BrowserType browserType)
+        {
+            var browserOption = GetBrowserOptions(browserType);
+            browserOption.AddArgument("--disable-dev-shm-usage");
+            driver = new RemoteWebDriver(new Uri("https://testing.t3winc.com/"), browserOption);
+        }
 
         public RemoteWebDriver Driver => driver;
 
