@@ -24,12 +24,12 @@ namespace blog_xunit
             driver = new RemoteWebDriver(new Uri("https://testing.t3winc.com/"), chromeOption);          
         }
 
-        public DriverFixture(BrowserType browserType)
-        {
-            var browserOption = GetBrowserOptions(browserType);
-            browserOption.AddArgument("--disable-dev-shm-usage");
-            driver = new RemoteWebDriver(new Uri("https://testing.t3winc.com/"), browserOption);
-        }
+        // public DriverFixture(BrowserType browserType)
+        // {
+        //     var browserOption = GetBrowserOptions(browserType);
+        //     browserOption.AddArgument("--disable-dev-shm-usage");
+        //     driver = new RemoteWebDriver(new Uri("https://testing.t3winc.com/"), browserOption);
+        // }
 
         public RemoteWebDriver Driver => driver;
 
