@@ -1,17 +1,14 @@
 ﻿using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace blog_xunit.Helper
+namespace t3winc.blog.xunit.function.helper
 {
     internal class FindBrokenLinks
     {
-        public async Task<int> TestForBrokenLinks(DriverFixture driver)
+        public async Task<int> TestForBrokenLinks(dynamic driver)
         {
             int broken_links = 0;
             using var client = new HttpClient();
@@ -22,7 +19,7 @@ namespace blog_xunit.Helper
             foreach (var link in link_list)
             {
                 try
-                {                    
+                {
                     var uri = link.GetAttribute("href");
                     if (uri != null)
                         if (uri != "https://www.linkedin.com/in/donald-schulz-6b72833/")
@@ -38,7 +35,6 @@ namespace blog_xunit.Helper
                                 broken_links++;
                             }
                         }
-
                 }
                 catch (Exception ex)
                 {
@@ -58,7 +54,7 @@ namespace blog_xunit.Helper
         public async Task<int> TestForBrokenLinks(IWebDriver driver)
         {
             int broken_links = 0;
-            using var client = new HttpClient();            
+            using var client = new HttpClient();
             var link_list = driver.FindElements(By.TagName("a"));
 
             /* Loop through all the links */
@@ -81,7 +77,6 @@ namespace blog_xunit.Helper
                                 broken_links++;
                             }
                         }
-
                 }
                 catch (Exception ex)
                 {
@@ -92,7 +87,7 @@ namespace blog_xunit.Helper
                 }
             }
 
-            System.Threading.Thread.Sleep(2000);            
+            System.Threading.Thread.Sleep(2000);
             Console.WriteLine($"\nThe page {driver.Url} has {broken_links} broken links");
             return broken_links;
         }

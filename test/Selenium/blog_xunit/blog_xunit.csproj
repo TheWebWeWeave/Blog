@@ -14,12 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Parameters.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="Selenium.WebDriver" Version="4.1.0" />
@@ -33,6 +27,19 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="XunitXml.TestLogger" Version="3.0.70" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Fixtures\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Data\Parameters.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="xunitrunner.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -4,15 +4,16 @@ using System.IO;
 using System.Reflection;
 using Xunit.Sdk;
 
-public class CsvDataAttribute : DataAttribute 
+public class CsvDataAttribute : DataAttribute
 {
     private string csvFile;
+
     public CsvDataAttribute(string v)
     {
         csvFile = v;
     }
 
-    private static object[] ConvertParameters(IReadOnlyList<object> values, IReadOnlyList<Type> parameterTypes) 
+    private static object[] ConvertParameters(IReadOnlyList<object> values, IReadOnlyList<Type> parameterTypes)
     {
         var result = new object[parameterTypes.Count];
         for (var idx = 0; idx < parameterTypes.Count; idx++)
@@ -23,7 +24,7 @@ public class CsvDataAttribute : DataAttribute
         return result;
     }
 
-    private static object ConvertParameter(object parameter, Type parameterType) 
+    private static object ConvertParameter(object parameter, Type parameterType)
     {
         return parameterType == typeof(int) ? Convert.ToInt32(parameter) : parameter;
     }
