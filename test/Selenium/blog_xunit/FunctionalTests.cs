@@ -1,6 +1,7 @@
 using blog_xunit.Helper;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
 using System;
 using System.Diagnostics;
 using System.Net.Http;
@@ -8,24 +9,23 @@ using Xunit;
 
 namespace blog_xunit;
 
-public class FunctionalTests : IClassFixture<DriverFixture>
+public class FunctionalTests : IClassFixture<ChromeFixture>
 {
     private readonly DriverFixture driverFixture;
 
-    public FunctionalTests()
+    public FunctionalTests(DriverFixture driverFixture)
     {
-        DriverFixture driverFixture = new DriverFixture();
-        this.driverFixture = driverFixture.Setup(BrowserType.Chrome);
+        this.driverFixture = driverFixture
     }
 
 
     [Fact]
     public void AboutPageIsReachable()
     {
-        driverFixture.Driver.Navigate().GoToUrl("https://blog.t3winc.com/");
-        driverFixture.Driver.FindElementByClassName("navbar-burger").Click();
-        driverFixture.Driver.FindElementByXPath("//body/nav[1]/div[2]/div[1]/a[2]").Click();
-        var postTitle = driverFixture.Driver.FindElementByClassName("title");
+        driverFixture.Navigate().GoToUrl("https://blog.t3winc.com/");
+        driverFixture.FindElementByClassName("navbar-burger").Click();
+        driverFixture.FindElementByXPath("//body/nav[1]/div[2]/div[1]/a[2]").Click();
+        var postTitle = driverFixture.FindElementByClassName("title");
 
         Assert.Equal("About Donald on Software", postTitle.Text);
     }
