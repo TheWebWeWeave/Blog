@@ -1,10 +1,5 @@
-using blog_xunit.Helper;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using System;
-using System.Diagnostics;
-using System.Net.Http;
+using t3winc.blog.xunit.function.fixtures;
+using t3winc.blog.xunit.function.helper;
 using Xunit;
 
 namespace blog_xunit;
@@ -30,7 +25,7 @@ public class EdgeTests : IClassFixture<EdgeFixture>
     }
 
     [Theory]
-    [CsvData("./Parameters.csv")]
+    [CsvData("./Data/Parameters.csv")]
     public void NoLinksAreBrokenOnThePage(string Category, string Post_Title, string Archive_Year)
     {
         int broken_links = 0;

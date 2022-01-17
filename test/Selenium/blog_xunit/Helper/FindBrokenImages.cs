@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace blog_xunit.Helper
+namespace t3winc.blog.xunit.function.helper
 {
     internal class FindBrokenImages
     {
