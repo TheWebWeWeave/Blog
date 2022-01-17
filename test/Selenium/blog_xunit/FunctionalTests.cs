@@ -9,11 +9,11 @@ using Xunit;
 
 namespace blog_xunit;
 
-public class FunctionalTests : IClassFixture<FirefoxFixture>
+public class FunctionalTests : IClassFixture<EdgeFixture>
 {
-    private readonly FirefoxFixture driverFixture;
+    private readonly EdgeFixture driverFixture;
 
-    public FunctionalTests(FirefoxFixture driverFixture)
+    public FunctionalTests(EdgeFixture driverFixture)
     {
         this.driverFixture = driverFixture;
     }
