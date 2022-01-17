@@ -61,20 +61,20 @@ public class ChromeTests : IClassFixture<ChromeFixture>
     //     Assert.Equal(Post_Title, postTitle.Text);
     // }
 
-    // [Theory]
-    // [CsvData("./Parameters.csv")]
-    // public void NoImagesAreBrokenOnThePage(string Category, string Post_Title, string Archive_Year)
-    // {
-    //     int broken_images = 0;
-    //     FindBrokenImages imageTest = new FindBrokenImages();
-    //     driverFixture.Driver.Navigate().GoToUrl("https://blog.t3winc.com/");
+    [Theory]
+    [CsvData("./Parameters.csv")]
+    public void NoImagesAreBrokenOnThePage(string Category, string Post_Title, string Archive_Year)
+    {
+        int broken_images = 0;
+        FindBrokenImages imageTest = new FindBrokenImages();
+        driverFixture.Driver.Navigate().GoToUrl("https://blog.t3winc.com/");
 
-    //     driverFixture.Driver.FindElementByLinkText(Category).Click();
-    //     driverFixture.Driver.FindElementByLinkText(Post_Title).Click();
-    //     broken_images = imageTest.TestForBrokenImages(driverFixture).Result;
+        driverFixture.Driver.FindElementByLinkText(Category).Click();
+        driverFixture.Driver.FindElementByLinkText(Post_Title).Click();
+        broken_images = imageTest.TestForBrokenImages(driverFixture).Result;
 
-    //     Assert.Equal(0, broken_images);
-    // }
+        Assert.Equal(0, broken_images);
+    }
 
     // [Theory]
     // [CsvData("./Parameters.csv")]

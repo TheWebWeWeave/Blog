@@ -76,19 +76,19 @@ public class EdgeTests : IClassFixture<EdgeFixture>
     //     Assert.Equal(0, broken_images);
     // }
 
-    // [Theory]
-    // [CsvData("./Parameters.csv")]
-    // public void NoLinksAreBrokenOnThePage(string Category, string Post_Title, string Archive_Year)
-    // {
-    //     int broken_links = 0;
-    //     FindBrokenLinks linkTest = new FindBrokenLinks();
-    //     driverFixture.Driver.Navigate().GoToUrl("https://blog.t3winc.com/");
+    [Theory]
+    [CsvData("./Parameters.csv")]
+    public void NoLinksAreBrokenOnThePage(string Category, string Post_Title, string Archive_Year)
+    {
+        int broken_links = 0;
+        FindBrokenLinks linkTest = new FindBrokenLinks();
+        driverFixture.Driver.Navigate().GoToUrl("https://blog.t3winc.com/");
 
-    //     driverFixture.Driver.FindElementByLinkText(Archive_Year).Click();
-    //     driverFixture.Driver.FindElementByLinkText(Post_Title).Click();
-    //     broken_links = linkTest.TestForBrokenLinks(driverFixture).Result;
+        driverFixture.Driver.FindElementByLinkText(Archive_Year).Click();
+        driverFixture.Driver.FindElementByLinkText(Post_Title).Click();
+        broken_links = linkTest.TestForBrokenLinks(driverFixture).Result;
 
-    //     Assert.Equal(0, broken_links);
-    // }
+        Assert.Equal(0, broken_links);
+    }
 
 }

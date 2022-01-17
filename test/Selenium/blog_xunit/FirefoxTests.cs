@@ -48,18 +48,18 @@ public class FirefoxTests : IClassFixture<FirefoxFixture>
         Assert.Equal(0, broken.Result);
     }
 
-    // [Theory]
-    // [CsvData("./Parameters.csv")]
-    // public void PageExitsFromCategory(string Category, string Post_Title, string Archive_Year)
-    // {
-    //     driverFixture.Driver.Navigate().GoToUrl("https://blog.t3winc.com/");
+    [Theory]
+    [CsvData("./Parameters.csv")]
+    public void PageExitsFromCategory(string Category, string Post_Title, string Archive_Year)
+    {
+        driverFixture.Driver.Navigate().GoToUrl("https://blog.t3winc.com/");
 
-    //     driverFixture.Driver.FindElementByLinkText(Category).Click();
-    //     driverFixture.Driver.FindElementByLinkText(Post_Title).Click();
-    //     var postTitle = driverFixture.Driver.FindElementByCssSelector("h1.title");
+        driverFixture.Driver.FindElementByLinkText(Category).Click();
+        driverFixture.Driver.FindElementByLinkText(Post_Title).Click();
+        var postTitle = driverFixture.Driver.FindElementByCssSelector("h1.title");
 
-    //     Assert.Equal(Post_Title, postTitle.Text);
-    // }
+        Assert.Equal(Post_Title, postTitle.Text);
+    }
 
     // [Theory]
     // [CsvData("./Parameters.csv")]
