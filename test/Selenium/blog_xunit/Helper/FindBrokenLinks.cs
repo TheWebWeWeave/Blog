@@ -11,7 +11,7 @@ namespace blog_xunit.Helper
 {
     internal class FindBrokenLinks
     {
-        public async Task<int> TestForBrokenLinks(DriverFixture driver)
+        public async Task<int> TestForBrokenLinks(dynamic driver)
         {
             int broken_links = 0;
             using var client = new HttpClient();

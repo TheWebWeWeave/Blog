@@ -9,7 +9,7 @@ namespace blog_xunit.Helper
 {
     internal class FindBrokenImages
     {
-        public async Task<int> TestForBrokenImages(DriverFixture driver)
+        public async Task<int> TestForBrokenImages(dynamic driver)
         {
             int broken_images = 0;
             using var client = new HttpClient();

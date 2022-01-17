@@ -11,21 +11,21 @@ namespace blog_xunit;
 
 public class FunctionalTests : IClassFixture<ChromeFixture>
 {
-    private readonly DriverFixture driverFixture;
+    private readonly ChromeFixture driverFixture;
 
-    public FunctionalTests(DriverFixture driverFixture)
+    public FunctionalTests(ChromeFixture driverFixture)
     {
-        this.driverFixture = driverFixture
+        this.driverFixture = driverFixture;
     }
 
 
     [Fact]
     public void AboutPageIsReachable()
     {
-        driverFixture.Navigate().GoToUrl("https://blog.t3winc.com/");
-        driverFixture.FindElementByClassName("navbar-burger").Click();
-        driverFixture.FindElementByXPath("//body/nav[1]/div[2]/div[1]/a[2]").Click();
-        var postTitle = driverFixture.FindElementByClassName("title");
+        driverFixture.Driver.Navigate().GoToUrl("https://blog.t3winc.com/");
+        driverFixture.Driver.FindElementByClassName("navbar-burger").Click();
+        driverFixture.Driver.FindElementByXPath("//body/nav[1]/div[2]/div[1]/a[2]").Click();
+        var postTitle = driverFixture.Driver.FindElementByClassName("title");
 
         Assert.Equal("About Donald on Software", postTitle.Text);
     }
