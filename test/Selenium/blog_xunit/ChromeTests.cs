@@ -13,7 +13,7 @@ public class ChromeTests : IClassFixture<ChromeFixture>
 {
     private readonly ChromeFixture driverFixture;
 
-    public FunctionalTests(ChromeFixture driverFixture)
+    public ChromeTests(ChromeFixture driverFixture)
     {
         this.driverFixture = driverFixture;
     }
