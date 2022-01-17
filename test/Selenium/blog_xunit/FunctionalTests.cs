@@ -14,7 +14,7 @@ public class FunctionalTests : IClassFixture<DriverFixture>
 
     public FunctionalTests()
     {
-        DriverFisture driverFixture = new DriverFixture();
+        DriverFixture driverFixture = new DriverFixture();
         this.driverFixture = driverFixture.Setup(BrowserType.Chrome);
     }
 
