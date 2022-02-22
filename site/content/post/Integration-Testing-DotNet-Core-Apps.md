@@ -1,11 +1,18 @@
 ---
 title: Integration Testing DotNet Core
-date: 2020-01-17 09:25:01
-tags: ["Testing", "TFS", "ALM", "DevOps", "DotNet-Core"]
-categories: ["technology"]
+date: 2020-01-17T09:25:01.000Z
+tags:
+    - Testing
+    - TFS
+    - ALM
+    - DevOps
+    - DotNet-Core
+categories:
+    - technology
 archives: 2020
-menu: "main"
-author: "Donald L. Schulz"
+menu: main
+author: Donald L. Schulz
+slug: integration-testing-dotnet-core
 ---
 It is pretty easy and straight forward to create a dotnet core application and run your unit tests during a build process.  However, I also have some integration tests that I run in my Dev and QA environments where I actually hit my test database.  This is not something that you would run in the build process as I do not have a database on the build machine and this is not something that would be worth the trouble to install one, especially if you are using a hosted build agent.
 {{<figure src="/images/ASPNetCore.jpg" alt="Integration Testing dotNet Core">}}
