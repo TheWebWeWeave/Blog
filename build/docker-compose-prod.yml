@@ -20,7 +20,7 @@ services:
 
     www-donaldonsoftware:
         image: schulzdl/donaldonsoftware:v${semver}
-        container_name: donaldonsoftware
+        container_name: www-donaldonsoftware
         restart: always
         expose:
             - 80
