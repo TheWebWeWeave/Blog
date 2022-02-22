@@ -13,9 +13,19 @@ services:
         expose:
             - 80
         environment: 
-            - "VIRTUAL_HOST=www.donaldonsoftware.com"
-            - "LETSENCRYPT_HOST=www.donaldonsoftware.com"
             - "VIRTUAL_HOST=donaldonsoftware.com"
             - "LETSENCRYPT_HOST=donaldonsoftware.com"                      
         networks: 
             - app-net
+
+    www-donaldonsoftware:
+        image: schulzdl/donaldonsoftware:v${semver}
+        container_name: donaldonsoftware
+        restart: always
+        expose:
+            - 80
+        environment: 
+            - "VIRTUAL_HOST=www.donaldonsoftware.com"
+            - "LETSENCRYPT_HOST=www.donaldonsoftware.com"                   
+        networks: 
+            - app-net            
