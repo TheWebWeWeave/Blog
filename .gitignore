@@ -17,7 +17,12 @@ hugo.linux
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudio,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,visualstudiocode
 
+### Frontmatter
+.frontmatter/*
+frontmatter.json
+
 ### VisualStudioCode ###
+.vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
