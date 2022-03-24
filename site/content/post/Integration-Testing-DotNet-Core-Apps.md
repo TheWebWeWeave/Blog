@@ -1,14 +1,8 @@
 ---
 title: Integration Testing DotNet Core
 date: 2020-01-17T09:25:01.000Z
-tags:
-    - Testing
-    - TFS
-    - ALM
-    - DevOps
-    - DotNet-Core
-categories:
-    - technology
+tags: ["Testing", "TFS", "ALM", "DevOps", "DotNet-Core"]
+categories: ["technology"]
 archives: 2020
 menu: main
 author: Donald L. Schulz
