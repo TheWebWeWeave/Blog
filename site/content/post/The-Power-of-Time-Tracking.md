@@ -1,7 +1,7 @@
 ---
 title: The Power of Time Tracking
 date: 2008-06-21
-tags: ["Time Tracker", "Products"]
+tags: ["Time-Tracker", "Products"]
 categories: ["technology"]
 archives: 2008
 menu: "main"

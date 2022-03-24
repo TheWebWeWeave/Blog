@@ -1,7 +1,7 @@
 ---
 title: Goal Tracking
 date: 2009-02-09
-tags: ["Goal Tracker", "Products"]
+tags: ["Goal-Tracker", "Products"]
 categories: ["technology"]
 archives: 2009
 menu: "main"
