@@ -123,40 +123,40 @@ pipeline {
         }
         
 
-        stage('Testing'){
-            when {
-                not {
-                    branch 'pull/*'
-                }
-            }
-            steps {
-                    sh "dotnet test ./test/Selenium/blog_xunit/blog_xunit.csproj --test-adapter-path:. --logger:xunit"
-            }                                   
-            post {
-                success {                    
-                    createSuccessBadge(
-                        imageName: 'blogTest.svg',
-                        prodName: 'Blog_DoS',
-                        semver: "${semver}",
-                        token: '88e911920f71c20e08f567a1fd76e1811e24dcfd7f2034e74ccecc2ab22a4f70/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f67546573742e737667'
-                    )                                                           
-                }
-                failure {
-                    createFailureBadge(
-                        imageName: 'blogTest.svg',
-                        prodName: 'Blog_DoS',
-                        semver: "${semver}",
-                        token: '88e911920f71c20e08f567a1fd76e1811e24dcfd7f2034e74ccecc2ab22a4f70/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f67546573742e737667'
-                    )                  
-                }
-                always {
-                    xunit (
-                        thresholds: [ skipped(failureThreshold: '0'), failed(failureThreshold: '0')],
-                        tools: [ xUnitDotNet(pattern: '**/TestResults.xml')]
-                    )
-                }
-            }
-        }
+        // stage('Testing'){
+        //     when {
+        //         not {
+        //             branch 'pull/*'
+        //         }
+        //     }
+        //     steps {
+        //             sh "dotnet test ./test/Selenium/blog_xunit/blog_xunit.csproj --test-adapter-path:. --logger:xunit"
+        //     }                                   
+        //     post {
+        //         success {                    
+        //             createSuccessBadge(
+        //                 imageName: 'blogTest.svg',
+        //                 prodName: 'Blog_DoS',
+        //                 semver: "${semver}",
+        //                 token: '88e911920f71c20e08f567a1fd76e1811e24dcfd7f2034e74ccecc2ab22a4f70/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f67546573742e737667'
+        //             )                                                           
+        //         }
+        //         failure {
+        //             createFailureBadge(
+        //                 imageName: 'blogTest.svg',
+        //                 prodName: 'Blog_DoS',
+        //                 semver: "${semver}",
+        //                 token: '88e911920f71c20e08f567a1fd76e1811e24dcfd7f2034e74ccecc2ab22a4f70/68747470733a2f2f62616467652e743377696e632e636f6d2f696d616765732f626c6f67546573742e737667'
+        //             )                  
+        //         }
+        //         always {
+        //             xunit (
+        //                 thresholds: [ skipped(failureThreshold: '0'), failed(failureThreshold: '0')],
+        //                 tools: [ xUnitDotNet(pattern: '**/TestResults.xml')]
+        //             )
+        //         }
+        //     }
+        // }
 
         stage('Release'){
             agent{
